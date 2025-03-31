@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  neo4j-bus-chatbot:
+    image: neo4j:2025.03-community
+    container_name: neo4j-bus-chatbot
+    ports:
+      # Map to non-default ports to avoid conflicts
+      - "7475:7474"  # Browser interface
+      - "7688:7687"  # Bolt protocol
+      - "7476:7473"  # HTTPS
+    environment:
+      # Authentication
+      - NEO4J_AUTH=neo4j/busticket123
+      # Memory settings
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms_memory_heap_initial__size=1G
+      - NEO4J_dbms_memory_heap_max__size=2G
+      # Enable APOC and Vector plugins
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*,vector.*
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*,vector.*
+      # Install additional plugins - community version has limited plugin support
+      - NEO4JLABS_PLUGINS=["apoc"]
+      # Set default database (if supported in your version)
+      - NEO4J_dbms_default__database=neo4j
+    volumes:
+      # Persistent storage
+      - neo4j-bus-data:/data
+      - neo4j-bus-logs:/logs
+      - neo4j-bus-import:/var/lib/neo4j/import
+      - neo4j-bus-plugins:/plugins
+    healthcheck:
+      test: ["CMD", "wget", "-O", "/dev/null", "-q", "http://localhost:7474"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  neo4j-bus-data:
+  neo4j-bus-logs:
+  neo4j-bus-import:
+  neo4j-bus-plugins:
