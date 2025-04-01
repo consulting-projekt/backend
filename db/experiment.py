@@ -11,7 +11,7 @@ import pandas as pd
 model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')  # Good for German
 
 class BusTicketChatbot:
-    def __init__(self, uri="bolt://localhost:7687", user="neo4j", password="password"):
+    def __init__(self, uri="bolt://localhost:7688", user="neo4j", password="busticket123"):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
         self.model = model
         
@@ -107,7 +107,7 @@ class BusTicketChatbot:
             
             for from_stop, to_stop, line, times in connections:
                 session.run("""
-                MATCH (from:Location {name: $from})
+                MATCH (from:Location {name: $from_loc})
                 MATCH (to:Location {name: $to})
                 MATCH (line:Line {id: $line})
                 CREATE (from)-[r:CONNECTED_TO {
@@ -115,7 +115,7 @@ class BusTicketChatbot:
                     travel_time_minutes: $travel_time,
                     upcoming_departures: $times
                 }]->(to)
-                """, from=from_stop, to=to_stop, line=line, travel_time=10, times=times)
+                """, from_loc=from_stop, to=to_stop, line=line, travel_time=10, times=times)
             
             # Create tag for inner city locations
             session.run("""
@@ -152,7 +152,7 @@ class BusTicketChatbot:
             // Find potential destinations using vector similarity
             CALL db.index.vector.queryNodes('location_embeddings', $k, $query_embedding)
             YIELD node, score
-            WHERE score > 0.7 OR node.is_inner_city = true
+            WHERE score > 0.7
             
             // Now find paths from current location to these destinations
             WITH node as destination
