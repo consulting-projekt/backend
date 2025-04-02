@@ -18,10 +18,10 @@ services:
       - NEO4J_PLUGINS=["apoc"]  # Updated from NEO4JLABS_PLUGINS as per warning
       - NEO4J_dbms_default__database=neo4j
     volumes:
-      - neo4j-bus-data:/data
-      - neo4j-bus-logs:/logs
-      - neo4j-bus-import:/var/lib/neo4j/import
-      - neo4j-bus-plugins:/plugins
+      - neo4j-bus-data2:/data
+      - neo4j-bus-logs2:/logs
+      - neo4j-bus-import2:/var/lib/neo4j/import
+      - neo4j-bus-plugins2:/plugins
     healthcheck:
       test: ["CMD", "wget", "-O", "/dev/null", "-q", "http://localhost:7474"]
       interval: 10s
@@ -58,10 +58,10 @@ services:
       start_period: 30s
 
 volumes:
-  neo4j-bus-data:
-  neo4j-bus-logs:
-  neo4j-bus-import:
-  neo4j-bus-plugins:
+  neo4j-bus-data2:
+  neo4j-bus-logs2:
+  neo4j-bus-import2:
+  neo4j-bus-plugins2:
   neo4j-bus-data-osm:      # Added new volume definition
   neo4j-bus-logs-osm:      # Added new volume definition
   neo4j-bus-import-osm:    # Added new volume definition
