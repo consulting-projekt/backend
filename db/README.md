@@ -28,9 +28,13 @@ Nodes: POI, AOI
 
 
 POI
-- point mit shape: (Längengrad Breitengrad) z.b. (9.97694 53.55304)
-- name, street, housnumber, postcode,
+- geometry in WKT format mit shape: (Längengrad Breitengrad) z.b. (9.97694 53.55304)
+
 
 AOI
-- area mit shape: ((Längengrad Breitengrad), (Längengrad Breitengrad), (Längengrad Breitengrad), ...)
-- name
+- geometry in WKT format mit shape: ((Längengrad Breitengrad), (Längengrad Breitengrad), (Längengrad Breitengrad), ...)
+
+POI & AOI
+- name, street, housnumber, postcode, 
+- description based on (osm: description:de + description)
+- tags based on: office, amenity, community_centre, operator, building, sport, dsa:criteria, official_name, operator:type, tourism
