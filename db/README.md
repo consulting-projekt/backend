@@ -38,3 +38,18 @@ POI & AOI
 - name, street, housnumber, postcode, 
 - description based on (osm: description:de + description)
 - tags based on: office, amenity, community_centre, operator, building, sport, dsa:criteria, official_name, operator:type, tourism
+
+## geofox
+### import
+filter:
+- serviceTypes = ZUG, BUS
+
+- import von stationen
+    - listStations
+- import von abfahrten zu jeder station
+    - URL: /gti/public/departureList 
+- verbindung der stationen anhand von abfahrtsdaten (direction, directionId: 1 für Hin und 6 für Rück)
+
+zunächst optional:
+- import von linien
+    - URL: /gti/public/listLines
