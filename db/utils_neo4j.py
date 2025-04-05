@@ -1,3 +1,5 @@
+from tqdm import tqdm
+
 # First, define Cypher queries to create constraints and indexes
 ## osm specific constraints and indexes
 constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI) REQUIRE i.osmid IS UNIQUE"
@@ -60,47 +62,91 @@ def del_stations(session):
         return None
 
 
-def add_relationships_to_neo4j(processed_data, session):
+def add_station_relationships(processed_data, session):
     """
     Add relationships to Neo4j database based on processed departure data.
+    Includes arrival times, origin, directionId and terminal information.
     
     Args:
         processed_data: List of processed departure dictionaries
+        session: Neo4j database session
     """
-
-    for record in processed_data:
-        # Cypher query to create stations if they don't exist and then create relationship
-        query = """
-        // Create FROM station if it doesn't exist
-        MERGE (from:Station {name: $from_station, id: $from_station_id})
+    print(f"Adding {len(processed_data)} relationships to Neo4j...")
+    
+    # Create indexes for better performance if they don't exist
+    session.run("CREATE INDEX IF NOT EXISTS FOR (s:Station) ON (s.name)")
+    session.run("CREATE INDEX IF NOT EXISTS FOR (s:Station) ON (s.id)")
+    
+    # Use batching to improve performance
+    batch_size = 1000
+    total_batches = (len(processed_data) + batch_size - 1) // batch_size
+    
+    for batch_idx in tqdm(range(total_batches), desc="Adding relationships to Neo4j"):
+        start_idx = batch_idx * batch_size
+        end_idx = min((batch_idx + 1) * batch_size, len(processed_data))
+        batch = processed_data[start_idx:end_idx]
         
-        // Create TO station if it doesn't exist
-        MERGE (to:Station {name: $to_station})
-        
-        // Create relationship
-        CREATE (from)-[r:CONNECTS_TO {
-            departure: $departure_time,
-            lineId: $line_id,
-            lineInfo: $line_info,
-            lineName: $line_name,
-            platform: $platform
-        }]->(to)
-        """
-        
-        # Parameters for the query
-        params = {
-            'from_station': record['from_station'],
-            'from_station_id': record['from_station_id'],
-            'to_station': record['to_station'],
-            'departure_time': record['departure_time'],
-            'line_id': record['line_id'],
-            'line_name': record['line_name'],
-            'line_info': record['line_info'],
-            'platform': record['platform']
-        }
-        
-        # Execute the query
-        session.run(query, params)
+        # Execute in a transaction for better performance
+        with session.begin_transaction() as tx:
+            for record in batch:
+                # Skip records where next_station is None
+                if not record['next_station']:
+                    continue
+                
+                # Cypher query to create stations and relationship
+                query = """
+                // Create FROM station if it doesn't exist
+                MERGE (from:Station {name: $from_station})
+                ON CREATE SET from.geofoxid = $from_station_id
+                ON MATCH SET from.geofoxid = $from_station_id
+                
+                // Create TO station (next_station) if it doesn't exist
+                MERGE (to:Station {name: $next_station})
+                
+                // Create relationship with all the data
+                CREATE (from)-[r:CONNECTS_TO {
+                    departure_time: $departure_time,
+                    arrival_time: $arrival_time,
+                    line_id: $line_id,
+                    line_name: $line_name,
+                    line_info: $line_info,
+                    platform: $platform,
+                    line_terminal: $line_terminal,
+                    line_origin: $line_origin,
+                    direction_id: $direction_id
+                }]->(to)
+                """
+                
+                # Handle None/NaT values for arrival_time
+                arrival_time = record['arrival_time']
+                if pd.isna(arrival_time) or arrival_time is None:
+                    arrival_time = None
+                
+                # Parameters for the query
+                params = {
+                    'from_station': record['from_station'],
+                    'from_station_id': record['from_station_id'],
+                    'next_station': record['next_station'],
+                    'departure_time': record['departure_time'],
+                    'arrival_time': arrival_time,
+                    'line_id': record['line_id'],
+                    'line_name': record['line_name'],
+                    'line_info': record['line_info'],
+                    'platform': record['platform'],
+                    'line_terminal': record['line_terminal'],
+                    'line_origin': record['line_origin'],
+                    'direction_id': int(record['direction_id'])  # Ensure this is an integer
+                }
+                
+                # Execute the query
+                tx.run(query, params)
+    
+    print("Creating additional indexes for optimized querying...")
+    # Create compound indexes for common query patterns
+    session.run("CREATE INDEX IF NOT EXISTS FOR ()-[r:CONNECTS_TO]-() ON (r.line_id, r.direction_id)")
+    session.run("CREATE INDEX IF NOT EXISTS FOR ()-[r:CONNECTS_TO]-() ON (r.departure_time)")
+    
+    print("Relationship creation complete!")
     
 
 
