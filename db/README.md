@@ -51,29 +51,23 @@ import von stationen
 import von abfahrten zu jeder station
     - URL: /gti/public/departureList 
     - direction -> combinedName
-    -> erstellung
-    bsp. reps:
-    7 "departures": [ 
-    8   { 
-    9    "line": { 
-    10      "name": "476", 
-    11      "direction": "Ahrensburg, Auestieg", 
-    12      "origin": "Bf. Ahrensburg", 
-    13      "type": { 
-    14       "simpleType": "BUS", 
-    15       "shortInfo": "Bus", 
-    16       "longInfo": "Niederflur Stadtbus", 
-    17       "model": "Niederflur Stadtbus" 
-    18      }, 
-    19      "id": "VHH:476_VHH" 
-    20    }, 
-    21    "timeOffset": 20, 
-    22    "serviceId": 200023670, 
-    23    "station": { 
-    24      "combinedName": "Ahrensburg, Rosenhof", 
-    25      "id": "Master:35009" 
-    26    } 
-    27   },
+    - dierctionId Hin- (1) und Rückrichtung (6) 
+    bsp. resp:
+    "departures": [{'line': {'name': 'U2',
+    'direction': 'Jungfernstieg',
+    'origin': 'Hammer Kirche',
+    'type': {'simpleType': 'TRAIN',
+     'shortInfo': 'U',
+     'longInfo': 'U-Bahn',
+     'model': 'U-Bahn'},
+    'id': 'HHA-U:U2_HHA-U'},
+   'directionId': 6,
+   'timeOffset': 1,
+   'serviceId': 27552,
+   'station': {'combinedName': 'Berliner Tor', 'id': 'Master:10952'},
+   'platform': 'Gleis 3',
+   'realtimePlatform': 'Gleis 3'},
+   ...
 
 
 

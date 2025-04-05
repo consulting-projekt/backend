@@ -46,6 +46,65 @@ SET p.location = point({longitude: row.longitude, latitude: row.latitude})
 RETURN COUNT(*) as total
 '''
 
+def del_stations(session):
+    """
+    Run a Cypher query in a safe manner, handling errors and returning results.
+    """
+    try:
+        result = session.run('''
+            MATCH (s:Station)
+            DETACH DELETE s''')
+        return result
+    except Exception as e:
+        print(f"Error running query: {e}")
+        return None
+
+
+def add_relationships_to_neo4j(processed_data, session):
+    """
+    Add relationships to Neo4j database based on processed departure data.
+    
+    Args:
+        processed_data: List of processed departure dictionaries
+    """
+
+    for record in processed_data:
+        # Cypher query to create stations if they don't exist and then create relationship
+        query = """
+        // Create FROM station if it doesn't exist
+        MERGE (from:Station {name: $from_station, id: $from_station_id})
+        
+        // Create TO station if it doesn't exist
+        MERGE (to:Station {name: $to_station})
+        
+        // Create relationship
+        CREATE (from)-[r:CONNECTS_TO {
+            departure: $departure_time,
+            lineId: $line_id,
+            lineInfo: $line_info,
+            lineName: $line_name,
+            platform: $platform
+        }]->(to)
+        """
+        
+        # Parameters for the query
+        params = {
+            'from_station': record['from_station'],
+            'from_station_id': record['from_station_id'],
+            'to_station': record['to_station'],
+            'departure_time': record['departure_time'],
+            'line_id': record['line_id'],
+            'line_name': record['line_name'],
+            'line_info': record['line_info'],
+            'platform': record['platform']
+        }
+        
+        # Execute the query
+        session.run(query, params)
+    
+
+
+
 # Cypher query to import our road network relationships GeoDataFrame
 
 rels_query = '''
