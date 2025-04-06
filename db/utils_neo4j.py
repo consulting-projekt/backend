@@ -65,24 +65,23 @@ def del_stations(session):
 
 def add_station_relationships(processed_data, session):
     """
-    Add relationships to Neo4j database based on processed departure data.
-    Includes arrival times, origin, directionId and terminal information.
+    Add consolidated relationships to Neo4j database based on processed departure data.
+    Each relationship contains lists of departure_times and arrival_times for the same line between stations.
 
     Args:
-        processed_data: List of processed departure dictionaries
+        processed_data: List of processed relationship dictionaries
         session: Neo4j database session
     """
-    print(f"Adding {len(processed_data)} relationships to Neo4j...")
+    print(f"Adding {len(processed_data)} consolidated relationships to Neo4j...")
 
     # Create indexes for better performance if they don't exist
     session.run("CREATE INDEX IF NOT EXISTS FOR (s:Station) ON (s.name)")
-    session.run("CREATE INDEX IF NOT EXISTS FOR (s:Station) ON (s.id)")
 
     # Use batching to improve performance
-    batch_size = 1000
+    batch_size = 100  # Smaller batch size due to larger data per relationship
     total_batches = (len(processed_data) + batch_size - 1) // batch_size
 
-    # Track skipped departures
+    # Track skipped relationships
     skipped_not_found = 0
     skipped_multiple_found = 0
 
@@ -93,35 +92,35 @@ def add_station_relationships(processed_data, session):
         
         # Execute in a transaction for better performance
         with session.begin_transaction() as tx:
-            for record in batch:
-                # Skip records where next_station is None
-                if not record['next_station']:
+            for rel in batch:
+                # Skip records where to_station is None
+                if not rel['to_station']:
                     continue
                 
                 # Check if the destination station exists and count how many there are
                 check_query = """
-                MATCH (to:Station {name: $next_station, city: "Hamburg"})
+                MATCH (to:Station {name: $to_station, city: "Hamburg"})
                 RETURN count(to) AS count
                 """
                 
                 # Run the check query
-                result = tx.run(check_query, {'next_station': record['next_station']}).single()
+                result = tx.run(check_query, {'to_station': rel['to_station']}).single()
                 
                 # If station doesn't exist, log and skip
                 if not result or result['count'] == 0:
                     skipped_not_found += 1
-                    print(f"Skipping departure from '{record['from_station']}' to '{record['next_station']}' - Destination station does not exist")
+                    print(f"Skipping relationship from '{rel['from_station']}' to '{rel['to_station']}' - Destination station does not exist")
                     continue
                 
                 # If multiple stations exist with the same name, log details and skip
                 if result['count'] > 1:
                     # Query to get details of all matching stations
                     details_query = """
-                    MATCH (to:Station {name: $next_station, city: "Hamburg"})
+                    MATCH (to:Station {name: $to_station, city: "Hamburg"})
                     RETURN to.name, to.geofoxid
                     """
                     
-                    details_result = tx.run(details_query, {'next_station': record['next_station']}).data()
+                    details_result = tx.run(details_query, {'to_station': rel['to_station']}).data()
                     
                     # Format the details for logging
                     stations_details = "\n  ".join([
@@ -129,60 +128,60 @@ def add_station_relationships(processed_data, session):
                         for station in details_result
                     ])
                     
-                    print(f"Skipping departure from '{record['from_station']}' to '{record['next_station']}' - Multiple destination stations found:\n  {stations_details}")
+                    print(f"Skipping relationship from '{rel['from_station']}' to '{rel['to_station']}' - Multiple destination stations found:\n  {stations_details}")
                     
                     skipped_multiple_found += 1
                     continue
                     
-                # Cypher query to create source station and relationship with destination
+                # Cypher query to create/update the relationship with consolidated lists
                 query = """
-                // Create FROM station if it doesn't exist
+                // Match FROM station
                 MATCH (from:Station {geofoxid: $from_station_id})
                 
-                // Need to use WITH to pass variables between MERGE and MATCH
+                // Need to use WITH to pass variables between MATCH statements
                 WITH from
 
                 // Match the TO station that we've confirmed exists uniquely
-                MATCH (to:Station {name: $next_station, city: "Hamburg"})
+                MATCH (to:Station {name: $to_station, city: "Hamburg"})
                 
-                // Check if relationship exists and create only if it doesn't
-                MERGE (from)-[r:CONNECTS_TO {
-                    departure_time: $departure_time,
-                    line_id: $line_id
-                }]->(to)
-                // Set other properties only on creation
-                ON CREATE SET 
-                    r.arrival_time = $arrival_time,
+                // Create or merge the relationship with the unique line identifier
+                MERGE (from)-[r:CONNECTS_TO {line_unique: $line_unique}]->(to)
+                
+                // Set or update the properties
+                SET 
                     r.line_name = $line_name,
                     r.line_info = $line_info,
-                    r.departure_platform = $platform
+                    r.departure_times = $departure_times,
+                    r.arrival_times = $arrival_times,
+                    r.duration = $duration,
+                    r.last_updated = $current_time
                 """
                 
-                # Handle None/NaT values for arrival_time
-                arrival_time = record['arrival_time']
-                if pd.isna(arrival_time) or arrival_time is None:
-                    arrival_time = None
+                # Ensure all lists are valid for Neo4j
+                # Filter out any None/NaT values in arrival_times and departure_times
+                departure_times = [dt for dt in rel['departure_times'] if dt is not None and not pd.isna(dt)]
+                arrival_times = [at for at in rel['arrival_times'] if at is not None and not pd.isna(at)]
                 
                 # Parameters for the query
                 params = {
-                    'from_station': record['from_station'],
-                    'from_station_id': record['from_station_id'],
-                    'next_station': record['next_station'],
-                    'departure_time': record['departure_time'],
-                    'arrival_time': arrival_time,
-                    'line_id': f"{record['line_id']}#{record['line_origin']}#{record['line_terminal']}", # damit eindeutig identifizierbar
-                    'line_name': record['line_name'],
-                    'line_info': record['line_info'],
-                    'platform': record['platform'],
+                    'from_station_id': rel['from_station_id'],
+                    'to_station': rel['to_station'],
+                    'line_unique': rel['line_unique'],
+                    'line_name': rel['line_name'],
+                    'line_info': rel['line_info'],
+                    'departure_times': departure_times,
+                    'arrival_times': arrival_times,
+                    'duration': rel['duration'],
+                    'current_time': "2025-04-06 10:08:11"  # Current timestamp from your context
                 }
                 
                 # Execute the query
                 tx.run(query, params)
 
-    # Log summary of skipped departures
+    # Log summary of skipped relationships
     total_skipped = skipped_not_found + skipped_multiple_found
     if total_skipped > 0:
-        print(f"WARNING: Skipped {total_skipped} departures:")
+        print(f"WARNING: Skipped {total_skipped} relationships:")
         if skipped_not_found > 0:
             print(f"  - {skipped_not_found} due to missing destination stations")
         if skipped_multiple_found > 0:
@@ -190,8 +189,11 @@ def add_station_relationships(processed_data, session):
 
     print("Creating additional indexes for optimized querying...")
     # Create compound indexes for common query patterns
-    session.run("CREATE INDEX IF NOT EXISTS FOR ()-[r:CONNECTS_TO]-() ON (r.line_id)")
-    session.run("CREATE INDEX IF NOT EXISTS FOR ()-[r:CONNECTS_TO]-() ON (r.departure_time)")
+    session.run("CREATE INDEX IF NOT EXISTS FOR ()-[r:CONNECTS_TO]-() ON (r.line_unique)")
+    
+    # Create full-text index for searching departure times
+    # This can help with finding the next available departure
+    session.run("CREATE INDEX IF NOT EXISTS FOR ()-[r:CONNECTS_TO]-() ON (r.departure_times)")
 
     print("Relationship creation complete!")
         
