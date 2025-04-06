@@ -24,7 +24,7 @@ https://gti.geofox.de/html/GTIHandbuch_p.html#methode-liststations
 
 # Design
 
-Nodes: POI, AOI
+Nodes: POI, AOI, Station
 
 
 POI
@@ -69,64 +69,9 @@ import von abfahrten zu jeder station
    'realtimePlatform': 'Gleis 3'},
    ...
 
+import pois
+    - URL: /gti/public/checkName 
+    - daring können auch stations enthalten sein mit zusatz info ob innerCity
 
 
-# Optimiertes Neo4j-Modell für ÖPNV-Routing
 
-Sie haben einen wichtigen Punkt angesprochen! Ihr vorgeschlagenes Modell mit direkten zeitgestempelten Relationen zwischen Stationen ist tatsächlich für viele Routing-Szenarien deutlich effizienter und intuitiver. Das vereinfacht die Pfadsuche erheblich und ermöglicht sehr elegante Abfragen.
-
-## Ihr vorgeschlagenes Modell
-
-```
-(Station1)-[:TRIP {line: "U1", departure: "14:00", arrival: "14:10"}]->(Station2)
-```
-
-Dieses Modell hat mehrere Vorteile:
-
-### Vorteile:
-1. **Direkte Pfadsuche**: Neo4j's Algorithmen wie `shortestPath` können direkt eingesetzt werden
-2. **Einfache Zeitprüfung**: Filter auf Relationsattributen sind sehr effizient
-3. **Intuitive Abfragestruktur**: Die Abfragen werden viel verständlicher
-4. **Bessere Performance**: Weniger JOIN-artige Operationen notwendig
-
-
-## Routensuche mit diesem Modell
-
-```cypher
-// Finde alle Routen von Start zu Ziel ab aktueller Zeit
-MATCH path = (start:Station {name: 'Hauptbahnhof'})-[:CONNECTS_TO*1..5]->(end:Station {name: 'Barmbek'})
-WHERE ALL(r IN relationships(path) WHERE r.departure_time > datetime("2025-04-05T16:09:39"))
-
-// Prüfe, ob die Umsteigezeiten ausreichend sind
-WITH path, relationships(path) AS trips
-WHERE ALL(
-    i IN range(0, size(trips)-2) 
-    WHERE trips[i+1].departure_time > trips[i].arrival_time + duration({minutes: 3})  // Minimale Umsteigezeit
-)
-
-// Berechne Gesamtreisezeit und weitere Informationen
-WITH path, trips,
-     trips[0].departure_time AS start_time,
-     trips[size(trips)-1].arrival_time AS end_time,
-     duration.between(trips[0].departure_time, trips[size(trips)-1].arrival_time) AS total_travel_time,
-     [t IN trips | t.line_id] AS lines,
-     [idx IN range(0, size(trips)-1) | 
-         CASE WHEN idx = 0 OR trips[idx].line_id <> trips[idx-1].line_id
-              THEN idx ELSE NULL END
-     ] AS transfers
-
-// Formatiere die Ausgabe
-RETURN 
-     start_time AS departure,
-     end_time AS arrival,
-     total_travel_time AS duration,
-     size([t IN transfers WHERE t IS NOT NULL])-1 AS transfers,
-     [n IN nodes(path) | n.name] AS stations,
-     [r IN relationships(path) | r.line_name] AS lines
-ORDER BY 
-     // Primär nach Ankunftszeit sortieren
-     end_time,
-     // Sekundär nach Anzahl der Umstiege
-     size([t IN transfers WHERE t IS NOT NULL])-1
-LIMIT 5
-```

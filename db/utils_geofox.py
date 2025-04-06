@@ -231,3 +231,106 @@ def stationdf2rows(df):
         rows.append(station_data)
     
     return rows
+
+
+def get_pois(client, filename="pois.json", maxList=1, loadFromDisk=False , doSave=True):
+    if loadFromDisk:
+        # load json from folder "data_geofox"
+        with open(os.path.join(data_dir, filename), "r") as f:
+            res = json.load(f)
+        return res
+    
+    sdName = {
+        "type": "POI",
+        "combinedName": "Hamburg",
+    }
+
+    endpoint = 'checkName' 
+    
+    request = {
+    "language": "de",
+    "version": 59,
+    "tariffDetails": True,
+    "maxList": maxList,
+    "theName": sdName,
+    }
+
+    res = client.send(endpoint, request)
+
+    if doSave and not loadFromDisk:
+        # saving json to folder "data_geofox"
+        with open(os.path.join(data_dir, filename), "w") as f:
+            json.dump(res, f, indent=4)
+
+    return res
+
+def poisdf2rows(df):
+    """
+    Transform a stations DataFrame to a format suitable for Neo4j import.
+    Specifically handles coordinates in format {'x': longitude, 'y': latitude}
+    """
+    rows = []
+    for index, row in df.iterrows():
+        # Extract station data
+            
+        station_data = {
+            "geofoxid": row.id,  # Assuming 'id' is the field with "Master:xxxxx"
+            "name": row['name'],
+            "city": row.city if hasattr(row, 'city') else None,
+            "address": row['address']
+        }
+        
+        # Handle coordinate conversion
+        if hasattr(row, 'coordinate') and pd.notna(row.coordinate):
+            try:
+                # If it's already a dictionary
+                if isinstance(row.coordinate, dict):
+                    station_data["longitude"] = row.coordinate.get('x')
+                    station_data["latitude"] = row.coordinate.get('y')
+                # If it's a string representation of a dictionary
+                elif isinstance(row.coordinate, str):
+                    import ast
+                    coord_dict = ast.literal_eval(row.coordinate)
+                    station_data["longitude"] = coord_dict.get('x')
+                    station_data["latitude"] = coord_dict.get('y')
+                else:
+                    station_data["longitude"] = None
+                    station_data["latitude"] = None
+            except Exception as e:
+                print(f"Error processing coordinates for row {index}: {e}")
+                station_data["longitude"] = None
+                station_data["latitude"] = None
+        else:
+            station_data["longitude"] = None
+            station_data["latitude"] = None
+        
+        rows.append(station_data)
+    
+    return rows
+
+def get_station_innercityinfo(client, stations, filename="pois.json", loadFromDisk=False , doSave=True):
+    if loadFromDisk:
+        # load json from folder "data_geofox"
+        with open(os.path.join(data_dir, filename), "r") as f:
+            res = json.load(f)
+        return res
+    
+    sdName = {
+        "type": "STATION",
+    }
+
+    endpoint = 'checkName' 
+    request = {
+    "language": "de",
+    "version": 59,
+    "tariffDetails": True,
+    }
+
+    res = client.send(endpoint, request)
+
+    if doSave and not loadFromDisk:
+        # saving json to folder "data_geofox"
+        with open(os.path.join(data_dir, filename), "w") as f:
+            json.dump(res, f, indent=4)
+
+    return res

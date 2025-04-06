@@ -3,17 +3,17 @@ import pandas as pd
 
 # First, define Cypher queries to create constraints and indexes
 ## osm specific constraints and indexes
-constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI) REQUIRE i.osmid IS UNIQUE"
-point_index_query = "CREATE POINT INDEX IF NOT EXISTS FOR (i:POI) ON i.location"
-
-constraint_query2 = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:AOI) REQUIRE i.osmid IS UNIQUE"
+osm_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI) REQUIRE i.osmid IS UNIQUE"
+osm_constraint_query2 = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:AOI) REQUIRE i.osmid IS UNIQUE"
 
 ## Geofox specific constraints and indexes
-constraint_query3 = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:Station) REQUIRE i.geofoxid IS UNIQUE"
+geofox_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI) REQUIRE i.geofoxid IS UNIQUE"
+geofox_constraint_query2 = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:Station) REQUIRE i.geofoxid IS UNIQUE"
 
 ## etc
+point_index_query = "CREATE POINT INDEX IF NOT EXISTS FOR (i:POI) ON i.location"
+poi_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI) REQUIRE i.name IS UNIQUE"
 rel_index_query = "CREATE INDEX IF NOT EXISTS FOR ()-[r:ROAD_SEGMENT]-() ON r.osmids"
-
 address_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (a:Address) REQUIRE a.id IS UNIQUE"
 
 
@@ -43,6 +43,19 @@ SET p.name = row.name,
     p.city = row.city,
     p.vehicleTypes = row.vehicleTypes,
     p.aliasses = row.aliasses
+WITH p, row
+WHERE row.longitude IS NOT NULL AND row.latitude IS NOT NULL
+SET p.location = point({longitude: row.longitude, latitude: row.latitude})
+RETURN COUNT(*) as total
+'''
+
+# Cypher query for importing stations from geofox
+geofoxpois_insert_query = '''
+UNWIND $rows AS row
+MERGE (p:POI {geofoxid: row.geofoxid})
+SET p.name = row.name,
+    p.city = row.city,
+    p.address = row.address
 WITH p, row
 WHERE row.longitude IS NOT NULL AND row.latitude IS NOT NULL
 SET p.location = point({longitude: row.longitude, latitude: row.latitude})
@@ -224,11 +237,13 @@ def init(driver):
     """
     with driver.session() as session:
         # osm specific constraints and indexes
-        run_safe(constraint_query, session)
-        run_safe(point_index_query, session)
-        run_safe(constraint_query2, session)
+        run_safe(osm_constraint_query, session)
+        run_safe(osm_constraint_query2, session)
         # Geofox specific constraints and indexes
-        run_safe(constraint_query3, session)
+        run_safe(geofox_constraint_query, session)
+        run_safe(geofox_constraint_query2, session)
+        # etc
+        run_safe(point_index_query, session)
 
 
 def run_safe(query, session):

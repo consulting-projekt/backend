@@ -35,7 +35,7 @@ def poidf2rows(df):
         # Create a dictionary for each row
         poi_data = {
             "osmid": row.osmid,
-            "name": row.name,
+            "name": row['name'],
             "addr_street": row["addr:street"] if pd.notna(row["addr:street"]) else None,
             "addr_housenumber": row["addr:housenumber"] if pd.notna(row["addr:housenumber"]) else None,
             "addr_postcode": row["addr:postcode"] if pd.notna(row["addr:postcode"]) else None,
