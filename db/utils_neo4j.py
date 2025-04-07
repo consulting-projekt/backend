@@ -49,7 +49,15 @@ SET p.location = point({longitude: row.longitude, latitude: row.latitude})
 RETURN COUNT(*) as total
 '''
 
-# Cypher query for importing stations from geofox
+# Cypher query for setting inner_city prop of stations from geofox
+station_ictag_insert_query = '''
+UNWIND $rows AS row
+Match (p:Station {geofoxid: row.geofoxid})
+SET p.tags = ['inner_city']
+RETURN COUNT(*) as total
+'''
+
+# Cypher query for importing pois from geofox
 geofoxpois_insert_query = '''
 UNWIND $rows AS row
 MERGE (p:POI {geofoxid: row.geofoxid})

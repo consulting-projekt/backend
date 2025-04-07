@@ -71,7 +71,7 @@ import von abfahrten zu jeder station
 
 import pois
     - URL: /gti/public/checkName 
-    - daring können auch stations enthalten sein mit zusatz info ob innerCity
+    - darin können auch stations enthalten sein mit zusatz info ob innerCity
 
 
 

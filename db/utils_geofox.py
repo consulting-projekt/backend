@@ -308,8 +308,8 @@ def poisdf2rows(df):
     
     return rows
 
-def get_station_innercityinfo(client, stations, filename="pois.json", loadFromDisk=False , doSave=True):
-    if loadFromDisk:
+def get_station_innercityinfo(client, filename="stations_inner_city.json", maxList=1, loadFromDisk=False , doSave=True):
+    if client is None:
         # load json from folder "data_geofox"
         with open(os.path.join(data_dir, filename), "r") as f:
             res = json.load(f)
@@ -317,6 +317,7 @@ def get_station_innercityinfo(client, stations, filename="pois.json", loadFromDi
     
     sdName = {
         "type": "STATION",
+        "combinedName": "Hamburg",
     }
 
     endpoint = 'checkName' 
@@ -324,6 +325,8 @@ def get_station_innercityinfo(client, stations, filename="pois.json", loadFromDi
     "language": "de",
     "version": 59,
     "tariffDetails": True,
+    "maxList": maxList,
+    "theName": sdName,
     }
 
     res = client.send(endpoint, request)
