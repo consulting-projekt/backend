@@ -13,8 +13,6 @@ geofox_constraint_query2 = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:Station) REQU
 ## etc
 point_index_query = "CREATE POINT INDEX IF NOT EXISTS FOR (i:POI) ON i.location"
 poi_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI) REQUIRE i.name IS UNIQUE"
-rel_index_query = "CREATE INDEX IF NOT EXISTS FOR ()-[r:ROAD_SEGMENT]-() ON r.osmids"
-address_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (a:Address) REQUIRE a.id IS UNIQUE"
 
 
 # Cypher query to import our road network nodes GeoDataFrame
@@ -34,6 +32,22 @@ WHERE row.longitude IS NOT NULL AND row.latitude IS NOT NULL
 SET p.location = point({longitude: row.longitude, latitude: row.latitude})
 RETURN COUNT(*) as total
 '''
+
+# Cypher query for importing AOIs from osm
+aoi_insert_query = '''
+UNWIND $rows AS row
+MERGE (a:AOI {osmid: row.osmid})
+SET a.name = row.name,
+    a.description = row.description,
+    a.tags = row.tags,
+    a.geometry_wkt = row.geometry_wkt,
+    a.boundary_wkt = row.boundary_wkt
+WITH a, row
+WHERE row.centroid_lon IS NOT NULL AND row.centroid_lat IS NOT NULL
+SET a.centroid = point({longitude: row.centroid_lon, latitude: row.centroid_lat})
+RETURN COUNT(*) as total
+'''
+
 
 # Cypher query for importing stations from geofox
 station_insert_query = '''
