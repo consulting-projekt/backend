@@ -41,12 +41,15 @@ SET a.name = row.name,
     a.description = row.description,
     a.tags = row.tags,
     a.geometry_wkt = row.geometry_wkt,
-    a.boundary_wkt = row.boundary_wkt
+    a.boundary_wkt = row.boundary_wkt,
+    a.boundary_lons = row.boundary_lons,
+    a.boundary_lats = row.boundary_lats
 WITH a, row
 WHERE row.centroid_lon IS NOT NULL AND row.centroid_lat IS NOT NULL
 SET a.centroid = point({longitude: row.centroid_lon, latitude: row.centroid_lat})
 RETURN COUNT(*) as total
 '''
+
 
 
 # Cypher query for importing stations from geofox

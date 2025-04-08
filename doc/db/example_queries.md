@@ -60,3 +60,49 @@ RETURN poi.name AS poiName,
        poi.addr_postcode AS postcode,
        toInteger(distance) AS distance_meters
 ```
+
+pois in nähe eines aoi (Stadtpark)
+```
+// Find the Stadtparksee AOI
+MATCH (aoi:AOI {name: 'Stadtparksee'})
+WHERE aoi.boundary_lons IS NOT NULL AND aoi.boundary_lats IS NOT NULL
+
+// Get all POIs
+MATCH (poi:POI)
+WHERE poi.location IS NOT NULL
+
+// Calculate initial distance to centroid for efficiency
+WITH aoi, poi, 
+     point.distance(poi.location, aoi.centroid) AS centroid_distance,
+     size(aoi.boundary_lons) as num_points
+
+// Filter by proximity to centroid first
+ORDER BY centroid_distance
+LIMIT 100
+
+// Calculate minimum distance to any boundary point
+WITH aoi, poi, centroid_distance,
+     range(0, size(aoi.boundary_lons) - 1) AS indices
+UNWIND indices AS i
+WITH aoi, poi, centroid_distance, i
+WHERE aoi.boundary_lons[i] <> -999.0  // Skip separator points
+WITH aoi, poi, centroid_distance, i,
+     point.distance(
+       poi.location, 
+       point({longitude: aoi.boundary_lons[i], latitude: aoi.boundary_lats[i]})
+     ) AS point_distance
+
+// Get minimum distance for each POI
+WITH aoi, poi, min(point_distance) AS min_distance
+ORDER BY min_distance ASC
+LIMIT 10
+
+// Return the results
+RETURN poi.name AS poi_name,
+       poi.description AS description,
+       poi.tags AS tags,
+       poi.addr_street AS street,
+       poi.addr_housenumber AS housenumber,
+       poi.addr_postcode AS postcode,
+       toInteger(min_distance) AS distance_meters
+```

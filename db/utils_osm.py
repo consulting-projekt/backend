@@ -52,7 +52,7 @@ def poidf2rows(df):
 def aoidf2rows(df):
     """
     Convert a GeoDataFrame containing Areas of Interest (with polygon geometries)
-    to a format suitable for Neo4j import.
+    to a format suitable for Neo4j import, extracting boundary points as a flat list.
     
     Parameters:
     -----------
@@ -73,40 +73,62 @@ def aoidf2rows(df):
     for index, row in df.iterrows():
         # Handle Polygon/MultiPolygon geometry
         try:
-            # If geometry is already a shapely object
+            # Get geometry as shapely object
             if isinstance(row.geometry, (Polygon, MultiPolygon)):
-                geometry_wkt = row.geometry.wkt
-                # Get the centroid (useful for some operations)
-                centroid = row.geometry.centroid
-                centroid_lon = centroid.x
-                centroid_lat = centroid.y
-                # Get the boundary for distance calculations
-                boundary_wkt = row.geometry.boundary.wkt
-            # If geometry is WKT string
+                geometry = row.geometry
             elif isinstance(row.geometry, str):
-                geom = shapely.wkt.loads(row.geometry)
-                geometry_wkt = geom.wkt
-                centroid = geom.centroid
-                centroid_lon = centroid.x
-                centroid_lat = centroid.y
-                boundary_wkt = geom.boundary.wkt
+                geometry = shapely.wkt.loads(row.geometry)
             else:
-                geometry_wkt = None
-                centroid_lon = None
-                centroid_lat = None
-                boundary_wkt = None
+                continue  # Skip rows without valid geometry
+                
+            geometry_wkt = geometry.wkt
+            centroid = geometry.centroid
+            centroid_lon = centroid.x
+            centroid_lat = centroid.y
+            
+            # Extract boundary points as flat arrays of coordinates
+            # Neo4j can store arrays but not nested objects
+            boundary_lons = []
+            boundary_lats = []
+            
+            if isinstance(geometry, Polygon):
+                # Get boundary coordinates as flat arrays
+                for x, y in geometry.exterior.coords:
+                    boundary_lons.append(x)
+                    boundary_lats.append(y)
+                
+            elif isinstance(geometry, MultiPolygon):
+                # For multipolygon, collect all coordinates in flat arrays
+                # and add a separator between polygons (-999 is used as separator)
+                for poly in geometry.geoms:
+                    for x, y in poly.exterior.coords:
+                        boundary_lons.append(x)
+                        boundary_lats.append(y)
+                    # Add separator between polygons if there are more to come
+                    if poly != list(geometry.geoms)[-1]:
+                        boundary_lons.append(-999.0)  # Use -999 as separator
+                        boundary_lats.append(-999.0)
+            
+            # Convert boundary to WKT format
+            boundary_wkt = geometry.boundary.wkt
+                        
         except Exception as e:
             print(f"Error processing geometry for row {index}: {e}")
             geometry_wkt = None
             centroid_lon = None
             centroid_lat = None
             boundary_wkt = None
+            boundary_lons = []
+            boundary_lats = []
         
         # Convert tags to a list if it's not already
         if isinstance(row.tags, str):
             # This assumes tags are stored as a string representation of a list
             import ast
-            tags = ast.literal_eval(row.tags)
+            try:
+                tags = ast.literal_eval(row.tags)
+            except:
+                tags = [row.tags]  # Fallback if can't parse
         else:
             tags = row.tags if isinstance(row.tags, list) else []
         
@@ -119,9 +141,10 @@ def aoidf2rows(df):
             "geometry_wkt": geometry_wkt,
             "boundary_wkt": boundary_wkt,
             "centroid_lon": centroid_lon,
-            "centroid_lat": centroid_lat
+            "centroid_lat": centroid_lat,
+            "boundary_lons": boundary_lons,  # Store longitudes as flat array
+            "boundary_lats": boundary_lats   # Store latitudes as flat array
         }
-        
             
         rows.append(aoi_data)
 
