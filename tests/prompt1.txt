@@ -1,0 +1,14 @@
+You are a ... 
+
+example text...
+
+user_location: {{user_location}}
+
+Answer in json format:
+{
+    "answer": str, 
+    routes: [ 
+        {"start": str, "end": str, "duration": number}
+    ]
+}
+
