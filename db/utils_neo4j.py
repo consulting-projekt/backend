@@ -281,4 +281,22 @@ def run_safe(query, session):
     except Exception as e:
         print(f"Error running query: {e}")
         return None
+    
+
+
+def get_node_count(driver, label: str) -> int:
+    """
+    Get the count of nodes with a specific label.
+    
+    Args:
+        driver: Neo4j driver instance
+        label: Node label to count
+        
+    Returns:
+        Number of nodes with the specified label
+    """
+    with driver.session() as session:
+        count_query = f"MATCH (n:{label}) RETURN count(n) AS count"
+        result = session.run(count_query)
+        return result.single()["count"]
 
