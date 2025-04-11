@@ -3,7 +3,6 @@ import pandas as pd
 from typing import List, Dict, Any
 from neo4j import GraphDatabase
 from sentence_transformers import SentenceTransformer
-from utils_neo4j import get_node_count
 import json
 
 
@@ -39,7 +38,7 @@ def get_nodes_batch(driver, label: str, offset: int, batch_size: int) -> List[Di
     with driver.session() as session:
         query = f"""
         MATCH (n:{label})
-        WHERE NOT EXISTS(n.embeddings_json)
+        WHERE n.embeddings_json IS NOT NULL
         RETURN elementId(n) AS id, properties(n) AS properties
         SKIP {offset}
         LIMIT {batch_size}
@@ -120,6 +119,22 @@ def update_node_embeddings(driver, node_id: int, embeddings_dict) -> None:
         """
         session.run(update_query, {"node_id": node_id, "embeddings_json": json.dumps(embeddings_dict)})
 
+def get_node_count(driver, label: str) -> int:
+    """
+    Get the count of nodes with a specific label.
+    
+    Args:
+        driver: Neo4j driver instance
+        label: Node label to count
+        
+    Returns:
+        Number of nodes with the specified label
+    """
+    with driver.session() as session:
+        count_query = f"MATCH (n:{label}) where WHERE n.embeddings_json IS NOT NULL RETURN count(n) AS count"
+        result = session.run(count_query)
+        return result.single()["count"]
+    
 def process_nodes(driver, model, label: str, batch_size: int = 100) -> None:
     """
     Process all nodes with the specified label to generate and store embeddings.

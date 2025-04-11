@@ -74,4 +74,9 @@ import pois
     - darin können auch stations enthalten sein mit zusatz info ob innerCity
 
 
+## graph rag
+### vector index
+https://neo4j.com/docs/neo4j-graphrag-python/current/user_guide_rag.html#vector-cypher-retriever
+
+
 
