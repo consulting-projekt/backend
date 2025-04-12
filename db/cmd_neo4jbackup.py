@@ -2,7 +2,7 @@ import subprocess
 import datetime
 from pathlib import Path
 
-snapshot_container_path="snapshots/std_embeddings"
+snapshot_container_path="snapshots"
 snapshot_path = Path(__file__).parent / "neo4j_container" / snapshot_container_path
 snapshot_path.mkdir(parents=True, exist_ok=True)
 

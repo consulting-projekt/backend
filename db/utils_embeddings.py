@@ -2,8 +2,10 @@ from sentence_transformers import SentenceTransformer
 import pandas as pd
 from typing import List, Dict, Any
 from neo4j import GraphDatabase
-from sentence_transformers import SentenceTransformer
 import json
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, VectorParams
+
 
 
 
@@ -22,154 +24,165 @@ def load_embedding_model(model_name: str = "all-MiniLM-L6-v2"):
 
 
 
-def get_nodes_batch(driver, label: str, offset: int, batch_size: int) -> List[Dict]:
+def get_nodes(driver, node_type: str, batch_size: int, offset: int) -> List[Dict]:
     """
-    Get a batch of nodes with the specified label.
+    Get a batch of nodes of a specific type from Neo4j.
     
     Args:
         driver: Neo4j driver instance
-        label: Node label to query
-        offset: Starting offset for pagination
+        node_type: Type of nodes to retrieve
         batch_size: Number of nodes to retrieve
+        offset: Starting offset for pagination
         
     Returns:
         List of node dictionaries with their properties
     """
     with driver.session() as session:
-        query = f"""
-        MATCH (n:{label})
-        WHERE n.embeddings_json IS NOT NULL
+        query = """
+        MATCH (n:POI) 
+        WHERE n.type = $node_type OR n.category = $node_type
         RETURN elementId(n) AS id, properties(n) AS properties
-        SKIP {offset}
-        LIMIT {batch_size}
+        SKIP $offset
+        LIMIT $batch_size
         """
         
-        result = session.run(query)
+        result = session.run(query, {"node_type": node_type, "offset": offset, "batch_size": batch_size})
         return [{"id": record["id"], "properties": record["properties"]} for record in result]
 
-def generate_embeddings_for_text(model, text: str) -> List[float]:
+    
+
+def get_node_count(driver, node_type: str) -> int:
     """
-    Generate embeddings for a text string.
+    Get the count of nodes of a specific type.
     
     Args:
-        model: SentenceTransformer model
-        text: Text to generate embeddings for
+        driver: Neo4j driver instance
+        node_type: Type of nodes to count
         
     Returns:
-        List of embedding values
+        Number of nodes of the specified type
     """
-    if text:
-        return model.encode(text).tolist()
-    return []
+    with driver.session() as session:
+        count_query = """
+        MATCH (n:POI)
+        WHERE n.type = $node_type OR n.category = $node_type
+        RETURN count(n) AS count
+        """
+        result = session.run(count_query, {"node_type": node_type})
+        return result.single()["count"]
+    
 
-def generate_node_embeddings(model, node_properties: Dict) -> List[List[float]]:
+def create_text_for_embedding(node_properties: Dict) -> str:
     """
-    Generate embeddings for node properties (name, description, tags).
+    Create a combined text from node properties for embedding.
     
     Args:
-        model: SentenceTransformer model
         node_properties: Dictionary of node properties
         
     Returns:
-        List of embedding arrays
+        Combined text for embedding
     """
-    embeddings_dic = {}
+    combined_text = ""
     
-    # Generate embedding for name if it exists
     if "name" in node_properties and node_properties["name"]:
-        name_embedding = generate_embeddings_for_text(model, node_properties["name"])
-        embeddings_dic['name'] = name_embedding
-    else:
-        embeddings_dic['name'] = []
+        combined_text += f"Name: {node_properties['name']}\n"
     
-    # Generate embedding for description if it exists
     if "description" in node_properties and node_properties["description"]:
-        desc_embedding = generate_embeddings_for_text(model, node_properties["description"])
-        embeddings_dic['description'] = desc_embedding
-    else:
-        embeddings_dic['description'] = []
+        combined_text += f"Beschreibung: {node_properties['description']}\n"
     
-    # Generate embeddings for each tag if they exist
     if "tags" in node_properties and isinstance(node_properties["tags"], list):
-        tagEmbeddings = []
-        for tag in node_properties["tags"]:
-            if tag:  # Only process non-empty tags
-                tag_embedding = generate_embeddings_for_text(model, tag)
-                tagEmbeddings.append(tag_embedding)
-        embeddings_dic['tags'] = tagEmbeddings
-    else:
-        embeddings_dic['tags'] = []
+        combined_text += f"Schlagwörter: {', '.join(node_properties['tags'])}"
     
-    return embeddings_dic
+    return combined_text
 
-def update_node_embeddings(driver, node_id: int, embeddings_dict) -> None:
+def initialize_collection(client, model, collection_name: str):
     """
-    Update a Neo4j node with the generated embeddings list.
+    Initialize Qdrant collection for embeddings.
     
     Args:
-        driver: Neo4j driver instance
-        node_id: ID of the node to update
-        embeddings_list: List of embedding arrays to store
+        client: Qdrant client instance
+        model: SentenceTransformer model
+        collection_name: Name of the collection to create
     """
-    with driver.session() as session:
-        update_query = """
-        MATCH (n)
-        WHERE elementId(n) = $node_id
-        SET n.embeddings_json = $embeddings_json
-        """
-        session.run(update_query, {"node_id": node_id, "embeddings_json": json.dumps(embeddings_dict)})
+    # Get embedding dimension from the model
+    vector_size = model.get_sentence_embedding_dimension()
+    
+    # Create or recreate the collection
+    client.recreate_collection(
+        collection_name=collection_name,
+        vectors_config=VectorParams(
+            size=vector_size,
+            distance=Distance.COSINE
+        )
+    )
+    print(f"Qdrant Collection '{collection_name}' created")
 
-def get_node_count(driver, label: str) -> int:
+def process_node_embeddings(driver, model, client, node_type: str, collection_name: str, batch_size: int = 100):
     """
-    Get the count of nodes with a specific label.
-    
-    Args:
-        driver: Neo4j driver instance
-        label: Node label to count
-        
-    Returns:
-        Number of nodes with the specified label
-    """
-    with driver.session() as session:
-        count_query = f"MATCH (n:{label}) where WHERE n.embeddings_json IS NOT NULL RETURN count(n) AS count"
-        result = session.run(count_query)
-        return result.single()["count"]
-    
-def process_nodes(driver, model, label: str, batch_size: int = 100) -> None:
-    """
-    Process all nodes with the specified label to generate and store embeddings.
+    Process nodes to generate embeddings and store them in Qdrant.
     
     Args:
         driver: Neo4j driver instance
         model: SentenceTransformer model
-        label: Node label to process
+        client: Qdrant client instance
+        node_type: Type of nodes to process
+        collection_name: Name of the Qdrant collection to store embeddings
         batch_size: Number of nodes to process in each batch
     """
-    print(f"Processing nodes with label: {label}")
+    print(f"Processing {node_type} nodes for embeddings")
     
-    # Get total count
-    total_count = get_node_count(driver, label)
-    print(f"Found {total_count} {label} nodes")
+    # Initialize Qdrant collection
+    initialize_collection(client, model, collection_name)
+    
+    # Get total count of nodes
+    total_count = get_node_count(driver, node_type)
+    print(f"Found {total_count} {node_type} nodes")
+    
+    if total_count == 0:
+        print(f"No {node_type} nodes found to process")
+        return
     
     # Process in batches
     for offset in range(0, total_count, batch_size):
         print(f"Processing batch at offset {offset}")
         
         # Get batch of nodes
-        nodes = get_nodes_batch(driver, label, offset, batch_size)
+        nodes = get_nodes(driver, node_type, batch_size, offset)
         
         # Process each node
         for node in nodes:
             node_id = node["id"]
             node_properties = node["properties"]
             
-            # Generate embeddings
-            embeddings_dict = generate_node_embeddings(model, node_properties)
+            # Create combined text for embedding
+            combined_text = create_text_for_embedding(node_properties)
             
-            # Update node with embeddings
-            update_node_embeddings(driver, node_id, embeddings_dict)
-            
+            if combined_text:
+                # Generate embedding
+                vector = model.encode(combined_text).tolist()
+                
+                # Store in Qdrant
+                client.upsert(
+                    collection_name=collection_name,
+                    points=[{
+                        "id": node_id,
+                        "vector": vector,
+                        "payload": {
+                            "neo4j_id": str(node_id),
+                            "name": node_properties.get("name", ""),
+                            "description": node_properties.get("description", ""),
+                            "tags": node_properties.get("tags", [])
+                        }
+                    }]
+                )
+        
         print(f"Completed batch processing (offset: {offset})")
+    
+    # Verify storage
+    collection_info = client.get_collection(collection_name=collection_name)
+    print(f"Qdrant Collection '{collection_name}' contains {collection_info.vectors_count} vectors")
+    
+
 
 # Initialize the sentence transformer model
 model_std = 'paraphrase-multilingual-MiniLM-L12-v2'

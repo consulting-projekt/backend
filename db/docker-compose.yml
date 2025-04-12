@@ -83,6 +83,25 @@ services:
       retries: 5
       start_period: 30s
 
+  # Neuer Qdrant-Service für Vektorspeicherung und -suche
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant-vector-db
+    ports:
+      - "6333:6333"  # REST API
+      - "6334:6334"  # gRPC API
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    environment:
+      - QDRANT_ALLOW_ORIGIN=* # Nur für Entwicklung, in Produktion einschränken
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
 volumes:
   neo4j-bus-data2:
   neo4j-bus-logs2:
@@ -92,9 +111,12 @@ volumes:
   neo4j-bus-logs-osm:      # Added new volume definition
   neo4j-bus-import-osm:    # Added new volume definition
   neo4j-bus-plugins-osm:   # Added new volume definition
+  qdrant-storage:         # Neues Volume für Qdrant-Daten
   snapshots:    # Changed to map local directory
     driver: local
     driver_opts:
       type: none
       o: bind
       device: ./neo4j_container/snapshots
+
+

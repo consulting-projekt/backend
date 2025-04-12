@@ -52,7 +52,7 @@ def restore_neo4j_backup(new_container_name, backup_file=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Restore Neo4j database from backup")
-    parser.add_argument("--container", default="neo4j-bus-chatbot-osm2", help="Target container name to restore the database to")
+    parser.add_argument("--container", default="neo4j-bus-chatbot-osm", help="Target container name to restore the database to")
     parser.add_argument("-f", "--file", default="neo4j", help="Specific backup file to restore (optional, uses latest if not specified)")
     
     args = parser.parse_args()
