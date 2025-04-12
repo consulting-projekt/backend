@@ -5,7 +5,7 @@ from neo4j import GraphDatabase
 import json
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
-
+import uuid
 
 
 
@@ -24,7 +24,7 @@ def load_embedding_model(model_name: str = "all-MiniLM-L6-v2"):
 
 
 
-def get_nodes(driver, node_type: str, batch_size: int, offset: int) -> List[Dict]:
+def get_nodes(driver, label: str, batch_size: int, offset: int) -> List[Dict]:
     """
     Get a batch of nodes of a specific type from Neo4j.
     
@@ -38,20 +38,19 @@ def get_nodes(driver, node_type: str, batch_size: int, offset: int) -> List[Dict
         List of node dictionaries with their properties
     """
     with driver.session() as session:
-        query = """
-        MATCH (n:POI) 
-        WHERE n.type = $node_type OR n.category = $node_type
+        query = f"""
+        MATCH (n:{label}) 
         RETURN elementId(n) AS id, properties(n) AS properties
         SKIP $offset
         LIMIT $batch_size
         """
         
-        result = session.run(query, {"node_type": node_type, "offset": offset, "batch_size": batch_size})
+        result = session.run(query, {"offset": offset, "batch_size": batch_size})
         return [{"id": record["id"], "properties": record["properties"]} for record in result]
 
     
 
-def get_node_count(driver, node_type: str) -> int:
+def get_node_count(driver, label: str) -> int:
     """
     Get the count of nodes of a specific type.
     
@@ -63,12 +62,11 @@ def get_node_count(driver, node_type: str) -> int:
         Number of nodes of the specified type
     """
     with driver.session() as session:
-        count_query = """
-        MATCH (n:POI)
-        WHERE n.type = $node_type OR n.category = $node_type
+        count_query = f"""
+        MATCH (n:{label})
         RETURN count(n) AS count
         """
-        result = session.run(count_query, {"node_type": node_type})
+        result = session.run(count_query)
         return result.single()["count"]
     
 
@@ -117,7 +115,7 @@ def initialize_collection(client, model, collection_name: str):
     )
     print(f"Qdrant Collection '{collection_name}' created")
 
-def process_node_embeddings(driver, model, client, node_type: str, collection_name: str, batch_size: int = 100):
+def process_node_embeddings(driver, model, client, label: str, collection_name: str, batch_size: int = 100):
     """
     Process nodes to generate embeddings and store them in Qdrant.
     
@@ -129,17 +127,14 @@ def process_node_embeddings(driver, model, client, node_type: str, collection_na
         collection_name: Name of the Qdrant collection to store embeddings
         batch_size: Number of nodes to process in each batch
     """
-    print(f"Processing {node_type} nodes for embeddings")
-    
-    # Initialize Qdrant collection
-    initialize_collection(client, model, collection_name)
+    print(f"Processing {label} nodes for embeddings")
     
     # Get total count of nodes
-    total_count = get_node_count(driver, node_type)
-    print(f"Found {total_count} {node_type} nodes")
+    total_count = get_node_count(driver, label)
+    print(f"Found {total_count} {label} nodes")
     
     if total_count == 0:
-        print(f"No {node_type} nodes found to process")
+        print(f"No {label} nodes found to process")
         return
     
     # Process in batches
@@ -147,7 +142,7 @@ def process_node_embeddings(driver, model, client, node_type: str, collection_na
         print(f"Processing batch at offset {offset}")
         
         # Get batch of nodes
-        nodes = get_nodes(driver, node_type, batch_size, offset)
+        nodes = get_nodes(driver, label, batch_size, offset)
         
         # Process each node
         for node in nodes:
@@ -160,15 +155,16 @@ def process_node_embeddings(driver, model, client, node_type: str, collection_na
             if combined_text:
                 # Generate embedding
                 vector = model.encode(combined_text).tolist()
-                
+                # Generate a new UUID for Qdrant
+                qdrant_id = str(uuid.uuid4())
                 # Store in Qdrant
                 client.upsert(
                     collection_name=collection_name,
                     points=[{
-                        "id": node_id,
+                        "id": qdrant_id,
                         "vector": vector,
                         "payload": {
-                            "neo4j_id": str(node_id),
+                            "neo4j_elementId": str(node_id),
                             "name": node_properties.get("name", ""),
                             "description": node_properties.get("description", ""),
                             "tags": node_properties.get("tags", [])
