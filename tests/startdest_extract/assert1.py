@@ -5,7 +5,7 @@ import json
 def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[str, Any]]:
     # test case variablen
     anfrage = options.get('vars', {}).get('anfrage', "")
-    user_location = options.get('vars', {}).get('user_location', "")
+    user_location = options.get('vars', {}).get('assert', "")
 
     # llm output
     raw_llm_output = output

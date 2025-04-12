@@ -1,16 +1,40 @@
 import pandas as pd
 
-
+# start und dest types = ["poi",  "adress", "aoi",  "station" , None]
 test_cases = [
-        { 
-        "anfrage": "Wann kommt der nächste Bus in die Innenstadt?", 
-        "user_location": {"lat": 52.5200, "lon": 13.4050},
-        "start_location": None,
-        "assert": {
-            "start": None,
-            "dest": "Innenstadt"
+    { 
+        "vars": {
+            "anfrage": "Wann kommt der nächste Bus in die Innenstadt?", 
+            "assert": {
+                "start": ["leer"],
+                "start_typ": None,
+                "ziel": ["Innenstadt"],
+                "ziel_type": "aoi"
+            }
         }
     }, 
+    { 
+        "vars": {
+            "anfrage": "Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?", 
+            "assert": {
+                "start": "Herthastraße",
+                "start_typ": "adress",
+                "ziel": "Restarurant in Nähe vom Hafen",
+                "ziel_typ": "poi_complex"
+            }
+        }
+    },
+    { 
+        "vars": {
+            "anfrage": "Zeige mir eine Verbindung von Herthastraße zur Innenstadt?", 
+            "assert": {
+                "start": "Herthastraße",
+                "start_typ": "adress",
+                "ziel": "Innenstadt",
+                "ziel_typ": "aoi"
+            }
+        }
+    },
 ]
 
 

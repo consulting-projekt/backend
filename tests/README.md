@@ -14,6 +14,12 @@ promptfoo eval --output filepath.json
 ```
 
 
+## llms
+
+gemma3 4b
+https://ollama.com/library/gemma3
+
+
 
 
 
