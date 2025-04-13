@@ -20,15 +20,34 @@ def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[
         try:
             llm_json = raw_llm2json(raw_llm_output)
             if not llm_json:
-                return False
+                return {
+                "pass": False,
+                "score": 0.0,
+                "reason": "Invalid JSON format or structure"
+            }
                 
             # Calculate score based on matching entries
             score = calculate_score(llm_json, expected_output)
-            return score
+            if score < 1.0:
+                return {
+                    "pass": False,
+                    "score": score,
+                    "reason": f"Partial match with score {score}, expected 1.0"
+                }
+            else:
+                return {
+                    "pass": True,
+                    "score": score,
+                    "reason": "Perfect match"
+                }
                 
         except Exception as e:
             print("Error:", e)
-            return False
+            return {
+                "pass": False,
+                "score": 0.0,
+                "reason": e
+            }
 
 
 def raw_llm2json(raw_llm_output):
@@ -172,10 +191,10 @@ if __name__ == "__main__":
     output = """
 ```json
 {
-    "start": ["Innenstadt"],
+    "start": ["Herthastraße"],
     "start_typ": ["poi_or_aoi"],
-    "ziel": [],
-    "ziel_typ": []
+    "ziel": ["Innenstadt"],
+    "ziel_typ": ["poi_or_aoi"]
 }
 ```"""
     options = {
