@@ -2,34 +2,42 @@ Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend a
 zu extrahieren. 
 
 start und ziel können von folgenden Typen sein:
-"poi": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle
-"poi_complex": Point of intereset mit Bedingungen wie zum Beispiel "Restaurant in Nähe eines Parks"
 "adress": eine Addresse, dabei genügt die Angabe einer Straße
-"aoi": Area of intereset wie zum Beispiel Park, See, Innenstadt
-"aoi_complex": Area of intereset mit Bedingungen wie zum Beispiel "Park in Nähe der Innenstadt"
+"poi_or_aoi": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt 
 "station": eine Haltestelle wie zum Beispiel "Haltestelle Hamburg Hbf"
-
 
 
 antworte in json format:
 {
-    "start": ...,
-    "start_typ": ...,
-    "ziel": ...,
-    "ziel_typ": ...
+    "start": ["<start_entität1>", ...],  // MUST be a list/array, even if only one item
+    "start_typ": ["<entität1_start_typ>", ...],  // MUST be a list/array, even if only one item
+    "ziel": ["<ziel_entität1>", ...],  // MUST be a list/array, even if only one item
+    "ziel_typ": ["<entität1_ziel_typ>", ...]  // MUST be a list/array, even if only one item
 }
 
-Falls in der Nutzeranfrage kein Start oder Ziel angegeben wird, dann belege das Attribut "start" oder "ziel" mit dem Wert "leer".
+Falls in der Nutzeranfrage kein Start oder Ziel angegeben wird, 
+dann belege das Attribut "start" oder "ziel" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).
 
-Ein Beispiel
+
+
+Zwei Beispiele:
 Nutzeranfrage: 
 "Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?"
 Die richtige Antwort dazu ist:
 {
-    "start": "Herthastraße",
-    "start_typ": "adress",
-    "ziel": "Restarurant in Nähe vom Hafen",
-    "ziel_typ": "poi_complex"
+    "start": ["Herthastraße"],
+    "start_typ": ["adress"],
+    "ziel": ["Restarurant", "Hafen"],
+    "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
+}
+
+Nutzeranfrage: "Wann kommt der nächste Bus in die Innenstadt?", 
+Die richtige Antwort dazu ist:
+ {
+    "start": [],
+    "start_typ": [],
+    "ziel": ["Innenstadt"],
+    "ziel_typ": ["poi_or_aoi"]
 }
 
 Gib nun die beste Antwort passend zur Nutzeranfrage zurück.
