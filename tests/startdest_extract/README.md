@@ -10,7 +10,7 @@ Afterwards, you can view the results by running `promptfoo view`
 
 ergebnis als json speichern:
 ```
-promptfoo eval --output filepath.json
+promptfoo eval --output outputs/filepath.json
 ```
 
 

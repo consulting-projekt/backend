@@ -1,0 +1,2067 @@
+{
+  "evalId": "eval-6VG-2025-04-14T12:46:03",
+  "results": {
+    "version": 3,
+    "timestamp": "2025-04-14T12:46:03.395Z",
+    "prompts": [
+      {
+        "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+        "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+        "id": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "provider": "file://retrieve_gemma3_4b.py",
+        "metrics": {
+          "score": 15.966666666666667,
+          "testPassCount": 10,
+          "testFailCount": 10,
+          "testErrorCount": 0,
+          "assertPassCount": 10,
+          "assertFailCount": 10,
+          "totalLatencyMs": 372,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 20,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "a21da50b-aaed-423b-b922-cd15e3bbee80",
+        "latencyMs": 8,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Wann kommt der nächste Bus in die Innenstadt?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [],\n    \"start_typ\": [],\n    \"ziel\": [\"Innenstadt\"],\n    \"ziel_typ\": [\"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Wann kommt der nächste Bus in die Innenstadt?",
+            "assert": {
+              "start": [],
+              "start_typ": [],
+              "ziel": [
+                "Innenstadt"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "anfrage": "Wann kommt der nächste Bus in die Innenstadt?",
+          "assert": {
+            "start": [],
+            "start_typ": [],
+            "ziel": [
+              "Innenstadt"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "cf814098-4e0c-4729-b917-16f7d1305dbb",
+        "latencyMs": 15,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Zeige mir eine Verbindung von Herthastraße zur Innenstadt?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Herthastraße\"],\n    \"start_typ\": [\"adress\"],\n    \"ziel\": [\"Innenstadt\"],\n    \"ziel_typ\": [\"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Zeige mir eine Verbindung von Herthastraße zur Innenstadt?",
+            "assert": {
+              "start": [
+                "Herthastraße"
+              ],
+              "start_typ": [
+                "adress"
+              ],
+              "ziel": [
+                "Innenstadt"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "anfrage": "Zeige mir eine Verbindung von Herthastraße zur Innenstadt?",
+          "assert": {
+            "start": [
+              "Herthastraße"
+            ],
+            "start_typ": [
+              "adress"
+            ],
+            "ziel": [
+              "Innenstadt"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "10284a71-ccaa-4255-a312-3cfc54504796",
+        "latencyMs": 21,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Ich möchte vom U Mümmelmannsberg zu einem Jugendzentrum in der Nähe der Speicherstadt fahren.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"U Mümmelmannsberg\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Jugendzentrum\", \"Speicherstadt\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Ich möchte vom U Mümmelmannsberg zu einem Jugendzentrum in der Nähe der Speicherstadt fahren.",
+            "assert": {
+              "start": [
+                "U Mümmelmannsberg"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Jugendzentrum",
+                "Speicherstadt"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "anfrage": "Ich möchte vom U Mümmelmannsberg zu einem Jugendzentrum in der Nähe der Speicherstadt fahren.",
+          "assert": {
+            "start": [
+              "U Mümmelmannsberg"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Jugendzentrum",
+              "Speicherstadt"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "708ff437-bd50-4eb6-83e1-cf83714bc93e",
+        "latencyMs": 27,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Herthastraße\"],\n    \"start_typ\": [\"adress\"],\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?",
+            "assert": {
+              "start": [
+                "Herthastraße"
+              ],
+              "start_typ": [
+                "adress"
+              ],
+              "ziel": [
+                "Restarurant",
+                "Hafen"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "anfrage": "Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?",
+          "assert": {
+            "start": [
+              "Herthastraße"
+            ],
+            "start_typ": [
+              "adress"
+            ],
+            "ziel": [
+              "Restarurant",
+              "Hafen"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.8, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.8,
+          "reason": "Partial match with score 0.8, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.8,
+              "reason": "Partial match with score 0.8, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "5e3fb7c0-e2e4-4b17-aa60-97618f562233",
+        "latencyMs": 20,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Wie komme ich vom Billwerder Ring zur nächsten Behörde oder einem Bezirksamt?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Billwerder Ring\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Behörde\", \"Bezirksamt\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.8,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Wie komme ich vom Billwerder Ring zur nächsten Behörde oder einem Bezirksamt?",
+            "assert": {
+              "start": [
+                "Billwerder Ring"
+              ],
+              "start_typ": [
+                "adress"
+              ],
+              "ziel": [
+                "Behörde",
+                "Bezirksamt"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "anfrage": "Wie komme ich vom Billwerder Ring zur nächsten Behörde oder einem Bezirksamt?",
+          "assert": {
+            "start": [
+              "Billwerder Ring"
+            ],
+            "start_typ": [
+              "adress"
+            ],
+            "ziel": [
+              "Behörde",
+              "Bezirksamt"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "5dfad29b-9cf0-48b0-9652-6008516446e0",
+        "latencyMs": 22,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Wann fährt der nächste Bus vom Bahnhof Bergedorf zum S Allermöhe?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Bahnhof Bergedorf\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"S Allermöhe\"],\n    \"ziel_typ\": [\"station\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Wann fährt der nächste Bus vom Bahnhof Bergedorf zum S Allermöhe?",
+            "assert": {
+              "start": [
+                "Bahnhof Bergedorf"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "S Allermöhe"
+              ],
+              "ziel_typ": [
+                "station"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "vars": {
+          "anfrage": "Wann fährt der nächste Bus vom Bahnhof Bergedorf zum S Allermöhe?",
+          "assert": {
+            "start": [
+              "Bahnhof Bergedorf"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "S Allermöhe"
+            ],
+            "ziel_typ": [
+              "station"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "f7a834a1-2b1a-4d92-aa5f-fe0df647606c",
+        "latencyMs": 21,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"U Steinfurther Allee\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Jugendzentrum\", \"Billstedt\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?",
+            "assert": {
+              "start": [
+                "U Steinfurther Allee"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Jugendzentrum",
+                "Billstedt"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "vars": {
+          "anfrage": "Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?",
+          "assert": {
+            "start": [
+              "U Steinfurther Allee"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Jugendzentrum",
+              "Billstedt"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.8, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.8,
+          "reason": "Partial match with score 0.8, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.8,
+              "reason": "Partial match with score 0.8, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "2366b477-1e08-4cb0-9a95-4fc42ca2fe4b",
+        "latencyMs": 23,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Zeige mir den Weg von der Kirchdorfer Straße zur Bücherhalle in der Nähe der Hafencity.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Kirchdorfer Straße\"],\n    \"start_typ\": [\"adress\"],\n    \"ziel\": [\"Bücherhalle\", \"HafenCity\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.8,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Zeige mir den Weg von der Kirchdorfer Straße zur Bücherhalle in der Nähe der Hafencity.",
+            "assert": {
+              "start": [
+                "Kirchdorfer Straße"
+              ],
+              "start_typ": [
+                "adress"
+              ],
+              "ziel": [
+                "Bücherhalle",
+                "Hafencity"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "vars": {
+          "anfrage": "Zeige mir den Weg von der Kirchdorfer Straße zur Bücherhalle in der Nähe der Hafencity.",
+          "assert": {
+            "start": [
+              "Kirchdorfer Straße"
+            ],
+            "start_typ": [
+              "adress"
+            ],
+            "ziel": [
+              "Bücherhalle",
+              "Hafencity"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.2, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.2,
+          "reason": "Partial match with score 0.2, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.2,
+              "reason": "Partial match with score 0.2, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "a7c6a146-0c00-4a45-b1c3-69277505714d",
+        "latencyMs": 18,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Verbindung von der Davidwache zum Haus der Familie am Elbstrand.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Davidwache\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Haus der Familie am Elbstrand\"],\n    \"ziel_typ\": [\"adress\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.2,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Verbindung von der Davidwache zum Haus der Familie am Elbstrand.",
+            "assert": {
+              "start": [
+                "Davidwache"
+              ],
+              "start_typ": [
+                "poi_or_aoi"
+              ],
+              "ziel": [
+                "Haus der Familie",
+                "Elbstrand"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "vars": {
+          "anfrage": "Verbindung von der Davidwache zum Haus der Familie am Elbstrand.",
+          "assert": {
+            "start": [
+              "Davidwache"
+            ],
+            "start_typ": [
+              "poi_or_aoi"
+            ],
+            "ziel": [
+              "Haus der Familie",
+              "Elbstrand"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.6, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.6,
+          "reason": "Partial match with score 0.6, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.6,
+              "reason": "Partial match with score 0.6, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "f6df35ac-cd3f-4ab4-b528-6de439c898e0",
+        "latencyMs": 18,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Fahre von S Billwerder-Moorfleet zur Grundschule in Allermöhe.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"S Billwerder-Moorfleet\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Grundschule in Allermöhe\"],\n    \"ziel_typ\": [\"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.6,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Fahre von S Billwerder-Moorfleet zur Grundschule in Allermöhe.",
+            "assert": {
+              "start": [
+                "S Billwerder-Moorfleet"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Grundschule",
+                "Allermöhe"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "vars": {
+          "anfrage": "Fahre von S Billwerder-Moorfleet zur Grundschule in Allermöhe.",
+          "assert": {
+            "start": [
+              "S Billwerder-Moorfleet"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Grundschule",
+              "Allermöhe"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.6666666666666666, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.6666666666666666,
+          "reason": "Partial match with score 0.6666666666666666, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.6666666666666666,
+              "reason": "Partial match with score 0.6666666666666666, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "d409b18c-2360-4f12-a75e-a8bddda18c28",
+        "latencyMs": 18,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Von Bahnhof Bergedorf zur Freiwilligen Feuerwehr in der Nähe des Curslacker Deichs.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Bahnhof Bergedorf\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Freiwilligen Feuerwehr\", \"Curslacker Deichs\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.6666666666666666,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Von Bahnhof Bergedorf zur Freiwilligen Feuerwehr in der Nähe des Curslacker Deichs.",
+            "assert": {
+              "start": [
+                "Bahnhof Bergedorf"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Freiwilligen Feuerwehr",
+                "Curslacker Deich"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "adress"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 10,
+        "vars": {
+          "anfrage": "Von Bahnhof Bergedorf zur Freiwilligen Feuerwehr in der Nähe des Curslacker Deichs.",
+          "assert": {
+            "start": [
+              "Bahnhof Bergedorf"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Freiwilligen Feuerwehr",
+              "Curslacker Deich"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "adress"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.8, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.8,
+          "reason": "Partial match with score 0.8, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.8,
+              "reason": "Partial match with score 0.8, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "686b33b0-12fc-4224-9d12-34871a3f3675",
+        "latencyMs": 19,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Fahre vom Billwerder Billdeich zum Bürgerhaus im Stadtteil Wilhelmsburg.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Billwerder Billdeich\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Bürgerhaus\", \"Wilhelmsburg\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.8,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Fahre vom Billwerder Billdeich zum Bürgerhaus im Stadtteil Wilhelmsburg.",
+            "assert": {
+              "start": [
+                "Billwerder Billdeich"
+              ],
+              "start_typ": [
+                "adress"
+              ],
+              "ziel": [
+                "Bürgerhaus",
+                "Wilhelmsburg"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 11,
+        "vars": {
+          "anfrage": "Fahre vom Billwerder Billdeich zum Bürgerhaus im Stadtteil Wilhelmsburg.",
+          "assert": {
+            "start": [
+              "Billwerder Billdeich"
+            ],
+            "start_typ": [
+              "adress"
+            ],
+            "ziel": [
+              "Bürgerhaus",
+              "Wilhelmsburg"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.6666666666666666, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.6666666666666666,
+          "reason": "Partial match with score 0.6666666666666666, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.6666666666666666,
+              "reason": "Partial match with score 0.6666666666666666, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "23f7cc3d-5fa6-4e2f-be8e-2832ce09dc12",
+        "latencyMs": 18,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Wie komme ich vom Bezirksamt Bergedorf zum Krankenhaus in der Nähe vom Boberger Drift?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Bezirksamt Bergedorf\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Krankenhaus\", \"Boberger Drift\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.6666666666666666,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Wie komme ich vom Bezirksamt Bergedorf zum Krankenhaus in der Nähe vom Boberger Drift?",
+            "assert": {
+              "start": [
+                "Bezirksamt Bergedorf"
+              ],
+              "start_typ": [
+                "poi_or_aoi"
+              ],
+              "ziel": [
+                "Krankenhaus",
+                "Boberger Drift"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "adress"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 12,
+        "vars": {
+          "anfrage": "Wie komme ich vom Bezirksamt Bergedorf zum Krankenhaus in der Nähe vom Boberger Drift?",
+          "assert": {
+            "start": [
+              "Bezirksamt Bergedorf"
+            ],
+            "start_typ": [
+              "poi_or_aoi"
+            ],
+            "ziel": [
+              "Krankenhaus",
+              "Boberger Drift"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "adress"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "9f000ade-6c2c-4528-8372-10fcf46ede94",
+        "latencyMs": 17,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Ich möchte vom U Mümmelmannsberg zum Finanzamt in der Nähe der Mundsburg fahren.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"U Mümmelmannsberg\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Finanzamt\", \"Mundsburg\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Ich möchte vom U Mümmelmannsberg zum Finanzamt in der Nähe der Mundsburg fahren.",
+            "assert": {
+              "start": [
+                "U Mümmelmannsberg"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Finanzamt",
+                "Mundsburg"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 13,
+        "vars": {
+          "anfrage": "Ich möchte vom U Mümmelmannsberg zum Finanzamt in der Nähe der Mundsburg fahren.",
+          "assert": {
+            "start": [
+              "U Mümmelmannsberg"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Finanzamt",
+              "Mundsburg"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.6, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.6,
+          "reason": "Partial match with score 0.6, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.6,
+              "reason": "Partial match with score 0.6, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "1e3375f4-6ba7-4c0b-a9a0-1b53217ba1af",
+        "latencyMs": 18,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Zeig mir den schnellsten Weg von der Elbchaussee zum Museum am Alsterufer.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Elbchaussee\"],\n    \"start_typ\": [\"adress\"],\n    \"ziel\": [\"Museum am Alsterufer\"],\n    \"ziel_typ\": [\"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.6,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Zeig mir den schnellsten Weg von der Elbchaussee zum Museum am Alsterufer.",
+            "assert": {
+              "start": [
+                "Elbchaussee"
+              ],
+              "start_typ": [
+                "adress"
+              ],
+              "ziel": [
+                "Museum",
+                "Alsterufer"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 14,
+        "vars": {
+          "anfrage": "Zeig mir den schnellsten Weg von der Elbchaussee zum Museum am Alsterufer.",
+          "assert": {
+            "start": [
+              "Elbchaussee"
+            ],
+            "start_typ": [
+              "adress"
+            ],
+            "ziel": [
+              "Museum",
+              "Alsterufer"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.5, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.5,
+          "reason": "Partial match with score 0.5, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.5,
+              "reason": "Partial match with score 0.5, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "d998c590-104b-49d4-bc38-4172166141ea",
+        "latencyMs": 19,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Verbindung von S Nettelnburg zum Spielplatz im Friedrich-Frank-Bogen.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"S Nettelnburg\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Spielplatz im Friedrich-Frank-Bogen\"],\n    \"ziel_typ\": [\"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.5,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Verbindung von S Nettelnburg zum Spielplatz im Friedrich-Frank-Bogen.",
+            "assert": {
+              "start": [
+                "S Nettelnburg"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Spielplatz",
+                "Friedrich-Frank-Bogen"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "adress"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 15,
+        "vars": {
+          "anfrage": "Verbindung von S Nettelnburg zum Spielplatz im Friedrich-Frank-Bogen.",
+          "assert": {
+            "start": [
+              "S Nettelnburg"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Spielplatz",
+              "Friedrich-Frank-Bogen"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "adress"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "0468d01c-3a2e-4b67-975a-2bdec3ec9f86",
+        "latencyMs": 17,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Wie gelange ich von Billwerder-Moorfleet zum Schwimmbad in Bergedorf?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Billwerder-Moorfleet\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Schwimmbad\", \"Bergedorf\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Wie gelange ich von Billwerder-Moorfleet zum Schwimmbad in Bergedorf?",
+            "assert": {
+              "start": [
+                "Billwerder-Moorfleet"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Schwimmbad",
+                "Bergedorf"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 16,
+        "vars": {
+          "anfrage": "Wie gelange ich von Billwerder-Moorfleet zum Schwimmbad in Bergedorf?",
+          "assert": {
+            "start": [
+              "Billwerder-Moorfleet"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Schwimmbad",
+              "Bergedorf"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "8ea60e96-5f89-4fb5-ba30-87f98947c74e",
+        "latencyMs": 17,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Fahre vom S Billwerder-Moorfleet zur Kirche in Kirchdorf-Süd.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"S Billwerder-Moorfleet\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Kirche\", \"Kirchdorf-Süd\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Fahre vom S Billwerder-Moorfleet zur Kirche in Kirchdorf-Süd.",
+            "assert": {
+              "start": [
+                "S Billwerder-Moorfleet"
+              ],
+              "start_typ": [
+                "station"
+              ],
+              "ziel": [
+                "Kirche",
+                "Kirchdorf-Süd"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 17,
+        "vars": {
+          "anfrage": "Fahre vom S Billwerder-Moorfleet zur Kirche in Kirchdorf-Süd.",
+          "assert": {
+            "start": [
+              "S Billwerder-Moorfleet"
+            ],
+            "start_typ": [
+              "station"
+            ],
+            "ziel": [
+              "Kirche",
+              "Kirchdorf-Süd"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Perfect match",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "cf5ce89a-2410-471b-b17b-0655ad29b3ab",
+        "latencyMs": 18,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Route von Neuengammer Hausdeich zum Job-Center bei der Agentur für Arbeit Harburg.\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Neuengammer Hausdeich\"],\n    \"start_typ\": [\"adress\"],\n    \"ziel\": [\"Job-Center\", \"Agentur für Arbeit Harburg\"],\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "anfrage": "Route von Neuengammer Hausdeich zum Job-Center bei der Agentur für Arbeit Harburg.",
+            "assert": {
+              "start": [
+                "Neuengammer Hausdeich"
+              ],
+              "start_typ": [
+                "adress"
+              ],
+              "ziel": [
+                "Job-Center",
+                "Agentur für Arbeit Harburg"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "poi_or_aoi"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 18,
+        "vars": {
+          "anfrage": "Route von Neuengammer Hausdeich zum Job-Center bei der Agentur für Arbeit Harburg.",
+          "assert": {
+            "start": [
+              "Neuengammer Hausdeich"
+            ],
+            "start_typ": [
+              "adress"
+            ],
+            "ziel": [
+              "Job-Center",
+              "Agentur für Arbeit Harburg"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "poi_or_aoi"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Partial match with score 0.3333333333333333, expected 1.0",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.3333333333333333,
+          "reason": "Partial match with score 0.3333333333333333, expected 1.0",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0.3333333333333333,
+              "reason": "Partial match with score 0.3333333333333333, expected 1.0",
+              "assertion": {
+                "type": "python",
+                "value": "file://assert1.py"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "66056551-0059-4493-bd2e-495965a59a89",
+        "latencyMs": 18,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: Wie komme ich vom Rathaus Bergedorf zur Grundschule am Friedrich-Frank-Bogen?\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}",
+          "label": "prompt1.txt: Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage start und ziel einer Route\r\nzu extrahieren. \r\n\r\nstart und ziel können von folgenden Typen sein:\r\n\"adress\": eine Addresse, dabei genügt die Angabe einer Straße\r\n\"poi_or_aoi\": Point of intereset wie zum Beispiel Restaurant, Cafe, Behörde, Polizeistelle oder Area of intereset wie zum Beispiel Park, See, Innenstadt \r\n\"station\": eine Haltestelle wie zum Beispiel \"Haltestelle Hamburg Hbf\"\r\n\r\n\r\nantworte in json format:\r\n{\r\n    \"start\": [\"<start_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"start_typ\": [\"<entität1_start_typ>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel\": [\"<ziel_entität1>\", ...],  // MUST be a list/array, even if only one item\r\n    \"ziel_typ\": [\"<entität1_ziel_typ>\", ...]  // MUST be a list/array, even if only one item\r\n}\r\n\r\nFalls in der Nutzeranfrage kein Start oder Ziel angegeben wird, \r\ndann belege das Attribut \"start\" oder \"ziel\" mit dem Wert [] (leere Liste/Array) und die dazugehörgen Typen mit [] (leere Liste/Array).\r\n\r\n\r\n\r\nZwei Beispiele:\r\nNutzeranfrage: \r\n\"Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?\"\r\nDie richtige Antwort dazu ist:\r\n{\r\n    \"start\": [\"Herthastraße\"],\r\n    \"start_typ\": [\"adress\"],\r\n    \"ziel\": [\"Restarurant\", \"Hafen\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\", \"poi_or_aoi\"]\r\n}\r\n\r\nNutzeranfrage: \"Wann kommt der nächste Bus in die Innenstadt?\", \r\nDie richtige Antwort dazu ist:\r\n {\r\n    \"start\": [],\r\n    \"start_typ\": [],\r\n    \"ziel\": [\"Innenstadt\"],\r\n    \"ziel_typ\": [\"poi_or_aoi\"]\r\n}\r\n\r\nGib nun die beste Antwort passend zur Nutzeranfrage zurück.\r\n\r\nNutzeranfrage: {{anfrage}}\r\n\r\nAntworte in json format:\r\n{\r\n    \"start\": ...,\r\n    \"start_typ\": ...,\r\n    \"ziel\": ...,\r\n    \"ziel_typ\": ...\r\n}"
+        },
+        "promptId": "5a6372b8ea3c5e8c60bfa63f8b6294affad153d9c5153ca63fcc4e8394fd2d39",
+        "promptIdx": 0,
+        "provider": {
+          "id": "file://retrieve_gemma3_4b.py",
+          "label": ""
+        },
+        "response": {
+          "output": "```json\n{\n    \"start\": [\"Rathaus Bergedorf\"],\n    \"start_typ\": [\"station\"],\n    \"ziel\": [\"Grundschule am Friedrich-Frank-Bogen\"],\n    \"ziel_typ\": [\"poi_or_aoi\"]\n}\n```",
+          "cached": true
+        },
+        "score": 0.3333333333333333,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "anfrage": "Wie komme ich vom Rathaus Bergedorf zur Grundschule am Friedrich-Frank-Bogen?",
+            "assert": {
+              "start": [
+                "Rathaus Bergedorf"
+              ],
+              "start_typ": [
+                "poi_or_aoi"
+              ],
+              "ziel": [
+                "Grundschule",
+                "Friedrich-Frank-Bogen"
+              ],
+              "ziel_typ": [
+                "poi_or_aoi",
+                "adress"
+              ],
+              "style": {}
+            }
+          },
+          "assert": [
+            {
+              "type": "python",
+              "value": "file://assert1.py"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 19,
+        "vars": {
+          "anfrage": "Wie komme ich vom Rathaus Bergedorf zur Grundschule am Friedrich-Frank-Bogen?",
+          "assert": {
+            "start": [
+              "Rathaus Bergedorf"
+            ],
+            "start_typ": [
+              "poi_or_aoi"
+            ],
+            "ziel": [
+              "Grundschule",
+              "Friedrich-Frank-Bogen"
+            ],
+            "ziel_typ": [
+              "poi_or_aoi",
+              "adress"
+            ],
+            "style": {}
+          }
+        },
+        "metadata": {},
+        "failureReason": 1
+      }
+    ],
+    "stats": {
+      "successes": 10,
+      "failures": 10,
+      "errors": 0,
+      "tokenUsage": {
+        "cached": 0,
+        "completion": 0,
+        "prompt": 0,
+        "total": 0,
+        "numRequests": 20,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0
+        }
+      }
+    }
+  },
+  "config": {
+    "prompts": [
+      "file://prompt1.txt"
+    ],
+    "providers": [
+      {
+        "id": "file://retrieve_gemma3_4b.py"
+      }
+    ],
+    "tests": [
+      "file://cases.py:generate_tests"
+    ],
+    "sharing": true,
+    "defaultTest": {
+      "assert": [
+        {
+          "type": "python",
+          "value": "file://assert1.py"
+        }
+      ]
+    },
+    "outputPath": [
+      "outputs/1.json"
+    ],
+    "extensions": []
+  },
+  "shareableUrl": null
+}

@@ -69,7 +69,7 @@ def raw_llm2json(raw_llm_output):
             return False
             
         # Check for required fields and verify they are lists
-        required_fields = ["start", "start_typ", "ziel", "ziel_typ"]
+        required_fields = ["start", "ziel"]
         for field in required_fields:
             if field not in json_output:
                 print(f"Error: Missing '{field}' field")
@@ -77,13 +77,6 @@ def raw_llm2json(raw_llm_output):
             if not isinstance(json_output[field], list):
                 print(f"Error: Field '{field}' is not a list")
                 return False
-        
-        # We'll print warnings but not fail validation if lengths don't match
-        if len(json_output["start"]) != len(json_output["start_typ"]):
-            print("Warning: 'start' and 'start_typ' lists have different lengths")
-            
-        if len(json_output["ziel"]) != len(json_output["ziel_typ"]):
-            print("Warning: 'ziel' and 'ziel_typ' lists have different lengths")
             
         return json_output
             
@@ -124,21 +117,6 @@ def calculate_score(llm_json, expected_json):
             
             print(f"Start entities: {start_matches}/{max(total_in_expected, total_in_llm)} matches")
         
-        # Compare start_typ
-        if "start_typ" in expected_json and len(expected_json["start_typ"]) > 0:
-            expected_start_types = set(expected_json["start_typ"])
-            llm_start_types = set(llm_json["start_typ"])
-            
-            # Count matches for start types
-            start_type_matches = len(expected_start_types.intersection(llm_start_types))
-            total_in_expected = len(expected_start_types)
-            total_in_llm = len(llm_start_types)
-            
-            # Add to our running totals
-            actual_matches += start_type_matches
-            total_possible_matches += max(total_in_expected, total_in_llm)
-            
-            print(f"Start types: {start_type_matches}/{max(total_in_expected, total_in_llm)} matches")
         
         # Compare ziel entities
         if "ziel" in expected_json and len(expected_json["ziel"]) > 0:
@@ -155,22 +133,6 @@ def calculate_score(llm_json, expected_json):
             total_possible_matches += max(total_in_expected, total_in_llm)
             
             print(f"Ziel entities: {ziel_matches}/{max(total_in_expected, total_in_llm)} matches")
-        
-        # Compare ziel_typ
-        if "ziel_typ" in expected_json and len(expected_json["ziel_typ"]) > 0:
-            expected_ziel_types = set(expected_json["ziel_typ"])
-            llm_ziel_types = set(llm_json["ziel_typ"])
-            
-            # Count matches for ziel types
-            ziel_type_matches = len(expected_ziel_types.intersection(llm_ziel_types))
-            total_in_expected = len(expected_ziel_types)
-            total_in_llm = len(llm_ziel_types)
-            
-            # Add to our running totals
-            actual_matches += ziel_type_matches
-            total_possible_matches += max(total_in_expected, total_in_llm)
-            
-            print(f"Ziel types: {ziel_type_matches}/{max(total_in_expected, total_in_llm)} matches")
         
         # Calculate final score
         if total_possible_matches == 0:

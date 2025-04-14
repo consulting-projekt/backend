@@ -6,3 +6,4 @@ cache
 *.dump
 logs
 !db/exports/*.csv
+!tests/**/*.json
