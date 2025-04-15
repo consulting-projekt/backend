@@ -70,7 +70,7 @@ def get_node_count(driver, label: str) -> int:
         return result.single()["count"]
     
 
-def create_text_for_embedding(node_properties: Dict) -> str:
+def create_text_for_embedding(node_properties: Dict, label) -> str:
     """
     Create a combined text from node properties for embedding.
     
@@ -81,6 +81,11 @@ def create_text_for_embedding(node_properties: Dict) -> str:
         Combined text for embedding
     """
     combined_text = ""
+
+    if label == "POI":
+        combined_text += "Entität: point of interest\n"
+    if label == "AOI":
+        combined_text += "Entität: area of interest\n"
     
     if "name" in node_properties and node_properties["name"]:
         combined_text += f"Name: {node_properties['name']}\n"
@@ -150,25 +155,35 @@ def process_node_embeddings(driver, model, client, label: str, collection_name: 
             node_properties = node["properties"]
             
             # Create combined text for embedding
-            combined_text = create_text_for_embedding(node_properties)
+            combined_text = create_text_for_embedding(node_properties, label)
             
             if combined_text:
                 # Generate embedding
                 vector = model.encode(combined_text).tolist()
                 # Generate a new UUID for Qdrant
                 qdrant_id = str(uuid.uuid4())
+                # Prepare payload with common attributes
+                payload = {
+                    "neo4j_elementId": str(node_id),
+                    "name": node_properties.get("name", ""),
+                    "description": node_properties.get("description", ""),
+                    "tags": node_properties.get("tags", []),
+                    "label": label  # Add label as a property
+                }
+                
+                # Add location based on node type
+                if label == "POI" and "location" in node_properties:
+                    payload["location"] = node_properties.get("location")
+                elif label == "AOI" and "centroid" in node_properties:
+                    payload["location"] = node_properties.get("centroid")
+                
                 # Store in Qdrant
                 client.upsert(
                     collection_name=collection_name,
                     points=[{
                         "id": qdrant_id,
                         "vector": vector,
-                        "payload": {
-                            "neo4j_elementId": str(node_id),
-                            "name": node_properties.get("name", ""),
-                            "description": node_properties.get("description", ""),
-                            "tags": node_properties.get("tags", [])
-                        }
+                        "payload": payload
                     }]
                 )
         
