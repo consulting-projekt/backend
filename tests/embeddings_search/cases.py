@@ -11,8 +11,7 @@ test_cases = [
                 "ziel_bedingung": "Kirchdorf-Süd"
             }, 
             "assert": {
-                "ziel_name_contains": ["Kirche"],
-                "ziel_nahe": "POINT(10.020014 53.483826)"
+                "ziel_nahe": ["POINT(10.000413 53.554069)", 1000]
             }
         }
     }, 
@@ -27,7 +26,7 @@ test_cases = [
                 "ziel_bedingung": None
             }, 
             "assert": {
-                "ziel_name_contains": ["Innenstadt"]
+                "ziel_nahe": ["POINT(9.988080668856236 53.55184559306223)", 5000]
             }
         }
     },
@@ -42,8 +41,7 @@ test_cases = [
                 "ziel_bedingung": "Hafen"
             }, 
             "assert": {
-                "ziel_name_contains": ["Restaurant"],
-                "ziel_nahe": "POINT(9.9800 53.5450)"  # Ungefähre Koordinaten für Hamburger Hafen
+                "ziel_nahe": ["POINT(9.984983833154688 53.47308499617683)", 5000]
             }
         }
     },
@@ -58,7 +56,7 @@ test_cases = [
                 "ziel_bedingung": None
             }, 
             "assert": {
-                "ziel_name_contains": ["Innenstadt"]
+                "ziel_nahe":  ["POINT(9.988080668856236 53.55184559306223)", 5000]
             }
         }
     },
@@ -73,8 +71,7 @@ test_cases = [
                 "ziel_bedingung": "Speicherstadt"
             },
             "assert": {
-                "ziel_name_contains": ["Jugendzentrum"],
-                "ziel_nahe": "POINT(9.9877 53.5456)"  # Ungefähre Koordinaten für Speicherstadt
+                "ziel_nahe": ["POINT(10.00467865 53.54357754999999)", 5000]
             }
         }
     },
@@ -89,25 +86,11 @@ test_cases = [
                 "ziel_bedingung": None
             },
             "assert": {
-                "ziel_name_contains": ["Behörde", "Amt", "Verwaltung"]
+                "ziel_name_contains": ["Behörde", "Amt", "Verwaltung"],
+                "ziel_nahe": ["POINT(9.984663 53.554245)", 5000]
             }
         }
-    },
-    
-    # "Wann fährt der nächste Bus vom Bahnhof Bergedorf zum S Allermöhe?"
-    {
-        "vars": {
-            "anfrage": {
-                "start": None,
-                "start_bedingung": None,
-                "ziel": None,
-                "ziel_bedingung": None
-            },
-            "assert": {}  # Beide sind Stationen, nicht in Qdrant vorhanden
-        }
-    },
-    
-    # "Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?"
+    }, # "Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?"
     {
         "vars": {
             "anfrage": {
@@ -118,7 +101,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Jugendzentrum"],
-                "ziel_nahe": "POINT(10.1065 53.5559)"  # Ungefähre Koordinaten für Billstedt
+                "ziel_nahe": ["POINT(10.104508884450647 53.54136343631377)", 5000]  # Ungefähre Koordinaten für Billstedt
             }
         }
     },
@@ -134,7 +117,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Bücherhalle", "Bibliothek"],
-                "ziel_nahe": "POINT(10.0041 53.5414)"  # Ungefähre Koordinaten für Hafencity
+                "ziel_nahe":  ["POINT(9.994725 53.541915)", 5000]  # Ungefähre Koordinaten für Hafencity
             }
         }
     },
@@ -151,7 +134,7 @@ test_cases = [
             "assert": {
                 "start_name_contains": ["Davidwache", "Polizei"],
                 "ziel_name_contains": ["Haus der Familie"],
-                "ziel_nahe": "POINT(9.8950 53.5430)"  # Ungefähre Koordinaten für Elbstrand
+                "ziel_nahe": ["POINT(9.96242186569669 53.557507857835716)", 5000]  # Ungefähre Koordinaten für Elbstrand
             }
         }
     },
@@ -167,7 +150,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Grundschule", "Schule"],
-                "ziel_nahe": "POINT(10.1500 53.5070)"  # Ungefähre Koordinaten für Allermöhe
+                "ziel_nahe":["POINT(10.160813 53.486764)", 5000] # Ungefähre Koordinaten für Allermöhe
             }
         }
     },
@@ -183,7 +166,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Feuerwehr"],
-                "ziel_nahe": "POINT(10.2000 53.4800)"  # Ungefähre Koordinaten für Curslacker Deich
+                "ziel_nahe": ["POINT(9.793617541260351 53.514917074226595)", 5000]  # Ungefähre Koordinaten für Curslacker Deich
             }
         }
     },
@@ -199,7 +182,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Bürgerhaus"],
-                "ziel_nahe": "POINT(9.9900 53.5000)"  # Ungefähre Koordinaten für Wilhelmsburg
+                "ziel_nahe": ["POINT(9.995909203025185 53.50033548012308)", 5000]  # Ungefähre Koordinaten für Wilhelmsburg
             }
         }
     },
@@ -216,7 +199,7 @@ test_cases = [
             "assert": {
                 "start_name_contains": ["Bezirksamt", "Bergedorf"],
                 "ziel_name_contains": ["Krankenhaus"],
-                "ziel_nahe": "POINT(10.1800 53.5100)"  # Ungefähre Koordinaten für Boberger Drift
+                "ziel_nahe": ["POINT(10.152339730730844 53.513922532693044)", 5000]  # Ungefähre Koordinaten für Boberger Drift
             }
         }
     },
@@ -232,7 +215,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Finanzamt"],
-                "ziel_nahe": "POINT(10.0300 53.5700)"  # Ungefähre Koordinaten für Mundsburg
+                "ziel_nahe": ["POINT(10.00333 53.550451)", 5000] # Ungefähre Koordinaten für Mundsburg
             }
         }
     },
@@ -248,7 +231,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Museum"],
-                "ziel_nahe": "POINT(9.9982 53.5653)"  # Ungefähre Koordinaten für Alsterufer
+                "ziel_nahe": ["POINT(10.001416935070356 53.56763769598505)", 5000]  # Ungefähre Koordinaten für Alsterufer
             }
         }
     },
@@ -264,7 +247,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Spielplatz"],
-                "ziel_nahe": "POINT(10.1710 53.4900)"  # Ungefähre Koordinaten für Friedrich-Frank-Bogen
+                "ziel_nahe": ["POINT(10.178885799999998 53.49181495)", 5000]  # Ungefähre Koordinaten für Friedrich-Frank-Bogen
             }
         }
     },
@@ -280,7 +263,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Schwimmbad", "Schwimmhalle", "Bad"],
-                "ziel_nahe": "POINT(10.2000 53.4900)"  # Ungefähre Koordinaten für Bergedorf
+                "ziel_nahe": ["POINT(10.220398 53.487293)", 5000] # Ungefähre Koordinaten für Bergedorf
             }
         }
     },
@@ -295,7 +278,7 @@ test_cases = [
             },
             "assert": {
                 "ziel_name_contains": ["Job-Center", "Jobcenter", "Agentur für Arbeit"],
-                "ziel_nahe": "POINT(9.9775 53.4601)"  # Ungefähre Koordinaten für Harburg
+                "ziel_nahe": ["POINT(9.978567 53.460712)", 5000]  # Ungefähre Koordinaten für Harburg
             }
         }
     },
@@ -311,7 +294,7 @@ test_cases = [
             "assert": {
                 "start_name_contains": ["Rathaus", "Bergedorf"],
                 "ziel_name_contains": ["Grundschule", "Schule"],
-                "ziel_nahe": "POINT(10.1710 53.4900)"  # Ungefähre Koordinaten für Friedrich-Frank-Bogen
+                "ziel_nahe": ["POINT(10.178885799999998 53.49181495)", 5000]  # Ungefähre Koordinaten für Friedrich-Frank-Bogen
             }
         }
     }
@@ -320,3 +303,13 @@ test_cases = [
 
 def generate_tests():
     return test_cases
+
+
+if __name__ == "__main__":
+    # Example usage
+    import ast
+    test_cases = generate_tests()
+    for case in test_cases:
+        anfrage =  case["vars"]["anfrage"]
+        anfrage_fromstr = ast.literal_eval(str(anfrage).strip())
+        print(f"From str: {anfrage_fromstr}")

@@ -1,5 +1,5 @@
 prompts:
-  - file://prompt2.txt
+  - file://prompt.txt
 providers:
 #  - openai:gpt-3.5-turbo-1106
 #  - openai:gpt-4o-mini
