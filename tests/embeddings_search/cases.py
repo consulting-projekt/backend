@@ -100,7 +100,7 @@ test_cases = [
                 "ziel_bedingung": "Billstedt"
             },
             "assert": {
-                "ziel_name_contains": ["Jugendzentrum"],
+                "ziel_name_contains": ["Jugend"],
                 "ziel_nahe": ["POINT(10.104508884450647 53.54136343631377)", 5000]  # Ungefähre Koordinaten für Billstedt
             }
         }

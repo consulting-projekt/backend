@@ -15,7 +15,6 @@ from typing import Dict, Any, Union
 
 def get_assert(output, options: Dict[str, Any]) -> Union[bool, float, Dict[str, Any]]:
     # test case variables
-    anfrage = options.get('vars', {}).get('anfrage', "")
     expected_output = options.get('vars', {}).get('assert', {})
 
     # llm output
@@ -137,7 +136,7 @@ def check_all_assertions(llm_json, expected_json):
             passed_assertions += 1
         else:
             all_passed = False
-            reasons.append("ziel_name_contains assertion failed")
+            reasons.append(f"ziel_name_contains assertion failed, {llm_json['ziel']} does not contain {expected_json['ziel_name_contains']}")
     
     # Check ziel/dest location assertions
     if "ziel_nahe" in expected_json and llm_json.get("ziel"):
