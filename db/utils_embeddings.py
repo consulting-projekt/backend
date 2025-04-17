@@ -116,7 +116,8 @@ def initialize_collection(client, model, collection_name: str):
         vectors_config=VectorParams(
             size=vector_size,
             distance=Distance.COSINE
-        )
+        ),
+        
     )
     print(f"Qdrant Collection '{collection_name}' created")
 
@@ -173,9 +174,11 @@ def process_node_embeddings(driver, model, client, label: str, collection_name: 
                 
                 # Add location based on node type
                 if label == "POI" and "location" in node_properties:
-                    payload["location"] = node_properties.get("location")
+                    longitude, latitude = node_properties.get("location")
+                    payload["location"] = {"lon": longitude, "lat": latitude}
                 elif label == "AOI" and "centroid" in node_properties:
-                    payload["location"] = node_properties.get("centroid")
+                    longitude, latitude = node_properties.get("centroid")
+                    payload["location"] = {"lon": longitude, "lat": latitude}
                 
                 # Store in Qdrant
                 client.upsert(

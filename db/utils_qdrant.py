@@ -25,72 +25,121 @@ def get_startdest(qdrant_client, emb_model, anfrage, coll_name):
 
 
 def get_point_byquery(point_text, point_condition, client, emb_model, coll_name, limit=1):
-    # Process ziel search
-    if point_text:
-        # Generate embedding for ziel
-        point_textemb = emb_model.encode(point_text)
+    """
+    Search for points in vector database based on text query and optional geographic condition.
+    
+    Args:
+        point_text: Main search text
+        point_condition: Optional geographic condition
+        client: Qdrant client
+        emb_model: Embedding model
+        coll_name: Collection name
+        limit: Maximum number of results to return
+    
+    Returns:
+        Dictionary with result payload and score, or None if no results
+    """
+    if not point_text:
+        return None
         
-        # Create filter for ziel_bedingung if present
-        filter_query = None
-        if point_condition:
-            # First search for ziel_bedingung to get geo location
-            bedingung_query_emb = emb_model.encode(point_condition)
-            bedingung_results = client.search(
-                collection_name=coll_name,
-                query_vector=bedingung_query_emb,
-                limit=1
+    # Generate embedding for main search text
+    point_textemb = emb_model.encode(point_text)
+    
+    # Try geo search first if condition is provided
+    location = None
+    if point_condition:
+        location = _get_location_from_condition(point_condition, client, emb_model, coll_name)
+        
+        if location:
+            # Try searching with increasingly larger radii
+            result = _search_with_increasing_radius(
+                point_textemb, location, client, coll_name, limit
             )
+            if result:
+                return result
+    
+    # Fallback to regular search without geo filter
+    return _perform_regular_search(point_textemb, client, coll_name, limit)
+
+
+def _get_location_from_condition(condition_text, client, emb_model, coll_name):
+    """Helper function to get location from condition text"""
+    bedingung_query_emb = emb_model.encode(condition_text)
+    bedingung_results = client.search(
+        collection_name=coll_name,
+        query_vector=bedingung_query_emb,
+        limit=1
+    )
+    
+    # Extract location if found
+    if bedingung_results and "location" in bedingung_results[0].payload:
+        return bedingung_results[0].payload["location"]
+    return None
+
+
+def _create_geo_filter(location, radius):
+    """Helper function to create a geo filter with given location and radius"""
+    try:
+        from qdrant_client.models import Filter, FieldCondition, GeoRadius, GeoPoint
+        lon, lat = location['lon'], location['lat']
+        return Filter(
+            must=[
+                FieldCondition(
+                    key="location",
+                    geo_radius=GeoRadius(
+                        center=GeoPoint(lon=lon, lat=lat),
+                        radius=radius
+                    )
+                )
+            ]
+        )
+    except Exception as e:
+        print(f"Error creating geo filter: {e}")
+        return None
+
+
+def _search_with_increasing_radius(query_vector, location, client, coll_name, limit):
+    """Search with incrementally increasing radius until results found or max radius reached"""
+    radius_steps = [5000]  # in meters
+    
+    for radius in radius_steps:
+        filter_query = _create_geo_filter(location, radius)
+        if not filter_query:
+            return None
             
-            # If we found a result for the bedingung
-            if bedingung_results:
-                # Extract the location from the result (assuming it's in the payload)
-                location = None
-                found_result = bedingung_results[0].payload
-                if "location" in found_result:
-                    location = found_result["location"]
-                
-                # Create geo filter if location was found
-                if location:
-                    # Parse location string to extract coordinates
-                    try:
-                        # Assuming location is stored as "POINT(lon lat)" in the payload
-                        location_str = location
-                        if location_str.startswith("POINT("):
-                            coords_str = location_str.replace("POINT(", "").replace(")", "")
-                            lon, lat = map(float, coords_str.split())
-                            
-                            # Create geo filter
-                            from qdrant_client.models import Filter, FieldCondition, GeoRadius, GeoPoint
-                            filter_query = Filter(
-                                must=[
-                                    FieldCondition(
-                                        key="location",
-                                        geo_radius=GeoRadius(
-                                            center=GeoPoint(
-                                                lon=lon,
-                                                lat=lat
-                                            ),
-                                            radius=5000  # 5km radius, adjust as needed
-                                        )
-                                    )
-                                ]
-                            )
-                    except:
-                        filter_query = None
-        
-        # Search for ziel with or without geo filter
-        ziel_results = client.search(
+        results = client.search(
             collection_name=coll_name,
-            query_vector=point_textemb,
+            query_vector=query_vector,
             limit=limit,
             query_filter=filter_query
         )
-        res = ziel_results[0].payload
-        res['score'] = ziel_results[0].score
-        return res
-    else:
-        # If no point_text is provided, return an empty list
-        return None
+        
+        if len(results)>0:
+            result = results[0].payload.copy()
+            result['score'] = results[0].score
+            result['found_radius_m'] = radius
+            return result
+            
+    return None
+
+
+def _perform_regular_search(query_vector, client, coll_name, limit):
+    """Perform search without geo filtering"""
+    results = client.search(
+        collection_name=coll_name,
+        query_vector=query_vector,
+        limit=limit
+    )
+    
+    if results:
+        result = results[0].payload.copy()
+        result['score'] = results[0].score
+        return result
+    return None
+
+    
+
+
 
 
 def search_qdrant_with_geo_filter(client, query_emb, coll_name, geo_point=None, limit=5):

@@ -33,12 +33,14 @@ def call_api(prompt, options, context):
 
 if __name__ == "__main__":
     # Example usage
-    prompt = """
-{
-"start": None,
-"start_bedingung": None,
-"ziel": "Kirche",
-"ziel_bedingung": "Kirchdorf-Süd"
-}
-"""
-    call_api(prompt, {}, {})
+    context = {
+                "vars": {    
+                "anfrage": {
+                "start": "Davidwache",
+                "start_bedingung": None,
+                "ziel": "Haus der Familie",
+                "ziel_bedingung": "Elbstrand"
+            }
+        }
+    }
+    call_api({}, {}, context)
