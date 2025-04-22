@@ -8,7 +8,7 @@ test_cases = [
             "assert": {
                 "start": [],
                 "start_typ": [],
-                "ziel": ["Innenstadt"],
+                "dest": ["Innenstadt"],
                 "ziel_typ": ["poi_or_aoi"]
             }
         }
@@ -19,7 +19,7 @@ test_cases = [
             "assert": {
                 "start": ["Herthastraße"],
                 "start_typ": ["adress"],
-                "ziel": ["Restarurant", "Hafen"],
+                "dest": ["Restarurant", "Hafen"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -30,7 +30,7 @@ test_cases = [
             "assert": {
                 "start": ["Herthastraße"],
                 "start_typ": ["adress"],
-                "ziel": ["Innenstadt"],
+                "dest": ["Innenstadt"],
                 "ziel_typ": ["poi_or_aoi"]
             }
         }
@@ -42,7 +42,7 @@ test_cases = [
             "assert": {
                 "start": ["U Mümmelmannsberg"],
                 "start_typ": ["station"],
-                "ziel": ["Jugendzentrum", "Speicherstadt"],
+                "dest": ["Jugendzentrum", "Speicherstadt"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -53,7 +53,7 @@ test_cases = [
             "assert": {
                 "start": ["Billwerder Ring"],
                 "start_typ": ["adress"],
-                "ziel": ["Behörde", "Bezirksamt"],
+                "dest": ["Behörde", "Bezirksamt"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -64,7 +64,7 @@ test_cases = [
             "assert": {
                 "start": ["Bahnhof Bergedorf"],
                 "start_typ": ["station"],
-                "ziel": ["S Allermöhe"],
+                "dest": ["S Allermöhe"],
                 "ziel_typ": ["station"]
             }
         }
@@ -75,7 +75,7 @@ test_cases = [
             "assert": {
                 "start": ["U Steinfurther Allee"],
                 "start_typ": ["station"],
-                "ziel": ["Jugendzentrum", "Billstedt"],
+                "dest": ["Jugendzentrum", "Billstedt"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -86,7 +86,7 @@ test_cases = [
             "assert": {
                 "start": ["Kirchdorfer Straße"],
                 "start_typ": ["adress"],
-                "ziel": ["Bücherhalle", "Hafencity"],
+                "dest": ["Bücherhalle", "Hafencity"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -97,7 +97,7 @@ test_cases = [
             "assert": {
                 "start": ["Davidwache"],
                 "start_typ": ["poi_or_aoi"],
-                "ziel": ["Haus der Familie", "Elbstrand"],
+                "dest": ["Haus der Familie", "Elbstrand"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -108,7 +108,7 @@ test_cases = [
             "assert": {
                 "start": ["S Billwerder-Moorfleet"],
                 "start_typ": ["station"],
-                "ziel": ["Grundschule", "Allermöhe"],
+                "dest": ["Grundschule", "Allermöhe"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -119,7 +119,7 @@ test_cases = [
             "assert": {
                 "start": ["Bahnhof Bergedorf"],
                 "start_typ": ["station"],
-                "ziel": ["Freiwilligen Feuerwehr", "Curslacker Deich"],
+                "dest": ["Freiwilligen Feuerwehr", "Curslacker Deich"],
                 "ziel_typ": ["poi_or_aoi", "adress"]
             }
         }
@@ -130,7 +130,7 @@ test_cases = [
             "assert": {
                 "start": ["Billwerder Billdeich"],
                 "start_typ": ["adress"],
-                "ziel": ["Bürgerhaus", "Wilhelmsburg"],
+                "dest": ["Bürgerhaus", "Wilhelmsburg"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -141,7 +141,7 @@ test_cases = [
             "assert": {
                 "start": ["Bezirksamt Bergedorf"],
                 "start_typ": ["poi_or_aoi"],
-                "ziel": ["Krankenhaus", "Boberger Drift"],
+                "dest": ["Krankenhaus", "Boberger Drift"],
                 "ziel_typ": ["poi_or_aoi", "adress"]
             }
         }
@@ -152,7 +152,7 @@ test_cases = [
             "assert": {
                 "start": ["U Mümmelmannsberg"],
                 "start_typ": ["station"],
-                "ziel": ["Finanzamt", "Mundsburg"],
+                "dest": ["Finanzamt", "Mundsburg"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -163,7 +163,7 @@ test_cases = [
             "assert": {
                 "start": ["Elbchaussee"],
                 "start_typ": ["adress"],
-                "ziel": ["Museum", "Alsterufer"],
+                "dest": ["Museum", "Alsterufer"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -174,7 +174,7 @@ test_cases = [
             "assert": {
                 "start": ["S Nettelnburg"],
                 "start_typ": ["station"],
-                "ziel": ["Spielplatz", "Friedrich-Frank-Bogen"],
+                "dest": ["Spielplatz", "Friedrich-Frank-Bogen"],
                 "ziel_typ": ["poi_or_aoi", "adress"]
             }
         }
@@ -185,7 +185,7 @@ test_cases = [
             "assert": {
                 "start": ["Billwerder-Moorfleet"],
                 "start_typ": ["station"],
-                "ziel": ["Schwimmbad", "Bergedorf"],
+                "dest": ["Schwimmbad", "Bergedorf"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -196,7 +196,7 @@ test_cases = [
             "assert": {
                 "start": ["S Billwerder-Moorfleet"],
                 "start_typ": ["station"],
-                "ziel": ["Kirche", "Kirchdorf-Süd"],
+                "dest": ["Kirche", "Kirchdorf-Süd"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -207,7 +207,7 @@ test_cases = [
             "assert": {
                 "start": ["Neuengammer Hausdeich"],
                 "start_typ": ["adress"],
-                "ziel": ["Job-Center", "Agentur für Arbeit Harburg"],
+                "dest": ["Job-Center", "Agentur für Arbeit Harburg"],
                 "ziel_typ": ["poi_or_aoi", "poi_or_aoi"]
             }
         }
@@ -218,7 +218,7 @@ test_cases = [
             "assert": {
                 "start": ["Rathaus Bergedorf"],
                 "start_typ": ["poi_or_aoi"],
-                "ziel": ["Grundschule", "Friedrich-Frank-Bogen"],
+                "dest": ["Grundschule", "Friedrich-Frank-Bogen"],
                 "ziel_typ": ["poi_or_aoi", "adress"]
             }
         }

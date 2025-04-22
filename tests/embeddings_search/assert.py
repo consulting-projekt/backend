@@ -93,8 +93,8 @@ def raw_llm2json(raw_llm_output):
         # We don't need to convert to lists as they are single entities
         
         # If dest is present but ziel isn't, map dest to ziel
-        if "dest" in json_output and "ziel" not in json_output:
-            json_output["ziel"] = json_output["dest"]
+        if "dest" in json_output and "dest" not in json_output:
+            json_output["dest"] = json_output["dest"]
         
         return json_output
             
@@ -130,16 +130,16 @@ def check_all_assertions(llm_json, expected_json):
             reasons.append("start_name_contains assertion failed")
     
     # Check ziel/dest name assertions
-    if "ziel_name_contains" in expected_json and llm_json.get("ziel"):
+    if "ziel_name_contains" in expected_json and llm_json.get("dest"):
         total_assertions += 1
-        if check_name_contains(llm_json["ziel"], expected_json["ziel_name_contains"]):
+        if check_name_contains(llm_json["dest"], expected_json["ziel_name_contains"]):
             passed_assertions += 1
         else:
             all_passed = False
             reasons.append(f"ziel_name_contains assertion failed, {llm_json['ziel']} does not contain {expected_json['ziel_name_contains']}")
     
     # Check ziel/dest location assertions
-    if "ziel_nahe" in expected_json and llm_json.get("ziel"):
+    if "ziel_nahe" in expected_json and llm_json.get("dest"):
         total_assertions += 1
         
         # Extract the point and radius (if provided)
@@ -150,7 +150,7 @@ def check_all_assertions(llm_json, expected_json):
             point_str = expected_json["ziel_nahe"]
             radius_meters = 1000  # Default to 1km if not specified
             
-        is_near, distance = check_location_near(llm_json["ziel"], point_str, radius_meters)
+        is_near, distance = check_location_near(llm_json["dest"], point_str, radius_meters)
         if is_near:
             passed_assertions += 1
         else:
@@ -287,9 +287,9 @@ if __name__ == "__main__":
         'vars': {
             'anfrage': {
             "start": None,
-            "start_bedingung": None,
-            "ziel": "Kirche",
-            "ziel_bedingung": "Kirchdorf-Süd"
+            "start_condition": None,
+            "dest": "Kirche",
+            "dest_condition": "Kirchdorf-Süd"
             },
             'assert': {
                 "ziel_nahe": ["POINT(10.000413 53.554069)", 2000]

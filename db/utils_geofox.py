@@ -337,3 +337,24 @@ def get_station_innercityinfo(client, filename="stations_inner_city.json", maxLi
             json.dump(res, f, indent=4)
 
     return res
+
+def get_startdest(qdrant_client, emb_model, anfrage, coll_name):
+    '''
+    Get start and destination from a Qdrant client.
+    anfrage type: 
+        {
+            "start": str|None,
+            "start_condition": str|None,
+            "dest": str|None,
+            "dest_condition": str|None
+        }
+
+    return type: (start, dest)
+    '''
+    start, start_cond = anfrage.get("start"), anfrage.get("start_condition")
+    ziel, ziel_cond = anfrage.get("dest"), anfrage.get("dest_condition")
+
+    start = 0
+    dest = 0
+
+    return start, dest
