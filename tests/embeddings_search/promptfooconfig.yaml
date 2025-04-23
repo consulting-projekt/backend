@@ -5,6 +5,7 @@ providers:
 #  - deepseek:deepseek-chat
   # - ollama:chat:gemma3:4b
   - id: file://retrieve_std.py
+  # - id: file://retrieve_geofox.py
 
 defaultTest:
   assert:
@@ -16,7 +17,7 @@ metrics:
     threshold: 1.0 
 
 tests: 
-  - file://cases.py:generate_tests
+  - file://cases_v2.py:generate_tests
   # - options:
   #     runSerially: true
 

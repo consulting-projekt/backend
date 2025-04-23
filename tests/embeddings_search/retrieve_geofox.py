@@ -6,29 +6,30 @@ from langchain_community.chat_models import ChatOllama
 from langchain.schema import HumanMessage
 from qdrant_client import QdrantClient
 from db.utils_embeddings import load_embedding_model_std
-from db.utils_qdrant import get_startdest
+from db.utils_geofox import get_startdest
+from db.geofox_client import get_geofox_client
 import ast
 import json
 from pythelpers.logger.logger import start_logging2
 
 COLLECTION_NAME = "aoipoi_embeddings_std"
 
-client = QdrantClient("localhost", port=6333)
-emb_modell = load_embedding_model_std()
+client = get_geofox_client()
 
 def call_api(prompt, options, context):
-    # Replace the ast.literal_eval line with:
-    anfrage = context.get('vars', {}).get('anfrage', {})
+    with start_logging2("retrieve_geofox"):
+        # Replace the ast.literal_eval line with:
+        anfrage = context.get('vars', {}).get('anfrage', {})
 
-    print(f"Prompt: {anfrage}, Options: {options}, Context: {context}")
-    start, dest = get_startdest(client, emb_modell, anfrage, COLLECTION_NAME)
+        print(f"Prompt: {anfrage}, Options: {options}, Context: {context}")
+        start, dest = get_startdest(client, anfrage)
 
-    return {
-        "output": {
-            "start": start,
-            "dest": dest
-        },
-    }
+        return {
+            "output": {
+                "start": start,
+                "dest": dest
+            },
+        }
 
 
 if __name__ == "__main__":

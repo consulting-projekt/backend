@@ -5,10 +5,10 @@ test_cases = [
     { 
         "vars": {
             "anfrage": {
-                "start": None,
-                "start_condition": None,
-                "dest": "Kirche",
-                "dest_condition": "Kirchdorf-Süd"
+                "start": None, # point of interest oder area of interest
+                "start_condition": None, # immer eine area of interest
+                "dest": "Kirche", # point of interest oder area of interest
+                "dest_condition": "Kirchdorf-Süd" # immer eine area of interest
             }, 
             "assert": {
                 "ziel_nahe": ["POINT(10.000413 53.554069)", 1000]

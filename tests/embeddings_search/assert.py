@@ -92,7 +92,7 @@ def raw_llm2json(raw_llm_output):
         # The output should have start and dest fields (both can be None or dictionaries)
         # We don't need to convert to lists as they are single entities
         
-        # If dest is present but ziel isn't, map dest to ziel
+        # If dest is present but dest isn't, map dest to dest
         if "dest" in json_output and "dest" not in json_output:
             json_output["dest"] = json_output["dest"]
         
@@ -129,16 +129,16 @@ def check_all_assertions(llm_json, expected_json):
             all_passed = False
             reasons.append("start_name_contains assertion failed")
     
-    # Check ziel/dest name assertions
+    # Check dest/dest name assertions
     if "ziel_name_contains" in expected_json and llm_json.get("dest"):
         total_assertions += 1
         if check_name_contains(llm_json["dest"], expected_json["ziel_name_contains"]):
             passed_assertions += 1
         else:
             all_passed = False
-            reasons.append(f"ziel_name_contains assertion failed, {llm_json['ziel']} does not contain {expected_json['ziel_name_contains']}")
+            reasons.append(f"ziel_name_contains assertion failed, {llm_json['dest']} does not contain {expected_json['ziel_name_contains']}")
     
-    # Check ziel/dest location assertions
+    # Check dest/dest location assertions
     if "ziel_nahe" in expected_json and llm_json.get("dest"):
         total_assertions += 1
         
@@ -227,6 +227,10 @@ def check_location_near(entity, point_str, max_distance_meters):
         entity_lon, entity_lat = location["lon"], location["lat"]
     elif isinstance(location, dict) and "longitude" in location and "latitude" in location:
         entity_lon, entity_lat = location["longitude"], location["latitude"]
+    elif isinstance(location, dict) and "longitude" in location and "latitude" in location:
+        entity_lon, entity_lat = location["longitude"], location["latitude"]
+    elif isinstance(location, dict) and "x" in location and "y" in location:
+        entity_lon, entity_lat = location["x"], location["y"]
     else:
         return False
         

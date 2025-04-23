@@ -1,4 +1,3 @@
-from geofox_client import GtiClient
 import json
 import os
 from pathlib import Path
@@ -338,7 +337,7 @@ def get_station_innercityinfo(client, filename="stations_inner_city.json", maxLi
 
     return res
 
-def get_startdest(qdrant_client, emb_model, anfrage, coll_name):
+def get_startdest(client, anfrage):
     '''
     Get start and destination from a Qdrant client.
     anfrage type: 
@@ -352,9 +351,59 @@ def get_startdest(qdrant_client, emb_model, anfrage, coll_name):
     return type: (start, dest)
     '''
     start, start_cond = anfrage.get("start"), anfrage.get("start_condition")
-    ziel, ziel_cond = anfrage.get("dest"), anfrage.get("dest_condition")
+    dest, dest_cond = anfrage.get("dest"), anfrage.get("dest_condition")
 
-    start = 0
-    dest = 0
+    start = get_point_byquery(client, start, start_cond)
+    dest = get_point_byquery(client, dest, dest_cond)
 
     return start, dest
+
+
+def get_point_byquery(client, point, point_cond):
+    coordinate = None
+    if point_cond:
+        res_cond = check_name(client, point_cond)
+        coordinate = res_cond['coordinate'] if res_cond else None
+    res = check_name(client, point, coordinate=coordinate)
+    if res:
+        res2 = {}
+        res2['location'] = res['coordinate']
+        res2['name'] = res['name']
+        return res2
+    return None
+
+def check_name(client, search_str, coordinate=None,  maxList=5):
+    if search_str is None:
+        return None
+    
+    endpoint = 'checkName' 
+
+    sdName = {
+    "type": "UNKNOWN",
+    "name": search_str,
+    "city": "Hamburg",
+    }
+
+    if coordinate:
+        sdName['coordinate'] = coordinate
+    
+    request = {
+    "language": "de",
+    "version": 59,
+    "tariffDetails": True,
+    "maxList": maxList,
+    "theName": sdName,
+    "allowTypeSwitch": True
+    }
+
+    res = client.send(endpoint, request)
+
+    if res['returnCode'] == 'OK':
+        if res.get('results', None):
+            # Extract the first result
+            res = res['results'][0]
+            return res
+    else:
+        print(f"Error: {res['returnCode']} - {res['errorDevInfo']}, anfrage: {sdName}")
+
+    return None
