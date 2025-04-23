@@ -92,9 +92,9 @@
             "anfrage": "Wann kommt der nächste Bus in die Innenstadt?",
             "assert": {
               "start": null,
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Innenstadt",
-              "dest_condition": null,
+              "dest_aoi": null,
               "style": {}
             }
           },
@@ -112,9 +112,9 @@
           "anfrage": "Wann kommt der nächste Bus in die Innenstadt?",
           "assert": {
             "start": null,
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Innenstadt",
-            "dest_condition": null,
+            "dest_aoi": null,
             "style": {}
           }
         },
@@ -171,9 +171,9 @@
             "anfrage": "Zeige mir eine Verbindung von Herthastraße zur Innenstadt?",
             "assert": {
               "start": "Herthastraße",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Innenstadt",
-              "dest_condition": null,
+              "dest_aoi": null,
               "style": {}
             }
           },
@@ -191,9 +191,9 @@
           "anfrage": "Zeige mir eine Verbindung von Herthastraße zur Innenstadt?",
           "assert": {
             "start": "Herthastraße",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Innenstadt",
-            "dest_condition": null,
+            "dest_aoi": null,
             "style": {}
           }
         },
@@ -250,9 +250,9 @@
             "anfrage": "Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?",
             "assert": {
               "start": "Herthastraße",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Restarurant",
-              "dest_condition": "Hafen",
+              "dest_aoi": "Hafen",
               "style": {}
             }
           },
@@ -270,9 +270,9 @@
           "anfrage": "Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?",
           "assert": {
             "start": "Herthastraße",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Restarurant",
-            "dest_condition": "Hafen",
+            "dest_aoi": "Hafen",
             "style": {}
           }
         },
@@ -329,9 +329,9 @@
             "anfrage": "Ich möchte vom U Mümmelmannsberg zu einem Jugendzentrum in der Nähe der Speicherstadt fahren.",
             "assert": {
               "start": "U Mümmelmannsberg",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Jugendzentrum",
-              "dest_condition": "Speicherstadt",
+              "dest_aoi": "Speicherstadt",
               "style": {}
             }
           },
@@ -349,9 +349,9 @@
           "anfrage": "Ich möchte vom U Mümmelmannsberg zu einem Jugendzentrum in der Nähe der Speicherstadt fahren.",
           "assert": {
             "start": "U Mümmelmannsberg",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Jugendzentrum",
-            "dest_condition": "Speicherstadt",
+            "dest_aoi": "Speicherstadt",
             "style": {}
           }
         },
@@ -408,9 +408,9 @@
             "anfrage": "Wie komme ich vom Billwerder Ring zur nächsten Behörde?",
             "assert": {
               "start": "Billwerder Ring",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Behörde",
-              "dest_condition": null,
+              "dest_aoi": null,
               "style": {}
             }
           },
@@ -428,9 +428,9 @@
           "anfrage": "Wie komme ich vom Billwerder Ring zur nächsten Behörde?",
           "assert": {
             "start": "Billwerder Ring",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Behörde",
-            "dest_condition": null,
+            "dest_aoi": null,
             "style": {}
           }
         },
@@ -487,9 +487,9 @@
             "anfrage": "Wann fährt der nächste Bus vom Bahnhof Bergedorf zum S Allermöhe?",
             "assert": {
               "start": "Bahnhof Bergedorf",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "S Allermöhe",
-              "dest_condition": null,
+              "dest_aoi": null,
               "style": {}
             }
           },
@@ -507,9 +507,9 @@
           "anfrage": "Wann fährt der nächste Bus vom Bahnhof Bergedorf zum S Allermöhe?",
           "assert": {
             "start": "Bahnhof Bergedorf",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "S Allermöhe",
-            "dest_condition": null,
+            "dest_aoi": null,
             "style": {}
           }
         },
@@ -566,9 +566,9 @@
             "anfrage": "Zeige mir den Weg von der Kirchdorfer Straße zur Bücherhalle in der Nähe der Hafencity.",
             "assert": {
               "start": "Kirchdorfer Straße",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Bücherhalle",
-              "dest_condition": "Hafencity",
+              "dest_aoi": "Hafencity",
               "style": {}
             }
           },
@@ -586,9 +586,9 @@
           "anfrage": "Zeige mir den Weg von der Kirchdorfer Straße zur Bücherhalle in der Nähe der Hafencity.",
           "assert": {
             "start": "Kirchdorfer Straße",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Bücherhalle",
-            "dest_condition": "Hafencity",
+            "dest_aoi": "Hafencity",
             "style": {}
           }
         },
@@ -645,9 +645,9 @@
             "anfrage": "Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?",
             "assert": {
               "start": "U Steinfurther Allee",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Jugendzentrum",
-              "dest_condition": "Billstedt",
+              "dest_aoi": "Billstedt",
               "style": {}
             }
           },
@@ -665,9 +665,9 @@
           "anfrage": "Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?",
           "assert": {
             "start": "U Steinfurther Allee",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Jugendzentrum",
-            "dest_condition": "Billstedt",
+            "dest_aoi": "Billstedt",
             "style": {}
           }
         },
@@ -725,9 +725,9 @@
             "anfrage": "Verbindung von der Davidwache zum Haus der Familie am Elbstrand.",
             "assert": {
               "start": "Davidwache",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Haus der Familie",
-              "dest_condition": "Elbstrand",
+              "dest_aoi": "Elbstrand",
               "style": {}
             }
           },
@@ -745,9 +745,9 @@
           "anfrage": "Verbindung von der Davidwache zum Haus der Familie am Elbstrand.",
           "assert": {
             "start": "Davidwache",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Haus der Familie",
-            "dest_condition": "Elbstrand",
+            "dest_aoi": "Elbstrand",
             "style": {}
           }
         },
@@ -805,9 +805,9 @@
             "anfrage": "Fahre von S Billwerder-Moorfleet zur Grundschule in Allermöhe.",
             "assert": {
               "start": "S Billwerder-Moorfleet",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Grundschule",
-              "dest_condition": "Allermöhe",
+              "dest_aoi": "Allermöhe",
               "style": {}
             }
           },
@@ -825,9 +825,9 @@
           "anfrage": "Fahre von S Billwerder-Moorfleet zur Grundschule in Allermöhe.",
           "assert": {
             "start": "S Billwerder-Moorfleet",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Grundschule",
-            "dest_condition": "Allermöhe",
+            "dest_aoi": "Allermöhe",
             "style": {}
           }
         },
@@ -885,9 +885,9 @@
             "anfrage": "Fahre vom Billwerder Billdeich zum Bürgerhaus im Stadtteil Wilhelmsburg.",
             "assert": {
               "start": "Billwerder Billdeich",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Bürgerhaus",
-              "dest_condition": "Wilhelmsburg",
+              "dest_aoi": "Wilhelmsburg",
               "style": {}
             }
           },
@@ -905,9 +905,9 @@
           "anfrage": "Fahre vom Billwerder Billdeich zum Bürgerhaus im Stadtteil Wilhelmsburg.",
           "assert": {
             "start": "Billwerder Billdeich",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Bürgerhaus",
-            "dest_condition": "Wilhelmsburg",
+            "dest_aoi": "Wilhelmsburg",
             "style": {}
           }
         },
@@ -965,9 +965,9 @@
             "anfrage": "Von Bahnhof Bergedorf zur Freiwilligen Feuerwehr in der Nähe des Curslacker Deichs.",
             "assert": {
               "start": "Bahnhof Bergedorf",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Freiwilligen Feuerwehr",
-              "dest_condition": "Curslacker Deich",
+              "dest_aoi": "Curslacker Deich",
               "style": {}
             }
           },
@@ -985,9 +985,9 @@
           "anfrage": "Von Bahnhof Bergedorf zur Freiwilligen Feuerwehr in der Nähe des Curslacker Deichs.",
           "assert": {
             "start": "Bahnhof Bergedorf",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Freiwilligen Feuerwehr",
-            "dest_condition": "Curslacker Deich",
+            "dest_aoi": "Curslacker Deich",
             "style": {}
           }
         },
@@ -1045,9 +1045,9 @@
             "anfrage": "Zeig mir den schnellsten Weg von der Elbchaussee zum Museum am Alsterufer.",
             "assert": {
               "start": "Elbchaussee",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Museum",
-              "dest_condition": "Alsterufer",
+              "dest_aoi": "Alsterufer",
               "style": {}
             }
           },
@@ -1065,9 +1065,9 @@
           "anfrage": "Zeig mir den schnellsten Weg von der Elbchaussee zum Museum am Alsterufer.",
           "assert": {
             "start": "Elbchaussee",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Museum",
-            "dest_condition": "Alsterufer",
+            "dest_aoi": "Alsterufer",
             "style": {}
           }
         },
@@ -1124,9 +1124,9 @@
             "anfrage": "Ich möchte vom U Mümmelmannsberg zum Finanzamt in der Nähe der Mundsburg fahren.",
             "assert": {
               "start": "U Mümmelmannsberg",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Finanzamt",
-              "dest_condition": "Mundsburg",
+              "dest_aoi": "Mundsburg",
               "style": {}
             }
           },
@@ -1144,9 +1144,9 @@
           "anfrage": "Ich möchte vom U Mümmelmannsberg zum Finanzamt in der Nähe der Mundsburg fahren.",
           "assert": {
             "start": "U Mümmelmannsberg",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Finanzamt",
-            "dest_condition": "Mundsburg",
+            "dest_aoi": "Mundsburg",
             "style": {}
           }
         },
@@ -1204,9 +1204,9 @@
             "anfrage": "Verbindung von S Nettelnburg zum Spielplatz im Friedrich-Frank-Bogen.",
             "assert": {
               "start": "S Nettelnburg",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Spielplatz",
-              "dest_condition": "Friedrich-Frank-Bogen",
+              "dest_aoi": "Friedrich-Frank-Bogen",
               "style": {}
             }
           },
@@ -1224,9 +1224,9 @@
           "anfrage": "Verbindung von S Nettelnburg zum Spielplatz im Friedrich-Frank-Bogen.",
           "assert": {
             "start": "S Nettelnburg",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Spielplatz",
-            "dest_condition": "Friedrich-Frank-Bogen",
+            "dest_aoi": "Friedrich-Frank-Bogen",
             "style": {}
           }
         },
@@ -1283,9 +1283,9 @@
             "anfrage": "Wie komme ich vom Bezirksamt Bergedorf zum Krankenhaus in der Nähe vom Boberger Drift?",
             "assert": {
               "start": "Bezirksamt Bergedorf",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Krankenhaus",
-              "dest_condition": "Boberger Drift",
+              "dest_aoi": "Boberger Drift",
               "style": {}
             }
           },
@@ -1303,9 +1303,9 @@
           "anfrage": "Wie komme ich vom Bezirksamt Bergedorf zum Krankenhaus in der Nähe vom Boberger Drift?",
           "assert": {
             "start": "Bezirksamt Bergedorf",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Krankenhaus",
-            "dest_condition": "Boberger Drift",
+            "dest_aoi": "Boberger Drift",
             "style": {}
           }
         },
@@ -1362,9 +1362,9 @@
             "anfrage": "Wie gelange ich von Billwerder-Moorfleet zum Schwimmbad in Bergedorf?",
             "assert": {
               "start": "Billwerder-Moorfleet",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Schwimmbad",
-              "dest_condition": "Bergedorf",
+              "dest_aoi": "Bergedorf",
               "style": {}
             }
           },
@@ -1382,9 +1382,9 @@
           "anfrage": "Wie gelange ich von Billwerder-Moorfleet zum Schwimmbad in Bergedorf?",
           "assert": {
             "start": "Billwerder-Moorfleet",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Schwimmbad",
-            "dest_condition": "Bergedorf",
+            "dest_aoi": "Bergedorf",
             "style": {}
           }
         },
@@ -1442,9 +1442,9 @@
             "anfrage": "Wie komme ich vom Rathaus Bergedorf zur Grundschule am Friedrich-Frank-Bogen?",
             "assert": {
               "start": "Rathaus Bergedorf",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Grundschule",
-              "dest_condition": "Friedrich-Frank-Bogen",
+              "dest_aoi": "Friedrich-Frank-Bogen",
               "style": {}
             }
           },
@@ -1462,9 +1462,9 @@
           "anfrage": "Wie komme ich vom Rathaus Bergedorf zur Grundschule am Friedrich-Frank-Bogen?",
           "assert": {
             "start": "Rathaus Bergedorf",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Grundschule",
-            "dest_condition": "Friedrich-Frank-Bogen",
+            "dest_aoi": "Friedrich-Frank-Bogen",
             "style": {}
           }
         },
@@ -1522,9 +1522,9 @@
             "anfrage": "Fahre vom S Billwerder-Moorfleet zur Kirche in Kirchdorf-Süd.",
             "assert": {
               "start": "S Billwerder-Moorfleet",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Kirche",
-              "dest_condition": "Kirchdorf-Süd",
+              "dest_aoi": "Kirchdorf-Süd",
               "style": {}
             }
           },
@@ -1542,9 +1542,9 @@
           "anfrage": "Fahre vom S Billwerder-Moorfleet zur Kirche in Kirchdorf-Süd.",
           "assert": {
             "start": "S Billwerder-Moorfleet",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Kirche",
-            "dest_condition": "Kirchdorf-Süd",
+            "dest_aoi": "Kirchdorf-Süd",
             "style": {}
           }
         },
@@ -1602,9 +1602,9 @@
             "anfrage": "Route von Neuengammer Hausdeich zum Job-Center bei der Agentur für Arbeit Harburg.",
             "assert": {
               "start": "Neuengammer Hausdeich",
-              "start_condition": null,
+              "start_aoi": null,
               "dest": "Job-Center",
-              "dest_condition": "Agentur für Arbeit Harburg",
+              "dest_aoi": "Agentur für Arbeit Harburg",
               "style": {}
             }
           },
@@ -1622,9 +1622,9 @@
           "anfrage": "Route von Neuengammer Hausdeich zum Job-Center bei der Agentur für Arbeit Harburg.",
           "assert": {
             "start": "Neuengammer Hausdeich",
-            "start_condition": null,
+            "start_aoi": null,
             "dest": "Job-Center",
-            "dest_condition": "Agentur für Arbeit Harburg",
+            "dest_aoi": "Agentur für Arbeit Harburg",
             "style": {}
           }
         },

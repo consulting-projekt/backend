@@ -6,9 +6,9 @@ test_cases = [
             "anfrage": "Ich brauche ca. 15:00 einen Bus in die Innenstadt. Gib mir die Route dazu.", 
             "assert": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Innenstadt",
-                "dest_condition": None,
+                "dest_aoi": None,
                 "date": "today", # wenn datum konkret angegeben dann ist das das Zielformat: "22.04.2025"
                 "time": "15:00",  # wenn zeit konkret angegeben dann ist das das Zielformat: "18:30"
                 "time_is_departure": True, # wenn true dann ist die Zeit eine Abfahrtszeit, wenn false dann ist es eine Ankunftszeit
@@ -21,9 +21,9 @@ test_cases = [
             "anfrage": "Ich brauche nächste woche von der Harverdstraße einen Bus in die Innenstadt. Gib mir die Route dazu.", 
             "assert": {
                 "start": "Harverdstraße",
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Innenstadt",
-                "dest_condition": None,
+                "dest_aoi": None,
                 "date": "today + 7d",
                 "time": "now + 2h", 
                 "time_is_departure": True,
@@ -36,9 +36,9 @@ test_cases = [
             "anfrage": "Wann kommt der nächste Bus in die Innenstadt?", 
             "assert": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Innenstadt",
-                "dest_condition": None,
+                "dest_aoi": None,
                 "date": "today", 
                 "time": "now",
                 "time_is_departure": True,
@@ -51,9 +51,9 @@ test_cases = [
             "anfrage": "Ich brauche in 2 Stunden einen Zug in die Innenstadt. Gib mir die Route dazu.", 
             "assert": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Innenstadt",
-                "dest_condition": None,
+                "dest_aoi": None,
                 "date": "today",
                 "time": "now + 2h",
                 "time_is_departure": True,
@@ -66,9 +66,9 @@ test_cases = [
             "anfrage": "Gib mir eine Verbindung in die Innenstadt. Die Ankunft soll 15:00 sein.", 
             "assert": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Innenstadt",
-                "dest_condition": None,
+                "dest_aoi": None,
                 "date": "today", 
                 "time": "15:00",
                 "time_is_departure": False,

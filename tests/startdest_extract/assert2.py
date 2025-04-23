@@ -69,7 +69,7 @@ def raw_llm2json(raw_llm_output):
             return False
             
         # Check for required fields
-        required_fields = ["start", "start_condition", "dest", "dest_condition"]
+        required_fields = ["start", "start_aoi", "dest", "dest_aoi"]
         for field in required_fields:
             if field not in json_output:
                 print(f"Error: Missing '{field}' field")
@@ -103,7 +103,7 @@ def calculate_score(llm_json, expected_json):
         matched_fields = 0
         
         # Fields to check
-        fields_to_check = ["start", "start_condition", "dest", "dest_condition"]
+        fields_to_check = ["start", "start_aoi", "dest", "dest_aoi"]
         
         for field in fields_to_check:
             if field in expected_json and field in llm_json:

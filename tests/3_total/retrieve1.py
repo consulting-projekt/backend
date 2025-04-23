@@ -6,6 +6,8 @@ model = "qwen2.5:3b"
 model_url = "http://localhost:11434"
 
 def call_api(prompt, options, context):
+    
+
     # Initialize Llama model via Ollama
     chat = ChatOllama(
         model=model,

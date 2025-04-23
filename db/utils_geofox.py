@@ -343,15 +343,15 @@ def get_startdest(client, anfrage):
     anfrage type: 
         {
             "start": str|None,
-            "start_condition": str|None,
+            "start_aoi": str|None,
             "dest": str|None,
-            "dest_condition": str|None
+            "dest_aoi": str|None
         }
 
     return type: (start, dest)
     '''
-    start, start_cond = anfrage.get("start"), anfrage.get("start_condition")
-    dest, dest_cond = anfrage.get("dest"), anfrage.get("dest_condition")
+    start, start_cond = anfrage.get("start"), anfrage.get("start_aoi")
+    dest, dest_cond = anfrage.get("dest"), anfrage.get("dest_aoi")
 
     start = get_point_byquery(client, start, start_cond)
     dest = get_point_byquery(client, dest, dest_cond)

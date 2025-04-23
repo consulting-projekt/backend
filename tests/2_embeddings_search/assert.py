@@ -291,9 +291,9 @@ if __name__ == "__main__":
         'vars': {
             'anfrage': {
             "start": None,
-            "start_condition": None,
+            "start_aoi": None,
             "dest": "Kirche",
-            "dest_condition": "Kirchdorf-Süd"
+            "dest_aoi": "Kirchdorf-Süd"
             },
             'assert': {
                 "ziel_nahe": ["POINT(10.000413 53.554069)", 2000]

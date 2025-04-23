@@ -6,9 +6,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None, # point of interest oder area of interest
-                "start_condition": None, # immer eine area of interest
+                "start_aoi": None, # immer eine area of interest
                 "dest": "Kirche", # point of interest oder area of interest
-                "dest_condition": "Kirchdorf-Süd" # immer eine area of interest
+                "dest_aoi": "Kirchdorf-Süd" # immer eine area of interest
             }, 
             "assert": {
                 "ziel_nahe": ["POINT(10.000413 53.554069)", 1000]
@@ -21,9 +21,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Innenstadt",
-                "dest_condition": None
+                "dest_aoi": None
             }, 
             "assert": {
                 "ziel_nahe": ["POINT(9.988080668856236 53.55184559306223)", 5000]
@@ -36,9 +36,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Restarurant",
-                "dest_condition": "Hafen"
+                "dest_aoi": "Hafen"
             }, 
             "assert": {
                 "ziel_nahe": ["POINT(9.984983833154688 53.47308499617683)", 5000]
@@ -51,9 +51,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Innenstadt",
-                "dest_condition": None
+                "dest_aoi": None
             }, 
             "assert": {
                 "ziel_nahe":  ["POINT(9.988080668856236 53.55184559306223)", 5000]
@@ -66,9 +66,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Jugendzentrum",
-                "dest_condition": "Speicherstadt"
+                "dest_aoi": "Speicherstadt"
             },
             "assert": {
                 "ziel_nahe": ["POINT(10.00467865 53.54357754999999)", 5000]
@@ -81,9 +81,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Behörde",
-                "dest_condition": None
+                "dest_aoi": None
             },
             "assert": {
                 "ziel_name_contains": ["Behörde", "Amt", "Verwaltung"],
@@ -95,9 +95,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Jugendzentrum",
-                "dest_condition": "Billstedt"
+                "dest_aoi": "Billstedt"
             },
             "assert": {
                 "ziel_name_contains": ["Jugend"],
@@ -111,9 +111,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Bücherhalle",
-                "dest_condition": "Hafencity"
+                "dest_aoi": "Hafencity"
             },
             "assert": {
                 "ziel_name_contains": ["Bücherhalle", "Bibliothek"],
@@ -127,9 +127,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": "Davidwache",
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Haus der Familie",
-                "dest_condition": "Elbstrand"
+                "dest_aoi": "Elbstrand"
             },
             "assert": {
                 "start_name_contains": ["Davidwache", "Polizei"],
@@ -144,9 +144,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Grundschule",
-                "dest_condition": "Allermöhe"
+                "dest_aoi": "Allermöhe"
             },
             "assert": {
                 "ziel_name_contains": ["Grundschule", "Schule"],
@@ -160,9 +160,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Freiwilligen Feuerwehr",
-                "dest_condition": "Curslacker Deich"
+                "dest_aoi": "Curslacker Deich"
             },
             "assert": {
                 "ziel_name_contains": ["Feuerwehr"],
@@ -176,9 +176,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Bürgerhaus",
-                "dest_condition": "Wilhelmsburg"
+                "dest_aoi": "Wilhelmsburg"
             },
             "assert": {
                 "ziel_name_contains": ["Bürgerhaus"],
@@ -192,9 +192,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": "Bezirksamt Bergedorf",
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Krankenhaus",
-                "dest_condition": "Boberger Drift"
+                "dest_aoi": "Boberger Drift"
             },
             "assert": {
                 "start_name_contains": ["Bezirksamt", "Bergedorf"],
@@ -209,9 +209,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Finanzamt",
-                "dest_condition": "Mundsburg"
+                "dest_aoi": "Mundsburg"
             },
             "assert": {
                 "ziel_name_contains": ["Finanzamt"],
@@ -225,9 +225,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Museum",
-                "dest_condition": "Alsterufer"
+                "dest_aoi": "Alsterufer"
             },
             "assert": {
                 "ziel_name_contains": ["Museum"],
@@ -241,9 +241,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Spielplatz",
-                "dest_condition": "Friedrich-Frank-Bogen"
+                "dest_aoi": "Friedrich-Frank-Bogen"
             },
             "assert": {
                 "ziel_name_contains": ["Spielplatz"],
@@ -257,9 +257,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Schwimmbad",
-                "dest_condition": "Bergedorf"
+                "dest_aoi": "Bergedorf"
             },
             "assert": {
                 "ziel_name_contains": ["Schwimmbad", "Schwimmhalle", "Bad"],
@@ -272,9 +272,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Job-Center",
-                "dest_condition": "Agentur für Arbeit Harburg"
+                "dest_aoi": "Agentur für Arbeit Harburg"
             },
             "assert": {
                 "ziel_name_contains": ["Job-Center", "Jobcenter", "Agentur für Arbeit"],
@@ -287,9 +287,9 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": "Rathaus Bergedorf",
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Grundschule",
-                "dest_condition": "Friedrich-Frank-Bogen"
+                "dest_aoi": "Friedrich-Frank-Bogen"
             },
             "assert": {
                 "start_name_contains": ["Rathaus", "Bergedorf"],

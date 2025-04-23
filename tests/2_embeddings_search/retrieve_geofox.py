@@ -38,9 +38,9 @@ if __name__ == "__main__":
                 "vars": {    
                 "anfrage": {
                 "start": "Davidwache",
-                "start_condition": None,
+                "start_aoi": None,
                 "dest": "Haus der Familie",
-                "dest_condition": "Elbstrand"
+                "dest_aoi": "Elbstrand"
             }
         }
     }
