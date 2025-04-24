@@ -1,6 +1,5 @@
 from typing import Dict, Any, Union
 import json
-from pythelpers.logger.logger import start_logging2
 from pathlib import Path
 import re
 
@@ -8,7 +7,7 @@ log_dir = Path(__file__).parent / "logs"
 
 
 def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[str, Any]]:
-    # test case variablen
+    # test case variables
     anfrage = options.get('vars', {}).get('anfrage', "")
     expected_output = options.get('vars', {}).get('assert', {})
 
@@ -20,10 +19,10 @@ def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[
         llm_json = raw_llm2json(raw_llm_output)
         if not llm_json:
             return {
-            "pass": False,
-            "score": 0.0,
-            "reason": "Invalid JSON format or structure"
-        }
+                "pass": False,
+                "score": 0.0,
+                "reason": "Invalid JSON format or structure"
+            }
             
         # Calculate score based on matching entries
         score = calculate_score(llm_json, expected_output)
@@ -45,7 +44,7 @@ def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[
         return {
             "pass": False,
             "score": 0.0,
-            "reason": e
+            "reason": str(e)
         }
 
 
@@ -68,16 +67,28 @@ def raw_llm2json(raw_llm_output):
             print("Error: Output is not a dictionary")
             return False
             
-        # Check for required fields
-        required_fields = ["start", "start_aoi", "dest", "dest_aoi"]
+        # Check for required fields based on the new prompt format
+        required_fields = [
+            "start", "start_aoi", "dest", "dest_aoi", 
+            "date", "time", "time_is_departure", "type_of_transport"
+        ]
+        
         for field in required_fields:
             if field not in json_output:
                 print(f"Error: Missing '{field}' field")
                 return False
-            # Check that each field is either null or a string
-            if json_output[field] is not None and not isinstance(json_output[field], str):
-                print(f"Error: Field '{field}' is not null or a string")
-                return False
+                
+            # Check that fields have appropriate types
+            if field in ["start", "start_aoi", "dest", "dest_aoi", "date", "time", "type_of_transport"]:
+                # These fields should be None or string
+                if json_output[field] is not None and not isinstance(json_output[field], str):
+                    print(f"Error: Field '{field}' is not None or a string")
+                    return False
+            elif field == "time_is_departure":
+                # time_is_departure should be a boolean
+                if not isinstance(json_output[field], bool) and json_output[field] is not None:
+                    print(f"Error: Field '{field}' is not a boolean")
+                    return False
             
         return json_output
             
@@ -92,7 +103,7 @@ def raw_llm2json(raw_llm_output):
 def calculate_score(llm_json, expected_json):
     """
     Calculate a score based on matching entries in the LLM output compared to expected output.
-    For the new schema where fields are single values instead of lists.
+    For the new schema with the updated fields for public transportation queries.
     """
     try:
         if not expected_json:
@@ -102,8 +113,11 @@ def calculate_score(llm_json, expected_json):
         total_fields = 0
         matched_fields = 0
         
-        # Fields to check
-        fields_to_check = ["start", "start_aoi", "dest", "dest_aoi"]
+        # Fields to check based on the new prompt format
+        fields_to_check = [
+            "start", "start_aoi", "dest", "dest_aoi", 
+            "date", "time", "time_is_departure", "type_of_transport"
+        ]
         
         for field in fields_to_check:
             if field in expected_json and field in llm_json:
@@ -116,11 +130,22 @@ def calculate_score(llm_json, expected_json):
                 
                 # Both have values - check if they match
                 elif expected_json[field] is not None and llm_json[field] is not None:
-                    if expected_json[field].lower() == llm_json[field].lower():
-                        matched_fields += 1
-                        print(f"{field}: Match - '{expected_json[field]}'")
+                    # For boolean values (time_is_departure)
+                    if isinstance(expected_json[field], bool) and isinstance(llm_json[field], bool):
+                        if expected_json[field] == llm_json[field]:
+                            matched_fields += 1
+                            print(f"{field}: Match - '{expected_json[field]}'")
+                        else:
+                            print(f"{field}: Mismatch - Expected '{expected_json[field]}', got '{llm_json[field]}'")
+                    # For string values
+                    elif isinstance(expected_json[field], str) and isinstance(llm_json[field], str):
+                        if expected_json[field].lower() == llm_json[field].lower():
+                            matched_fields += 1
+                            print(f"{field}: Match - '{expected_json[field]}'")
+                        else:
+                            print(f"{field}: Mismatch - Expected '{expected_json[field]}', got '{llm_json[field]}'")
                     else:
-                        print(f"{field}: Mismatch - Expected '{expected_json[field]}', got '{llm_json[field]}'")
+                        print(f"{field}: Type Mismatch - Expected type '{type(expected_json[field])}', got '{type(llm_json[field])}'")
                 
                 # One is null, one has value - this is a mismatch
                 else:
@@ -143,24 +168,32 @@ def calculate_score(llm_json, expected_json):
 
 
 if __name__ == "__main__":
-    # Example usage
+    # Example usage with the new format
     output = """
 ```json
 {
-    "start": ["Herthastraße"],
-    "start_typ": ["poi_or_aoi"],
-    "dest": ["Innenstadt"],
-    "ziel_typ": ["poi_or_aoi"]
+    "start": null,
+    "start_aoi": null,
+    "dest": "Innenstadt",
+    "dest_aoi": null,
+    "date": "today",
+    "time": "now + 1h",
+    "time_is_departure": true,
+    "type_of_transport": "bus"
 }
 ```"""
     options = {
         'vars': {
-            'anfrage': 'Zeige mir eine Verbindung von Herthastraße zur Innenstadt?',
+            'anfrage': 'Wann kommt der nächste Bus von Herthastraße in die Innenstadt?',
             'assert': {
-                'start': ['Herthastraße'],
-                'start_typ': ['adress'],
-                'ziel': ['Innenstadt'],
-                'ziel_typ': ['poi_or_aoi']
+                "start": None, # mögliche Werte: None, <start adresse|station|poi>, <start aoi> wenn keine adresse|station|poi angegeben
+                "start_aoi": None, # mögliche Werte: None, <start aoi> wenn für "start" adresse|station|poi angegeben
+                "dest": "Innenstadt", # mögliche Werte: None, <dest adresse|station|poi>, <dest aoi> wenn keine adresse|station|poi angegeben
+                "dest_aoi": None, # mögliche Werte: None, <dest aoi> wenn für "dest" adresse|station|poi angegeben
+                "date": "today", # mögliche Werte: None, today, today + d|w (d:Tage, w:Wochen) Datum mit Zielformat: 22.04.2025
+                "time": "15:00", # mögliche Werte: None, now, now + m|h (m:Minuten, h:Stunden) Zeit mit Zielformat: 18:30
+                "time_is_departure": True, # mögliche Werte: True, False; wenn true dann ist die Zeit eine Abfahrtszeit, wenn false dann ist es eine Ankunftszeit
+                "type_of_transport": "bus" # mögliche Werte: None, bus, train
             }
         }
     }

@@ -1,23 +1,26 @@
 prompts:
-  - file://prompt2.txt
+  - file://prompt_short.txt
 providers:
 #  - openai:gpt-3.5-turbo-1106
 #  - openai:gpt-4o-mini
 #  - deepseek:deepseek-chat
   # - ollama:chat:gemma3:4b
   - id: file://retrieve_gemma3_4b.py
+    config:
+      timeout: 60000  # Increase timeout to 60 seconds
+      retries: 3      # Add retries
 
 defaultTest:
   assert:
     - type: python
-      value: file://assert2.py
+      value: file://assert_v1.py
 
 metrics:
   pass:
     threshold: 1.0 
 
 tests: 
-  - file://cases2.py:generate_tests
+  - file://cases_v1.py:generate_tests
   # - options:
   #     runSerially: true
 

@@ -1,29 +1,3 @@
-import os
-import ollama
-from langchain_ollama import ChatOllama
-
-model = "gemma3:4b"
-model_url = "http://localhost:11434"
-
-def call_api(prompt, options, context):
-    # Initialize Llama model via Ollama
-    ollama = ChatOllama(
-        model=model,
-        base_url=model_url,
-        temperature=0
-    )
-    response = ollama.invoke(prompt)
-    
-    return {
-        "output": response.content,
-    }
-
-
-
-
-if __name__ == "__main__":
-    # Example usage
-    prompt = """
 Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage folgende entities zu extrahieren:
 
 "start": mögliche Werte= null, <start adresse|station|poi>, <start aoi> wenn keine adresse|station|poi angegeben
@@ -38,7 +12,7 @@ Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend a
 
 ein Beispiele:
 Nutzeranfrage: "Wann kommt der nächste Bus in die Innenstadt?"
-Deine Antwort in Json-Format:
+Deine Antwort als Json Objekt:
 {
     "start": null,
     "start_aoi": null,
@@ -50,8 +24,6 @@ Deine Antwort in Json-Format:
     "type_of_transport": "bus"
 }
 
-Gib nun die beste Antwort passend zur Nutzeranfrage zurück.
+Gib nun die beste Antwort passend zur Nutzeranfrage als Json-Objekt zurück.
 
-Nutzeranfrage: Ich brauche nächste woche von der Harverdstraße einen Bus in die Innenstadt. Gib mir die Route dazu.
-            """
-    call_api(prompt, {}, {})
+Nutzeranfrage: {{anfrage}}

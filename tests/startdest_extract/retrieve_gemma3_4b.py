@@ -26,6 +26,6 @@ def call_api(prompt, options, context):
 if __name__ == "__main__":
     # Example usage
     prompt = """
-            hallo
+            Zeige mir den Weg von der Kirchdorfer Straße zur Bücherhalle in der Nähe der Hafencity.
             """
     call_api(prompt, {}, {})
