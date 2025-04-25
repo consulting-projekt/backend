@@ -1,21 +1,13 @@
-import os
-import ollama
-from langchain_ollama import ChatOllama
+from pathlib import Path
+import sys
+sys.path.append(str(Path(__file__).parent.parent.parent))
 
-model = "gemma3:4b"
-model_url = "http://localhost:11434"
+from db.utils_llm import call_gemma3_4b
+
 
 def call_api(prompt, options, context):
-    # Initialize Llama model via Ollama
-    ollama = ChatOllama(
-        model=model,
-        base_url=model_url,
-        temperature=0
-    )
-    response = ollama.invoke(prompt)
-    
     return {
-        "output": response.content,
+        "output": call_gemma3_4b(prompt),
     }
 
 

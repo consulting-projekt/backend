@@ -1,5 +1,6 @@
 import json
 import re
+from langchain_ollama import ChatOllama
 
 def raw_llm2json(raw_llm_output):
     try:
@@ -51,3 +52,17 @@ def raw_llm2json(raw_llm_output):
     except Exception as e:
         print(f"Unexpected error: {e}")
         return False
+    
+def call_gemma3_4b(prompt):
+    model = "gemma3:4b"
+    model_url = "http://localhost:11434"
+    # Initialize Llama model via Ollama
+    ollama = ChatOllama(
+        model=model,
+        base_url=model_url,
+        temperature=0
+    )
+    response = ollama.invoke(prompt)
+    
+    return  response.content
+    

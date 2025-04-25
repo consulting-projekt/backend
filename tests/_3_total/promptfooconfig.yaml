@@ -12,7 +12,7 @@ defaultTest:
       value: file://assert1.py
 
 tests: 
-  - file://cases.json
+  - file://cases.py:generate_tests
   # - options:
   #     runSerially: true
 

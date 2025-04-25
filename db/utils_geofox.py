@@ -69,6 +69,191 @@ def get_departures(client, stations, filename="departures.json", loadFromDisk=Fa
 
     return res
 
+def get_route_params(start, dest, params_extracted):
+    """
+    Transform Neo4j start/destination objects and extracted parameters into format
+    needed for the get_route function.
+    
+    Args:
+        start (dict): Neo4j start location object with location data
+        dest (dict): Neo4j destination location object with location data
+        params_extracted (dict): Dictionary with extracted routing parameters
+        
+    Returns:
+        tuple: (start_param, dest_param, time_param, penalties_param)
+    """
+    # Transform start location to the required format
+    start_param = {
+        "type": "COORDINATE",
+        "coordinate": {
+            "x": start["location"]["lon"],
+            "y": start["location"]["lat"]
+        }
+    }
+    
+    # Transform destination location to the required format
+    dest_param = {
+        "type": "COORDINATE",
+        "coordinate": {
+            "x": dest["location"]["lon"],
+            "y": dest["location"]["lat"]
+        }
+    }
+    
+    # Handle time parameter
+    from datetime import datetime, timedelta
+    
+    time_param = None
+    date_str = params_extracted.get("date")
+    time_str = params_extracted.get("time")
+    time_is_departure = params_extracted.get("time_is_departure", True)
+    
+    if date_str or time_str:
+        current_date = datetime.now()
+        
+        # Parse date
+        if date_str:
+            if date_str == "today":
+                target_date = current_date
+                formatted_date = target_date.strftime("%d.%m.%Y")
+            elif "today" in date_str:
+                # Check if it's addition or subtraction
+                if "+" in date_str:
+                    parts = date_str.split("+")
+                    increment = parts[1].strip()
+                    if increment.endswith("d"):
+                        days = int(increment[:-1])
+                        target_date = current_date + timedelta(days=days)
+                    elif increment.endswith("w"):
+                        weeks = int(increment[:-1])
+                        target_date = current_date + timedelta(weeks=weeks)
+                    else:
+                        target_date = current_date
+                    formatted_date = target_date.strftime("%d.%m.%Y")
+                elif "-" in date_str:
+                    parts = date_str.split("-")
+                    decrement = parts[1].strip()
+                    if decrement.endswith("d"):
+                        days = int(decrement[:-1])
+                        target_date = current_date - timedelta(days=days)
+                    elif decrement.endswith("w"):
+                        weeks = int(decrement[:-1])
+                        target_date = current_date - timedelta(weeks=weeks)
+                    else:
+                        target_date = current_date
+                    formatted_date = target_date.strftime("%d.%m.%Y")
+                else:
+                    formatted_date = date_str
+            else:
+                # Use the provided date directly if it's already well-formatted
+                formatted_date = date_str
+        else:
+            formatted_date = current_date.strftime("%d.%m.%Y")
+        
+        # Parse time
+        if time_str:
+            if time_str == "now":
+                formatted_time = current_date.strftime("%H:%M")
+            elif "now" in time_str:
+                # Check if it's addition or subtraction
+                if "+" in time_str:
+                    parts = time_str.split("+")
+                    increment = parts[1].strip()
+                    if increment.endswith("m"):
+                        minutes = int(increment[:-1])
+                        target_time = current_date + timedelta(minutes=minutes)
+                    elif increment.endswith("h"):
+                        hours = int(increment[:-1])
+                        target_time = current_date + timedelta(hours=hours)
+                    else:
+                        target_time = current_date
+                    formatted_time = target_time.strftime("%H:%M")
+                elif "-" in time_str:
+                    parts = time_str.split("-")
+                    decrement = parts[1].strip()
+                    if decrement.endswith("m"):
+                        minutes = int(decrement[:-1])
+                        target_time = current_date - timedelta(minutes=minutes)
+                    elif decrement.endswith("h"):
+                        hours = int(decrement[:-1])
+                        target_time = current_date - timedelta(hours=hours)
+                    else:
+                        target_time = current_date
+                    formatted_time = target_time.strftime("%H:%M")
+                else:
+                    formatted_time = time_str
+            else:
+                # Use the provided time directly
+                formatted_time = time_str
+        else:
+            formatted_time = current_date.strftime("%H:%M")
+        
+        time_param = {
+            "date": formatted_date,
+            "time": formatted_time
+        }
+    
+    # Handle penalties based on type of transport
+    penalties_param = None
+    transport_type = params_extracted.get("type_of_transport")
+    
+    if transport_type:
+        penalties_param = [{
+            "name": "DesiredType",
+            "value": f"{transport_type}:-2"  # - 2 means Prefer
+        }]
+    
+    return start_param, dest_param, time_param, penalties_param, time_is_departure
+
+def get_route(client, start, dest, time=None, penalties=None, timeIsDeparture=True):
+    endpoint = 'getRoute' 
+
+    # Beispiel für Abfahrtszeit
+    # wenn None wird aktuelle Zeit verwendet
+    # time = { 
+    #         "date": "22.04.2025", "time": "18:30" 
+    #     }
+    
+    # beispiel für penalty
+    # penalties = [{
+    #     "name": "DesiredType", "value": "u:-10"
+    # }]
+
+    # start = { # Beh\u00f6rde f\u00fcr Stadtentwicklung und Wohnen
+    #         "type": "COORDINATE",
+    #         "coordinate": {
+    #                 "x": 10.004187,
+    #                 "y": 53.497465
+    #             },
+    #     }
+
+    # dest = { # "Altonaer Segel-Club e.V."
+    #         "type": "COORDINATE",
+    #         "coordinate": {
+    #                 "x": 9.858205,
+    #                 "y": 53.537384
+    #             },
+    #     }
+    
+    request = {
+    "language": "de",
+    "version": 59,
+    "tariffDetails": False,
+    "start": start,
+    "dest": dest,
+    "time": time,   # Zeit im Format GTITime: abfahrtszeit wenn timeIsDeparture = True, ankunftszeit wenn timeIsDeparture = False
+    "timeIsDeparture": True,
+    "penalties": penalties,
+    }
+
+    res = client.send(endpoint, request)
+    if 'realtimeAffected' in res and res['realtimeAffected']:
+        schedules = res['realtimeSchedules']
+    else:
+        schedules = res['schedules']
+
+    return schedules
+
 
 def process_departure_data(departures):
     """
