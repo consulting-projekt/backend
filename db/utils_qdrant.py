@@ -1,6 +1,13 @@
 
 from qdrant_client import QdrantClient, models
 from db.utils import parse_point_string
+from db.utils_embeddings import load_embedding_model_std
+
+def get_startdest_std(qdrant_client, anfrage):
+    COLLECTION_NAME = "aoipoi_embeddings_std"
+    emb_modell = load_embedding_model_std()
+
+    return get_startdest(qdrant_client, emb_modell, anfrage, COLLECTION_NAME)
 
 def get_startdest(qdrant_client, emb_model, anfrage, coll_name):
     '''

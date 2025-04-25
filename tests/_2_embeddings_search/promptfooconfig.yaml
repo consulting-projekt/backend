@@ -4,8 +4,8 @@ providers:
 #  - openai:gpt-4o-mini
 #  - deepseek:deepseek-chat
   # - ollama:chat:gemma3:4b
-  # - id: file://retrieve_std.py
-  - id: file://retrieve_geofox.py
+  - id: file://retrieve_std.py
+  # - id: file://retrieve_geofox.py
 
 defaultTest:
   assert:
