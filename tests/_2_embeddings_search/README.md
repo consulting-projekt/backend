@@ -14,6 +14,8 @@ promptfoo eval --output filepath.json
 ```
 
 
+temperature von 0.1 war am besten für herrn buchkremer (thema halluzinationen)
+
 
 
 

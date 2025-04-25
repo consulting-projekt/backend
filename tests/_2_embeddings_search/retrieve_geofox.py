@@ -10,26 +10,24 @@ from db.utils_geofox import get_startdest
 from db.geofox_client import get_geofox_client
 import ast
 import json
-from pythelpers.logger.logger import start_logging2
 
 COLLECTION_NAME = "aoipoi_embeddings_std"
 
 client = get_geofox_client()
 
 def call_api(prompt, options, context):
-    with start_logging2("retrieve_geofox"):
-        # Replace the ast.literal_eval line with:
-        anfrage = context.get('vars', {}).get('anfrage', {})
+    # Replace the ast.literal_eval line with:
+    anfrage = context.get('vars', {}).get('anfrage', {})
 
-        print(f"Prompt: {anfrage}, Options: {options}, Context: {context}")
-        start, dest = get_startdest(client, anfrage)
+    print(f"Prompt: {anfrage}, Options: {options}, Context: {context}")
+    start, dest = get_startdest(client, anfrage)
 
-        return {
-            "output": {
-                "start": start,
-                "dest": dest
-            },
-        }
+    return {
+        "output": {
+            "start": start,
+            "dest": dest
+        },
+    }
 
 
 if __name__ == "__main__":
