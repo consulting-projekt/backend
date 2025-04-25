@@ -6,9 +6,6 @@ providers:
 #  - deepseek:deepseek-chat
   # - ollama:chat:gemma3:4b
   - id: file://retrieve_gemma3_4b.py
-    config:
-      timeout: 60000  # Increase timeout to 60 seconds
-      retries: 3      # Add retries
 
 defaultTest:
   assert:
