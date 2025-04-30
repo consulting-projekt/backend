@@ -238,7 +238,7 @@ def get_route(client, start, dest, time=None, penalties=None, timeIsDeparture=Tr
     "start": start,
     "dest": dest,
     "time": time,   # Zeit im Format GTITime: abfahrtszeit wenn timeIsDeparture = True, ankunftszeit wenn timeIsDeparture = False
-    "timeIsDeparture": True,
+    "timeIsDeparture": timeIsDeparture,
     "penalties": penalties,
     }
 
