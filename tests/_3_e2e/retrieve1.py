@@ -17,6 +17,7 @@ client_geofox = get_geofox_client()
 def call_api(prompt, options, context):
     params_extract_res = call_gemma3_4b(prompt)
     params_json = raw_llm2json(params_extract_res)
+    problem = None
     if params_json['start'] is None:
         params_json['start'] = context.get('vars', {}).get('start', 'Herthastraße 1, Hamburg')
     start, dest = get_startdest_std(client_qdrant, params_json)
