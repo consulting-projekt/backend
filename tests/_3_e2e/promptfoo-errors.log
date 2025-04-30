@@ -1,0 +1,499 @@
+2025-04-30T13:54:04.233Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:54:04.503Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:54:04.503Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:54:04.948Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:54:04.948Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199783-d3fd7e4f20a84.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199783-d3fd7e4f20a84.json'
+2025-04-30T13:54:05.130Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:54:05.130Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199773-603d500c2cc03.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199773-603d500c2cc03.json'
+2025-04-30T13:54:05.133Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:54:05.133Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199787-29677f87978f9.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199787-29677f87978f9.json'
+2025-04-30T13:54:07.665Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 57, in call_api
+    "output": call_gemma3_4b(prompt),
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:54:08.213Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 57, in call_api
+      "output": call_gemma3_4b(prompt),
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:54:08.214Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199778-b2a3618a9f18e.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021199778-b2a3618a9f18e.json'
+2025-04-30T13:54:15.276Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:54:15.699Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:54:15.699Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021244957-bdbcca188c08a.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021244957-bdbcca188c08a.json'
+2025-04-30T13:55:11.988Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:55:12.056Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:55:12.317Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:55:12.668Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:55:12.669Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021298921-634135ef38d92.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021298921-634135ef38d92.json'
+2025-04-30T13:55:12.684Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:55:12.684Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021298911-d41396c4c89fd.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021298911-d41396c4c89fd.json'
+2025-04-30T13:55:12.818Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:55:12.818Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021298925-c13dab20fbf0d.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021298925-c13dab20fbf0d.json'
+2025-04-30T13:55:24.746Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+    prompt = get_problems_prompt(anfrage, params_json, problems)
+UnboundLocalError: local variable 'anfrage' referenced before assignment
+2025-04-30T13:55:25.202Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'anfrage' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'anfrage' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 41, in call_api
+      prompt = get_problems_prompt(anfrage, params_json, problems)
+2025-04-30T13:55:25.203Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021312676-af2e42d525a98.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021312676-af2e42d525a98.json'
+2025-04-30T13:56:12.599Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:56:12.672Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:56:12.738Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:56:13.323Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:56:13.324Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021354405-d3deb79a80763.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021354405-d3deb79a80763.json'
+2025-04-30T13:56:13.365Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:56:13.366Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021354399-6312d07a6589e.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021354399-6312d07a6589e.json'
+2025-04-30T13:56:13.397Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:56:13.398Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021354389-1ca9293290b24.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021354389-1ca9293290b24.json'
+2025-04-30T13:56:26.347Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:56:26.777Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:56:26.778Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021373330-cd217b6727e71.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021373330-cd217b6727e71.json'
+2025-04-30T13:58:06.939Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:58:07.016Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:58:07.083Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:58:07.630Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:58:07.630Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021468785-4a1ca4ad79322.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021468785-4a1ca4ad79322.json'
+2025-04-30T13:58:07.697Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:58:07.697Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021468779-236065b67b621.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021468779-236065b67b621.json'
+2025-04-30T13:58:07.748Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:58:07.748Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021468769-7848a7ca6e00c.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021468769-7848a7ca6e00c.json'
+2025-04-30T13:58:20.375Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+    "output": call_gemma3_4b(prompt)
+  File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+    response = ollama.invoke(prompt)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+    [self._convert_input(input)],
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+    raise ValueError(msg)  # noqa: TRY004
+ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-04-30T13:58:20.802Z [ERROR]: Error running Python script: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+Stack Trace: Error: ValueError: Invalid input type <class 'NoneType'>. Must be a PromptValue, str, or list of BaseMessages.
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 45, in call_api
+      "output": call_gemma3_4b(prompt)
+    File "C:\studium\consulting\backend\db\utils_llm.py", line 65, in call_gemma3_4b
+      response = ollama.invoke(prompt)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 332, in invoke
+      [self._convert_input(input)],
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\langchain_core\language_models\chat_models.py", line 317, in _convert_input
+      raise ValueError(msg)  # noqa: TRY004
+2025-04-30T13:58:20.802Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021487637-fccf2ed7af912.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746021487637-fccf2ed7af912.json'

@@ -69,7 +69,7 @@ def get_departures(client, stations, filename="departures.json", loadFromDisk=Fa
 
     return res
 
-def get_route_params(start, dest, params_extracted):
+def get_route_params(start, dest, date_str, time_str, time_is_departure, transport_type):
     """
     Transform Neo4j start/destination objects and extracted parameters into format
     needed for the get_route function.
@@ -104,9 +104,6 @@ def get_route_params(start, dest, params_extracted):
     from datetime import datetime, timedelta
     
     time_param = None
-    date_str = params_extracted.get("date")
-    time_str = params_extracted.get("time")
-    time_is_departure = params_extracted.get("time_is_departure", True)
     
     if date_str or time_str:
         current_date = datetime.now()
@@ -195,7 +192,6 @@ def get_route_params(start, dest, params_extracted):
     
     # Handle penalties based on type of transport
     penalties_param = None
-    transport_type = params_extracted.get("type_of_transport")
     
     if transport_type:
         penalties_param = [{

@@ -36,7 +36,7 @@ test_cases = [
     "vars": {
         "anfrage": "Wann kommt der nächste Bus in die Innenstadt?", 
 
-            "start": None,
+            "start": "Lutterothstraße",
             "start_aoi": None,
             "dest": "Innenstadt",
             "dest_aoi": None,
