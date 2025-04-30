@@ -13,11 +13,26 @@ test_cases = [
                 "date": "today", # mögliche Werte: None, today, today + d|w (d:Tage, w:Wochen) Datum mit Zielformat: 22.04.2025
                 "time": "15:00", # mögliche Werte: None, now, now + m|h (m:Minuten, h:Stunden) Zeit mit Zielformat: 18:30
                 "time_is_departure": True, # mögliche Werte: True, False; wenn true dann ist die Zeit eine Abfahrtszeit, wenn false dann ist es eine Ankunftszeit
-                "type_of_transport": "bus" # mögliche Werte: None, bus, train
-            
+                "type_of_transport": "bus" # mögliche Werte: None, bus, train            
         }
     },
         { 
+    "vars": {
+        "anfrage": "Ich brauche nächste woche von der Harverdstraße einen Bus in die Innenstadt. Gib mir die Route dazu.", 
+
+            "start": "Harverdstraße",
+            "start_aoi": None,
+            "dest": "Innenstadt",
+            "dest_aoi": None,
+            "date": "today + 7d",
+            "time": "now + 2h", 
+            "time_is_departure": True,
+            "type_of_transport": "bus"
+        
+    }
+},
+        
+                { 
     "vars": {
         "anfrage": "Ich brauche nächste woche von der Harverdstraße einen Bus in die Innenstadt. Gib mir die Route dazu.", 
 
