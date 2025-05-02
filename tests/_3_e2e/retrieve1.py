@@ -27,7 +27,6 @@ def call_api(prompt, options, context):
     # falls für start und dest in cases.py keine defaults hinterlegt sind (unter "vars") dann ist das ein simuliertes Problem
     start = params_json.get("start")
     start = context.get('vars', {}).get('start', start) if start is None else start
-    start_aoi = params_json.get("start_aoi")
     dest = params_json.get("dest")
     dest = context.get('vars', {}).get('dest', dest) if dest is None else dest
     dest_aoi = params_json.get("dest_aoi")
@@ -54,7 +53,7 @@ def call_api(prompt, options, context):
     start_with_coordinates = find_point(start)
     dest_with_coordinates = find_point(dest)
     if start_with_coordinates is None:
-        start_with_coordinates = get_point_std(client_qdrant, start, start_aoi)
+        start_with_coordinates = get_point_std(client_qdrant, start, None)
         if start_with_coordinates['score'] < MIN_EMBEDDING_SCORE:
             start_with_coordinates = None
     if dest_with_coordinates is None:
@@ -129,7 +128,6 @@ if __name__ == "__main__":
 Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage folgende entities zu extrahieren:
 
 "start": mögliche Werte= null, <start adresse|station|poi>, <start aoi> wenn keine adresse|station|poi angegeben
-"start_aoi":  mögliche Werte= null, <start aoi> wenn für "start" adresse|station|poi angegeben
 "dest":  mögliche Werte= null, <dest adresse|station|poi>, <dest aoi> wenn keine adresse|station|poi angegeben
 "dest_aoi":  mögliche Werte= null, <dest aoi> wenn für "dest" adresse|station|poi angegeben
 "date":  mögliche Werte= null, today, today + d|w (d:Tage, w:Wochen) Datum mit Zielformat: 22.04.2025
@@ -143,7 +141,6 @@ Nutzeranfrage: "Wann kommt der nächste Bus in die Innenstadt?"
 Deine Antwort in Json-Format:
 {
     "start": null,
-    "start_aoi": null,
     "dest": "Innenstadt",
     "dest_aoi": null,
     "date": "today", 
@@ -159,7 +156,7 @@ Nutzeranfrage: Wann kommt der nächste Bus in die Innenstadt?
     call_api(prompt, {}, {"vars": {        "anfrage": "Wann kommt der nächste Bus in die Innenstadt?", 
 
             "start": "Lutterothstraße",
-            "start_aoi": None,
+            
             "dest": "Innenstadt",
             "dest_aoi": None,
             "date": "today", 

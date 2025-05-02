@@ -291,7 +291,7 @@ if __name__ == "__main__":
         'vars': {
             'anfrage': {
             "start": None,
-            "start_aoi": None,
+            
             "dest": "Kirche",
             "dest_aoi": "Kirchdorf-Süd"
             },

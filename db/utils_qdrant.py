@@ -21,17 +21,16 @@ def get_startdest(qdrant_client, emb_model, anfrage, coll_name):
     anfrage type: 
         {
             "start": str|None,
-            "start_aoi": str|None,
             "dest": str|None,
             "dest_aoi": str|None
         }
 
     return type: (start, dest)
     '''
-    start, start_cond = anfrage.get("start"), anfrage.get("start_aoi")
+    start = anfrage.get("start")
     ziel, ziel_cond = anfrage.get("dest"), anfrage.get("dest_aoi")
 
-    start = get_point_byquery(start, start_cond, qdrant_client, emb_model, coll_name)
+    start = get_point_byquery(start, None, qdrant_client, emb_model, coll_name)
     dest = get_point_byquery(ziel, ziel_cond, qdrant_client, emb_model, coll_name)
 
     return start, dest

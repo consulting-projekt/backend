@@ -23,7 +23,7 @@ def raw_llm2json(raw_llm_output):
             
         # Check for required fields based on the new prompt format
         required_fields = [
-            "start", "start_aoi", "dest", "dest_aoi", 
+            "start", "dest", "dest_aoi", 
             "date", "time", "time_is_departure", "type_of_transport"
         ]
         
@@ -33,7 +33,7 @@ def raw_llm2json(raw_llm_output):
                 return False
                 
             # Check that fields have appropriate types
-            if field in ["start", "start_aoi", "dest", "dest_aoi", "date", "time", "type_of_transport"]:
+            if field in ["start", "dest", "dest_aoi", "date", "time", "type_of_transport"]:
                 # These fields should be None or string
                 if json_output[field] is not None and not isinstance(json_output[field], str):
                     print(f"Error: Field '{field}' is not None or a string")

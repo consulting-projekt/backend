@@ -12,7 +12,6 @@ Zum Beispiel: In "Restaurant in Nähe vom Hafen" ist "Restaurant" das ziel und "
 antworte in json format:
 {
     "start": "<start_entität>",  
-    "start_aoi": "<start_bedingung_entität oder null>",
     "dest": "<ziel_entität>",  
     "dest_aoi": "<ziel_bedingung_entität oder null>"
 }
@@ -28,7 +27,6 @@ Nutzeranfrage:
 Die richtige Antwort dazu ist:
 {
     "start": "Herthastraße",
-    "start_aoi": null,
     "dest": "Restarurant",
     "dest_aoi": "Hafen"
 }
@@ -37,7 +35,6 @@ Nutzeranfrage: "Wann kommt der nächste Bus in die Innenstadt?",
 Die richtige Antwort dazu ist:
 {
     "start": null,
-    "start_aoi": null,
     "dest": "Innenstadt",
     "dest_aoi": null
 }
@@ -49,7 +46,6 @@ Nutzeranfrage: {{anfrage}}
 Antworte in json format:
 {
     "start": ...,
-    "start_aoi": ...,
     "dest": ...,
     "dest_aoi": ...
 }

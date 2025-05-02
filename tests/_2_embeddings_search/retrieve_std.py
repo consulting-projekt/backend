@@ -27,7 +27,7 @@ if __name__ == "__main__":
                 "vars": {    
                 "anfrage": {
                 "start": "Davidwache",
-                "start_aoi": None,
+                
                 "dest": "Haus der Familie",
                 "dest_aoi": "Elbstrand"
             }

@@ -6,7 +6,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None, # point of interest oder area of interest
-                "start_aoi": None, # immer eine area of interest
+                 # immer eine area of interest
                 "dest": "Kirche", # point of interest oder area of interest
                 "dest_aoi": "Kirchdorf-Süd" # immer eine area of interest
             }, 
@@ -21,7 +21,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Innenstadt",
                 "dest_aoi": None
             }, 
@@ -36,7 +36,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Restarurant",
                 "dest_aoi": "Hafen"
             }, 
@@ -51,7 +51,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Innenstadt",
                 "dest_aoi": None
             }, 
@@ -66,7 +66,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Jugendzentrum",
                 "dest_aoi": "Speicherstadt"
             },
@@ -81,7 +81,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Behörde",
                 "dest_aoi": None
             },
@@ -95,7 +95,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Jugendzentrum",
                 "dest_aoi": "Billstedt"
             },
@@ -111,7 +111,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Bücherhalle",
                 "dest_aoi": "Hafencity"
             },
@@ -127,7 +127,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": "Davidwache",
-                "start_aoi": None,
+                
                 "dest": "Haus der Familie",
                 "dest_aoi": "Elbstrand"
             },
@@ -144,7 +144,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Grundschule",
                 "dest_aoi": "Allermöhe"
             },
@@ -160,7 +160,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Freiwilligen Feuerwehr",
                 "dest_aoi": "Curslacker Deich"
             },
@@ -176,7 +176,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Bürgerhaus",
                 "dest_aoi": "Wilhelmsburg"
             },
@@ -192,7 +192,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": "Bezirksamt Bergedorf",
-                "start_aoi": None,
+                
                 "dest": "Krankenhaus",
                 "dest_aoi": "Boberger Drift"
             },
@@ -209,7 +209,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Finanzamt",
                 "dest_aoi": "Mundsburg"
             },
@@ -225,7 +225,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Museum",
                 "dest_aoi": "Alsterufer"
             },
@@ -241,7 +241,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Spielplatz",
                 "dest_aoi": "Friedrich-Frank-Bogen"
             },
@@ -257,7 +257,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Schwimmbad",
                 "dest_aoi": "Bergedorf"
             },
@@ -272,7 +272,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": None,
-                "start_aoi": None,
+                
                 "dest": "Job-Center",
                 "dest_aoi": "Agentur für Arbeit Harburg"
             },
@@ -287,7 +287,7 @@ test_cases = [
         "vars": {
             "anfrage": {
                 "start": "Rathaus Bergedorf",
-                "start_aoi": None,
+                
                 "dest": "Grundschule",
                 "dest_aoi": "Friedrich-Frank-Bogen"
             },

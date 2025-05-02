@@ -68,7 +68,7 @@ def calculate_score(llm_json, expected_json):
         
         # Fields to check based on the new prompt format
         fields_to_check = [
-            "start", "start_aoi", "dest", "dest_aoi", 
+            "start", "dest", "dest_aoi", 
             "date", "time", "time_is_departure", "type_of_transport"
         ]
         
@@ -126,7 +126,6 @@ if __name__ == "__main__":
 ```json
 {
     "start": null,
-    "start_aoi": null,
     "dest": "Innenstadt",
     "dest_aoi": null,
     "date": "today",
@@ -140,7 +139,7 @@ if __name__ == "__main__":
             'anfrage': 'Wann kommt der nächste Bus von Herthastraße in die Innenstadt?',
             'assert': {
                 "start": None, # mögliche Werte: None, <start adresse|station|poi>, <start aoi> wenn keine adresse|station|poi angegeben
-                "start_aoi": None, # mögliche Werte: None, <start aoi> wenn für "start" adresse|station|poi angegeben
+                 # mögliche Werte: None, <start aoi> wenn für "start" adresse|station|poi angegeben
                 "dest": "Innenstadt", # mögliche Werte: None, <dest adresse|station|poi>, <dest aoi> wenn keine adresse|station|poi angegeben
                 "dest_aoi": None, # mögliche Werte: None, <dest aoi> wenn für "dest" adresse|station|poi angegeben
                 "date": "today", # mögliche Werte: None, today, today + d|w (d:Tage, w:Wochen) Datum mit Zielformat: 22.04.2025
