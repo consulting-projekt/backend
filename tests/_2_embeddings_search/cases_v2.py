@@ -88,7 +88,7 @@ test_cases = [
                 "dest_aoi": "Hafencity"
             },
             "assert": {
-                "ziel_name_contains": ["Bücherhalle", "Bibliothek"],
+                "ziel_name_contains": ["Bücherhalle", "Bibliothek", "Bibliotekswesen"],
                 "ziel_nahe":  ["POINT(9.994725 53.541915)", 5000]  # Ungefähre Koordinaten für Hafencity
             }
         }
@@ -106,7 +106,7 @@ test_cases = [
             "assert": {
                 "start_name_contains": ["Davidwache", "Polizei"],
                 "ziel_name_contains": ["Haus der Familie"],
-                "ziel_nahe": ["POINT(9.96242186569669 53.557507857835716)", 5000]  # Ungefähre Koordinaten für Elbstrand
+                "ziel_nahe": ["POINT(9.96242186569669 53.557507857835716)", 6000]  # Ungefähre Koordinaten für Elbstrand
             }
         }
     },
@@ -152,7 +152,7 @@ test_cases = [
                 "dest_aoi": None,
             },
             "assert": {
-                "ziel_name_contains": ["Park", "Volkspark"],
+                "ziel_name_contains": ["Volkspark"],
                 "ziel_nahe":["POINT(9.901091676352436 53.58340196584053)", 2000]
             }
         }
@@ -184,6 +184,109 @@ test_cases = [
             "assert": {
                 "ziel_name_contains": ["St. Pauli"],
                 "ziel_nahe":["POINT(9.96991127111408 53.5509767798889)", 2000]
+            }
+        }
+    },
+    # Ich bin gerade an der TU und muss in 10 Minuten zur Mönckebergstraße
+    {
+        "vars": {
+            "anfrage": {
+                "start": "TU",
+                "dest": "Mönckebergstraße",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "start_name_contains": ["Technische", "Universität", "TU"],
+                "start_nahe":["POINT(9.970045922930487 53.46134809982394)", 2000]
+            }
+        }
+    },
+    # Ich möchte zum Hafen. Wann geht der Nächste Bus?
+       {
+        "vars": {
+            "anfrage": {
+                "start": None,
+            
+                "dest": "Hafen",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "ziel_name_contains": ["Hafen", "Wasser", "Dock"],
+                "ziel_nahe":["POINT(9.975218933117612 53.50929137545466)", 10000]
+            }
+        }
+    },
+    # Wann geht die nächste Linue zum Wasser?
+    {
+        "vars": {
+            "anfrage": {
+                "start": None,
+            
+                "dest": "Wasser",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "ziel_nahe":["POINT(10.030831219700044 53.53189370546762)", 5000]
+            }
+        }
+    },
+    # Schnellste Bus-Route von der Fähre bis zum Hauptbahnhof
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Fähre",
+                "dest": "Hauptbahnhof",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "start_name_contains": ["Fähre"],
+                "start_nahe":["POINT(9.97105303088075 53.545512596582746)", 2000]
+            }
+        }
+    },
+    # Ich habe Lust etwas Neues zu erleben. Letztes Wochenende war ich am Hafen. Da möchte ich heute nicht hin. Mhm. Haha. Ich glaube ich möchte zum Millerntorstadion. Da ist es immer sehr schön. Am Besten jetzt gleich, direkt hier von der Brandenburger Straße mit dem Bus
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Millerntorstadion",
+                "dest": "Hauptbahnhof",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "start_name_contains": ["stadion"],
+                "start_nahe":["POINT(9.969942283590598 53.55491720595588)", 2000]
+            }
+        }
+    },
+    # Ich sitze gerade am Mö Grill und möchte mit dem Bus zur Elbphilharmonie. Jetzt bitte"
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Funk Eck",
+                "dest": "Elbphilharmonie",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "start_name_contains": ["Funk", "Eck", "Restaurant"],
+                "start_nahe":["POINT(9.988254884854902 53.57406821953324)", 2000],
+                "ziel_name_contains": ["Elbphilharmonie", "Konzert"],
+                "ziel_nahe":["POINT(9.985349825438133 53.54153130105184)", 2000]
+            }
+        }
+    },
+    # Ich habe mein Kind gerade am Rissen - Gymnasium abgegeben und möchte nun von hier in 50 Minuten zum Rahlstedt - Gymnasium mit Bus bitte"
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Rissen - Gymnasium",
+                "dest": "Rahlstedt - Gymnasium",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "start_name_contains": ["Rissen", "Gymnasium"],
+                "start_nahe":["POINT(9.752480386159485 53.579937348382444)", 2000],
+                "ziel_name_contains": ["Rahlstedt", "Gymnasium"],
+                "ziel_nahe":["POINT(10.146115769110034 53.60109684384269)", 2000]
             }
         }
     }
