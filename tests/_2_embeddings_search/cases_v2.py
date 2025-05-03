@@ -126,6 +126,67 @@ test_cases = [
             }
         }
     },
+
+    # LuftHansa Flughafen -> Rönkloppel in ca. 40 min
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Flughafen",
+                "start_aoi": None,
+                "dest": "Rönkloppel",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "start_name_contains": ["Airport", "Flughafen"],
+                "start_nahe":["POINT(10.006270459777692 53.63228460547464)", 7000]
+            }
+        }
+    },
+    # Wie komme ich von der Schnackenburgalle über die Bus Linie 172 zum Volkspark
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Schnackenburgalle",
+                "start_aoi": None,
+                "dest": "Volkspark",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "ziel_name_contains": ["Park", "Volkspark"],
+                "ziel_nahe":["POINT(9.901091676352436 53.58340196584053)", 2000]
+            }
+        }
+    },
+    # Ich muss in 2h 35 min von Puckholm zum Rieck Museum. Wie komme ich dort hin?
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Puckholm",
+                "start_aoi": None,
+                "dest": "Rieck Museum",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "ziel_name_contains": ["Museum", "Rieck Haus"],
+                "ziel_nahe":["POINT(10.214631390056974 53.45938998698139)", 5000]
+            }
+        }
+    },
+     # Ich brauche einen Bus von der Zweitbrückenstraße nach St.Pauli"
+    {
+        "vars": {
+            "anfrage": {
+                "start": "Zweitbrückenstraße",
+                "start_aoi": None,
+                "dest": "St.Pauli",
+                "dest_aoi": None,
+            },
+            "assert": {
+                "ziel_name_contains": ["St. Pauli"],
+                "ziel_nahe":["POINT(9.96991127111408 53.5509767798889)", 2000]
+            }
+        }
+    }
 ]
 
 
