@@ -21,9 +21,9 @@ test_cases = [
 # Komplexe Datumsangabe
         { 
     "vars": {
-        "anfrage": "Ich brauche nächste woche von der Harverdstraße einen Bus in die Innenstadt. Gib mir die Route dazu.", 
+        "anfrage": "Ich brauche nächste woche von der Harvertstraße einen Bus in die Innenstadt. Gib mir die Route dazu.", 
         "assert": {
-            "start": "Harverdstraße",
+            "start": "Harvertstraße",
             "start_aoi": None,
             "dest": "Innenstadt",
             "dest_aoi": None,
@@ -37,11 +37,11 @@ test_cases = [
 # Embedding Use-Case
 { 
     "vars": {
-        "anfrage": "Wann kommt der nächste Bus in die Innenstadt?", 
+        "anfrage": "Wann kommt der nächste Bus in die Innenstatt?", 
         "assert": {
             "start": None,
             "start_aoi": None,
-            "dest": "Innenstadt",
+            "dest": "Innenstatt",
             "dest_aoi": None,
             "date": "today", 
             "time": "now",
@@ -54,12 +54,12 @@ test_cases = [
 # # Mit Dest_AOI
 { 
     "vars": {
-        "anfrage": "Wie komme ich jetzt von Luckmoor zu einem Cafe am Habichtsplatz", 
+        "anfrage": "Wie komme ich jetzt von Lukmoor zu einem Cafe am Hapischtsplatz", 
         "assert": {
-            "start": "Luckmoor",
+            "start": "Lukmoor",
             "start_aoi": None,
             "dest": "Cafe",
-            "dest_aoi": "Habichtsplatz",
+            "dest_aoi": "Hapischtsplatz",
             "date": "today", 
             "time": "now",
             "time_is_departure": True,
@@ -71,11 +71,11 @@ test_cases = [
 # Komplexe Zeitangabe
     { 
     "vars": {
-        "anfrage": "Ich brauche in 2 Stunden einen Zug in die Innenstadt. Gib mir die Route dazu.", 
+        "anfrage": "Ich brauche in 2 Stunden einen Zug in die Innenstatt. Gib mir die Route dazu.", 
         "assert": {
             "start": None,
             "start_aoi": None,
-            "dest": "Innenstadt",
+            "dest": "Innenstatt",
             "dest_aoi": None,
             "date": "today",
             "time": "now + 120m",
@@ -88,12 +88,12 @@ test_cases = [
 # Mit Dest_AOI
     { 
     "vars": {
-        "anfrage": "Gib mir eine Verbindung zu einem McDonald's in der Innenstadt. Die Ankunft soll 15:00 sein.", 
+        "anfrage": "Gib mir eine Verbindung zu einem McDonald's in der Inennstadt. Die Ankunft soll 15:00 sein.", 
         "assert": {
             "start": None,
             "start_aoi": None,
             "dest": "McDonald's",
-            "dest_aoi": "Innenstadt",
+            "dest_aoi": "Inennstadt",
             "date": "today", 
             "time": "15:00",
             "time_is_departure": False,
@@ -105,11 +105,11 @@ test_cases = [
 # # Mit Dest_AOI
 { 
     "vars": {
-        "anfrage": "Ich benötge die nächste Bus-Linie vom Hochrad zu einem Einkaufszentrum in der Nähe des Windmühlenwegs", 
+        "anfrage": "Ich benötge die nächste Bus-Linie vom Hochrad zu einem Einkaufszentrum in der Nähe des Wintmüllenwegs", 
         "assert": {
             "start": "Hochrad",
             "start_aoi": None,
-            "dest": "Windmühlenweg",
+            "dest": "Wintmüllenweg",
             "dest_aoi": "Einkaufszentrum",
             "date": "today", 
             "time": "now",
@@ -122,12 +122,12 @@ test_cases = [
 # # Mit Dest_AOI
 { 
     "vars": {
-        "anfrage": "Zeig mir bitte den nächsten Bus von der Station Meßberg zu einem Restaurant am Hauptbahnhof", 
+        "anfrage": "Zeig mir bitte den nächsten Bus von der Station Messberg zu einem Restaurant am Hauptbanhof", 
         "assert": {
-            "start": "Meßberg",
+            "start": "Messberg",
             "start_aoi": None,
             "dest": "Restaurant",
-            "dest_aoi": "Hauptbahnhof",
+            "dest_aoi": "Hauptbanhof",
             "date": "today", 
             "time": "now",
             "time_is_departure": True,
@@ -141,12 +141,12 @@ test_cases = [
 # 
 { 
     "vars": {
-        "anfrage": "Ich möchte gerne in eine Bar in der Nähe vom Hamburger Stadtpark. Ich sitze gerade am Eppendorfer Marktplatz und möchte gerne mit dem Bus in 3 Stunden in der Bar sein", 
+        "anfrage": "Ich möchte gerne in eine Bar in der Nähe vom Stadtpark. Ich sitze gerade am Ependorfer Martplat und möchte gerne mit dem Bus in 3 Stunden in der Bar sein", 
         "assert": {
-            "start": "Eppendorfer Marktplatz",
+            "start": "Ependorfer Martplat",
             "start_aoi": None,
             "dest": "Bar",
-            "dest_aoi": "Hamburger Stadtpark",
+            "dest_aoi": "Stadtpark",
             "date": "today", 
             "time": "now + 3h",
             "time_is_departure": False,
@@ -158,11 +158,11 @@ test_cases = [
 # Komplexe Zeitangabe
 { 
     "vars": {
-        "anfrage": "LuftHansa Flughafen -> Rönkloppel in ca. 40 min", 
+        "anfrage": "LuftHansa Flughafen -> Roenklobel in ca. 40 min", 
         "assert": {
             "start": "Flughafen",
             "start_aoi": None,
-            "dest": "Rönkloppel",
+            "dest": "Roenklobel",
             "dest_aoi": None,
             "date": "today", 
             "time": "now + 40m",
@@ -175,11 +175,11 @@ test_cases = [
 # Komplexe Datumsangabe
 { 
     "vars": {
-        "anfrage": "Ich fahre jetzt in Urlaub. Ich brauche einen Bus in 3 Wochen und 5 Tagen um 23 Uhr vom Flughafen zum Prinzenweg", 
+        "anfrage": "Ich fahre jetzt in Urlaub. Ich brauche einen Bus in 3 Wochen und 5 Tagen um 23 Uhr vom Flughafen zum Prinsenw", 
         "assert": {
             "start": "Flughafen",
             "start_aoi": None,
-            "dest": "Prinzenweg",
+            "dest": "Prinsenw",
             "dest_aoi": None,
             "date": "today + 26d", 
             "time": "23:00",
@@ -277,9 +277,9 @@ test_cases = [
 # Komplexe Zeitangabe
 { 
     "vars": {
-        "anfrage": "Ich sitze gerade im Loki-Schmidt-Garten und möchte gerne in 30 minuten in ein Restaurant in der Nähe des Hamburger Hanfens", 
+        "anfrage": "Ich sitze gerade im Loki Schmitt Garden und möchte gerne in 30 minuten in ein Restaurant in der Nähe des Hamburger Hanfens", 
         "assert": {
-            "start": "Loki-Schmidt-Garten",
+            "start": "Loki Schmitt Garden",
             "start_aoi": None,
             "dest": "Restaurant",
             "dest_aoi": "Hamburger Hafen",
@@ -359,11 +359,11 @@ test_cases = [
 # Embedding Use-Case
 { 
     "vars": {
-        "anfrage": "Ich habe Lust etwas Neues zu erleben. Letztes Wochenende war ich am Hafen. Da möchte ich heute nicht hin. Mhm. Haha. Ich glaube ich möchte zum Millerntorstadion. Da ist es immer sehr schön. Am Besten jetzt gleich, direkt hier von der Brandenburger Straße mit dem Bus", 
+        "anfrage": "Ich habe Lust etwas Neues zu erleben. Letztes Wochenende war ich am Hafen. Da möchte ich heute nicht hin. Mhm. Haha. Ich glaube ich möchte zum Millerntorstadium. Da ist es immer sehr schön. Am Besten jetzt gleich, direkt hier von der Brandenburger Straße mit dem Bus", 
         "assert": {
             "start": "Brandenburger Straße",
             "start_aoi": None,
-            "dest": "Millerntorstadion",
+            "dest": "Millerntorstadium",
             "dest_aoi": None,
             "date": "today", 
             "time": "now",
@@ -376,11 +376,11 @@ test_cases = [
 # Komplexe Zeitangabe
 { 
     "vars": {
-        "anfrage": "Ich habe mein Kind gerade am Rissen - Gymnasium abgegeben und möchte nun von hier in 50 Minuten zum Rahlstedt - Gymnasium mit Bus bitte", 
+        "anfrage": "Ich habe mein Kind gerade am Rißen - Gymasium abgegeben und möchte nun von hier in 50 Minuten zum Ralstadt - Gymnsium mit Bus bitte", 
         "assert": {
-            "start": "Rissen - Gymnasium",
+            "start": "Rißen - Gymasium",
             "start_aoi": None,
-            "dest": "Rahlstedt - Gymnasium",
+            "dest": "Ralstadt - Gymnsium",
             "dest_aoi": None,
             "date": "today", 
             "time": "now + 50m",
@@ -394,12 +394,12 @@ test_cases = [
 # Komplexe Zeitangabe
 { 
     "vars": {
-        "anfrage": "Ich sitze gerade an der Neuhöfer Straße (Ost) und möchte gerne in 3 Stunden in ein Restaurant in der Nähe des Sport-Clubs Nienstedten. Bitte nur den Bus verwenden. Im Zug wird mir immer schlecht.", 
+        "anfrage": "Ich sitze gerade an der Neuhöfer Str.  und möchte gerne in 3 Stunden in ein Restaurant in der Nähe des SC Nienstedten. Bitte nur den Bus verwenden. Im Zug wird mir immer schlecht.", 
         "assert": {
-            "start": "Neuhöfer Straße (Ost)",
+            "start": "Neuhöfer Str.",
             "start_aoi": None,
             "dest": "Restaurant",
-            "dest_aoi": "Sport-Club Nienstedten",
+            "dest_aoi": "SC Nienstedten",
             "date": "today", 
             "time": "now + 3h",
             "time_is_departure": True,
@@ -411,11 +411,11 @@ test_cases = [
 # Embedding Use-Case
 { 
     "vars": {
-        "anfrage": "Ich sitze gerade am Mö Grill und möchte mit dem Bus zur Elbphilharmonie. Jetzt bitte", 
+        "anfrage": "Ich sitze gerade am Mö Krill und möchte mit dem Bus zur Elpfilarmonie. Jetzt bitte", 
         "assert": {
-            "start": "Mö Grill",
+            "start": "Mö Krill",
             "start_aoi": None,
-            "dest": "Elbphilharmonie",
+            "dest": "Elpfilarmonie",
             "dest_aoi": None,
             "date": "today", 
             "time": "now",
@@ -429,12 +429,12 @@ test_cases = [
 # Komplexe Zeitangabe
 { 
     "vars": {
-        "anfrage": "in 30 min, Von der Alsterblick zur freien evangelischen gemeinde lokstedt, das ist in der Nähe von Schillingsbekweg, mit dem bus", 
+        "anfrage": "in 30 min, Von der Alsterblik zur evang. gemeinde lokstät, das ist in der Nähe von Schilingsbegweg, mit dem bus", 
         "assert": {
-            "start": "Alsterblick",
+            "start": "Alsterblik",
             "start_aoi": None,
-            "dest": "freie evangelische gemeinde lokstedt",
-            "dest_aoi": "Schillingsbekweg",
+            "dest": "evang. gemeinde lokstät",
+            "dest_aoi": "Schilingsbegweg",
             "date": "today", 
             "time": "now + 30m",
             "time_is_departure": True,
