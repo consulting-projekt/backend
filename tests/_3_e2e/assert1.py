@@ -9,12 +9,30 @@ import json
 emb_model = load_embedding_model_std()
 
 
-def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[str, Any]]:
+def get_assert(output: dict, options: Dict[str, Any]) -> Union[bool, float, Dict[str, Any]]:
     # test case variablen
-    expected_output = options.get('vars', {}).get('answer', {})
 
-    output_textemb = emb_model.encode(output)
-    expected_output_textemb = emb_model.encode(expected_output)
+    print(
+        f"Output: {output}, Options: {options}")
+    expected_answer = options.get('vars', {}).get('answer', '')
+    answer = output.get('answer', '')
+    answer_vars = output.get('vars', {})
+
+    # Define the placeholders and their corresponding keys in answer_vars
+    placeholders = {
+        "<START>": "start",
+        "<DEST>": "dest",
+        "<DATE>": "date",
+        "<TIME>": "time"
+    }
+
+    # Replace actual values in the answer with placeholders (masks)
+    for placeholder, key in placeholders.items():
+        if key in answer_vars and answer_vars[key]:
+            answer = answer.replace(answer_vars[key], placeholder)
+
+    output_textemb = emb_model.encode(answer)
+    expected_output_textemb = emb_model.encode(expected_answer)
 
     # Compute cosine similarity
     try:
@@ -23,20 +41,22 @@ def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[
 
         # Decide pass/fail based on similarity threshold (e.g., 0.9)
         threshold = 0.9
+
         return {
-            "pass": cosine_similarity >= threshold,
-            "score": cosine_similarity,
+            "pass": bool(cosine_similarity >= threshold),
+            "score": float(cosine_similarity),
             "reason": "Cosine similarity computed"
         }
 
     except Exception as e:
         print("Error:", e)
-        return {"pass": False, "reason": str(e)}
+        return {"pass": False, "score": 0.0, "reason": str(e)}
 
 
 if __name__ == "__main__":
     # Example usage
-    output = "Um <TIME> fährt ein Bus von der Station <START> zur Station <DEST>. Wir wünschen Ihnen eine angenehme Fahrt!"
+    output = {"answer": "Gerne, hier ist die Route: Ab Oberschleems 13 fahren Sie mit dem Bus um 15:00 Uhr zur Böckmannstraße 1 an, die Fahrt dauert etwa 33 Minuten.",
+              "vars": {"start": "Oberschleems 13", "dest": "Böckmannstraße 1", "date": "05.05.2025", "time": "15:00"}}
     options = {
         "vars": {
             "anfrage": "Ich brauche ca. 15:00 einen Bus in die Innenstadt. Gib mir die Route dazu.",

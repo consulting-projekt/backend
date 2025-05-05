@@ -11,6 +11,8 @@ from db.utils_llm import raw_llm2json
 from tests._1_params_extract.retrieve_gemma3_4b import call_api as call_api_gemma3_4b
 from langchain.schema import HumanMessage
 from langchain_community.chat_models import ChatOllama
+from datetime import datetime
+
 
 client_qdrant = QdrantClient("localhost", port=6333)
 client_geofox = get_geofox_client()
@@ -30,9 +32,7 @@ def call_api(prompt, options, context):
     start = context.get('vars', {}).get(
         'start', start) if start is None else start
     date = params_json.get("date")
-    date = context.get('vars', {}).get('date', date) if date is None else date
     time = params_json.get("time")
-    time = context.get('vars', {}).get('time', time) if time is None else time
     dest = params_json.get("dest")
     dest_aoi = params_json.get("dest_aoi")
     time_is_departure = params_json.get("time_is_departure", True)
@@ -74,21 +74,52 @@ def call_api(prompt, options, context):
         prompt = get_problems_prompt(anfrage, params_json, problems)
 
         return {
-            "output": call_gemma3_4b(prompt)
+            "output": {
+                "answer": call_gemma3_4b(prompt),
+                "vars": {
+                    "start": route['start']['name'],
+                    "dest": route['dest']['name'],
+                    "date": formatted_dep_date,
+                    "time": formatted_dep_time,
+                }
+            }
         }
 
     start_param, dest_param, time_param, penalties_param, time_is_departure = get_route_params(
         start_with_coordinates, dest_with_coordinates, date, time, time_is_departure, type_of_transport)
     route = get_route(client_geofox, start_param, dest_param,
                       time_param, penalties_param, time_is_departure)[0]
-    route2 = {"start": route['start'], "dest": route['dest'],
-              "departure": route['realDepartureTime'], "arrival": route['realArrivalTime']}
+
+    # Parse the date string into a datetime object (ignoring the timezone offset)
+    dt_dep = datetime.strptime(route['realDepartureTime']
+                               [:-5], '%Y-%m-%dT%H:%M:%S.%f')
+    # Format the time as HH:MM
+    formatted_dep_time = dt_dep.strftime('%H:%M')
+    formatted_dep_date = dt_dep.strftime('%d.%m.%Y')
+
+    # Parse the date string into a datetime object (ignoring the timezone offset)
+    dt_arrival = datetime.strptime(route['realArrivalTime']
+                                   [:-5], '%Y-%m-%dT%H:%M:%S.%f')
+    # Format the time as HH:MM
+    formatted_arrival_time = dt_arrival.strftime('%H:%M')
+    formatted_arrival_date = dt_arrival.strftime('%d.%m.%Y')
+
+    route2 = {"start": route['start']['name'], "dest": route['dest']['name'],
+              "departure_date": formatted_dep_date, "departure_time": formatted_dep_time, "arrival_time": formatted_arrival_time, "arrival_date": formatted_arrival_date}
 
     # Read the prompt template from file
     prompt = get_route_prompt(anfrage, params_json, route2)
 
     return {
-        "output": call_gemma3_4b(prompt),
+        "output": {
+            "answer": call_gemma3_4b(prompt),
+            "vars": {
+                "start": route['start']['name'],
+                "dest": route['dest']['name'],
+                "date": formatted_dep_date,
+                "time": formatted_dep_time,
+            }
+        }
     }
 
 
@@ -162,11 +193,7 @@ Nutzeranfrage: Wann kommt der nächste Bus in die Innenstadt?
             """
     call_api(prompt, {}, {"vars": {"anfrage": "Wann kommt der nächste Bus in die Innenstadt?",
 
-                                   "start": "Lutterothstraße",
-
-                                   "dest": "Innenstadt",
-                                           "dest_aoi": None,
-                                   "date": "today",
-                                           "time": "now",
-                                           "time_is_departure": True,
-                                           "type_of_transport": "bus"}})
+                                   "start": "Harverdstraße",
+                                   "date": None,
+                                   "time": None,
+                                   }})
