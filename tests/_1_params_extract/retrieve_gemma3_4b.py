@@ -1,18 +1,14 @@
-from pathlib import Path
-import sys
-sys.path.append(str(Path(__file__).parent.parent.parent))
+from pathlib import Path  # noqa: E402
+import sys  # noqa: E402
+sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 
 from db.utils_llm import call_gemma3_4b
-
-
 
 
 def call_api(prompt, options, context):
     return {
         "output": call_gemma3_4b(prompt),
     }
-
-
 
 
 if __name__ == "__main__":

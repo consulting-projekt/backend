@@ -1,10 +1,11 @@
-from pathlib import Path
-import sys
-sys.path.append(str(Path(__file__).parent.parent.parent))
+from pathlib import Path  # noqa: E402
+import sys  # noqa: E402
+sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from qdrant_client import QdrantClient
 from db.utils_qdrant import get_startdest_std
 
 client = QdrantClient("localhost", port=6333)
+
 
 def call_api(prompt, options, context):
     # Replace the ast.literal_eval line with:
@@ -24,12 +25,12 @@ def call_api(prompt, options, context):
 if __name__ == "__main__":
     # Example usage
     context = {
-                "vars": {    
-                "anfrage": {
+        "vars": {
+            "anfrage": {
                 "start": "Davidwache",
-                
+
                 "dest": "Haus der Familie",
-                "dest_aoi": "Elbstrand"
+                        "dest_aoi": "Elbstrand"
             }
         }
     }

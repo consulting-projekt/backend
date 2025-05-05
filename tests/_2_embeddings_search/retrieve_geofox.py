@@ -1,6 +1,6 @@
-from pathlib import Path
-import sys
-sys.path.append(str(Path(__file__).parent.parent.parent))
+from pathlib import Path  # noqa: E402
+import sys  # noqa: E402
+sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 import os
 from langchain_community.chat_models import ChatOllama
 from langchain.schema import HumanMessage
@@ -14,6 +14,7 @@ import json
 COLLECTION_NAME = "aoipoi_embeddings_std"
 
 client = get_geofox_client()
+
 
 def call_api(prompt, options, context):
     # Replace the ast.literal_eval line with:
@@ -33,12 +34,12 @@ def call_api(prompt, options, context):
 if __name__ == "__main__":
     # Example usage
     context = {
-                "vars": {    
-                "anfrage": {
+        "vars": {
+            "anfrage": {
                 "start": "Davidwache",
-                
+
                 "dest": "Haus der Familie",
-                "dest_aoi": "Elbstrand"
+                        "dest_aoi": "Elbstrand"
             }
         }
     }
