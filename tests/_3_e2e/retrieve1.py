@@ -16,7 +16,8 @@ from datetime import datetime
 
 client_qdrant = QdrantClient("localhost", port=6333)
 client_geofox = get_geofox_client()
-MIN_EMBEDDING_SCORE = 0.55
+MIN_SIMILARITY_SCORE_DEST = 0.5
+MIN_SIMILARITY_SCORE_START = 0.5
 
 
 def call_api(prompt, options, context):
@@ -55,11 +56,13 @@ def call_api(prompt, options, context):
     dest_with_coordinates = find_point(dest)
     if start_with_coordinates is None:
         start_with_coordinates = get_point_std(client_qdrant, start, None)
-        if start_with_coordinates['score'] < MIN_EMBEDDING_SCORE:
+        if start_with_coordinates['score'] < MIN_SIMILARITY_SCORE_START:
             start_with_coordinates = None
     if dest_with_coordinates is None:
-        dest_with_coordinates = get_point_std(client_qdrant, dest, dest_aoi)
-        if dest_with_coordinates['score'] < MIN_EMBEDDING_SCORE:
+        dest_aoi_location = find_point(dest_aoi)["location"]
+        dest_with_coordinates = get_point_std(
+            client_qdrant, dest, dest_aoi, point_condition_location=dest_aoi_location)
+        if dest_with_coordinates['score'] < MIN_SIMILARITY_SCORE_DEST:
             dest_with_coordinates = None
 
     if start_with_coordinates is None:
@@ -189,11 +192,11 @@ Deine Antwort in Json-Format:
 
 Gib nun die beste Antwort passend zur Nutzeranfrage zurück.
 
-Nutzeranfrage: Wann kommt der nächste Bus in die Innenstadt?
+Nutzeranfrage: Ich benötge die nächste Bus-Linie vom Hochrad zu einem Einkaufszentrum in der Nähe des Windmühlenweg
             """
-    call_api(prompt, {}, {"vars": {"anfrage": "Wann kommt der nächste Bus in die Innenstadt?",
+    call_api(prompt, {}, {"vars": {"anfrage": "Ich benötge die nächste Bus-Linie vom Hochrad zu einem Einkaufszentrum in der Nähe des Windmühlenweg",
 
-                                   "start": "Harverdstraße",
+                                   "start": None,
                                    "date": None,
                                    "time": None,
                                    }})

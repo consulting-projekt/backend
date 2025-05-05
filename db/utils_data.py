@@ -1,11 +1,14 @@
 known_points = {
-    'Lutterothstraße': [9.952101, 53.580449], # adresse
-    'Haus der Familie': [9.96242186569669, 53.557507857835716], # Verein für stadtteilbezogene milieunahe Erziehungshilfen
-    'Else-Rauch-Platz': [9.952101, 53.580449], # poi park
+    'Lutterothstraße': [9.952101, 53.580449],  # adresse
+    # Verein für stadtteilbezogene milieunahe Erziehungshilfen
+    'Haus der Familie': [9.96242186569669, 53.557507857835716],
+    'Else-Rauch-Platz': [9.952101, 53.580449],  # poi park
+    'Else-Rauch-Platz': [9.952101, 53.580449],  # poi park
+    'Windmühlenweg': [9.868989, 53.571208],  # poi park
 }
 
 unknown_points = [
-    'Else Rauch Park' # ähnlich wie Else-Rauch-Platz
+    'Else Rauch Park'  # ähnlich wie Else-Rauch-Platz
 ]
 
 
