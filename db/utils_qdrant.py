@@ -1,7 +1,7 @@
 
 from qdrant_client import QdrantClient, models
 from db.utils import parse_point_string
-from db.utils_embeddings import load_embedding_model_std
+from db.utils_embeddings import load_embedding_model_std,load_embedding_model_LaBSE,load_embedding_model_distiluse
 
 
 def get_point_std(qdrant_client, point, point_cond, point_condition_location=None):
@@ -14,6 +14,30 @@ def get_point_std(qdrant_client, point, point_cond, point_condition_location=Non
 def get_startdest_std(qdrant_client, anfrage):
     COLLECTION_NAME = "aoipoi_embeddings_std"
     emb_modell = load_embedding_model_std()
+
+    return get_startdest(qdrant_client, emb_modell, anfrage, COLLECTION_NAME)
+
+def get_point_LaBSE(qdrant_client, point, point_cond, point_condition_location=None):
+    COLLECTION_NAME = "aoipoi_embeddings_LaBSE"
+    emb_model = load_embedding_model_LaBSE()
+
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+
+def get_startdest_LaBSE(qdrant_client, anfrage):
+    COLLECTION_NAME = "aoipoi_embeddings_LaBSE"
+    emb_modell = load_embedding_model_LaBSE()
+
+    return get_startdest(qdrant_client, emb_modell, anfrage, COLLECTION_NAME)
+
+def get_point_distiluse(qdrant_client, point, point_cond, point_condition_location=None):
+    COLLECTION_NAME = "aoipoi_embeddings_distiluse"
+    emb_model = load_embedding_model_distiluse()
+
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+
+def get_startdest_distiluse(qdrant_client, anfrage):
+    COLLECTION_NAME = "aoipoi_embeddings_distiluse"
+    emb_modell = load_embedding_model_distiluse()
 
     return get_startdest(qdrant_client, emb_modell, anfrage, COLLECTION_NAME)
 
