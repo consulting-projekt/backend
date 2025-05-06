@@ -68,7 +68,7 @@ def call_gemma3_4b(prompt):
 
 def call_mistral_7b(prompt):
     model = "mistral:7b"
-    model_url = "http://localhost:11435"
+    model_url = "http://localhost:11434"
     # Initialize Llama model via Ollama
     ollama = ChatOllama(
         model=model,
@@ -81,7 +81,7 @@ def call_mistral_7b(prompt):
 
 def call_qwen3_4b(prompt):
     model = "qwen3:4b"
-    model_url = "http://localhost:11436"
+    model_url = "http://localhost:11434"
     # Initialize Llama model via Ollama
     ollama = ChatOllama(
         model=model,
