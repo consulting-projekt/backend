@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from qdrant_client import QdrantClient
-from db.utils_qdrant import get_startdest_LaBSE
+from db.utils_qdrant import get_startdest_distiluse
 
 client = QdrantClient("localhost", port=6333)
 
@@ -12,7 +12,7 @@ def call_api(prompt, options, context):
     anfrage = context.get('vars', {}).get('anfrage', {})
 
     print(f"Prompt: {anfrage}, Options: {options}, Context: {context}")
-    start, dest = get_startdest_LaBSE(client, anfrage)
+    start, dest = get_startdest_distiluse(client, anfrage)
 
     return {
         "output": {
