@@ -6,6 +6,8 @@ providers:
 #  - deepseek:deepseek-chat
   # - ollama:chat:gemma3:4b
   - id: file://retrieve_gemma3_4b.py
+  - id: file://retrieve_qwen3_4b.py
+  - id: file://retrieve_mistral_7b.py
 
 defaultTest:
   assert:
