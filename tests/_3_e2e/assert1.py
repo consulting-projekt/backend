@@ -29,7 +29,8 @@ def get_assert(output: dict, options: Dict[str, Any]) -> Union[bool, float, Dict
     # Replace actual values in the answer with placeholders (masks)
     for placeholder, key in placeholders.items():
         if key in answer_vars and answer_vars[key]:
-            answer = answer.replace(answer_vars[key], placeholder)
+            expected_answer = expected_answer.replace(
+                placeholder, answer_vars[key])
 
     output_textemb = emb_model.encode(answer)
     expected_output_textemb = emb_model.encode(expected_answer)

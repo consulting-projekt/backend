@@ -169,3 +169,572 @@ Stack Trace: Error: TypeError: get_assert() missing 1 required positional argume
     File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
       return method_to_call(*args)
 2025-05-05T15:24:18.573Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746458651334-2b2adb0cdd401.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746458651334-2b2adb0cdd401.json'
+2025-05-06T13:38:22.517Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 116, in send_inner
+    response = self._client.send(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 58, in call_api
+    start_with_coordinates = get_point_std(client_qdrant, start, None)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 83, in get_point_byquery
+    return _perform_regular_search(point_textemb, client, coll_name, limit)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 149, in _perform_regular_search
+    results = client.search(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_client.py", line 373, in search
+    return self._client.search(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_remote.py", line 520, in search
+    search_result = self.http.search_api.search_points(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 936, in search_points
+    return self._build_for_search_points(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 487, in _build_for_search_points
+    return self.api_client.request(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 89, in request
+    return self.send(request, type_)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 106, in send
+    response = self.middleware(request, self.send_inner)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 215, in __call__
+    return call_next(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 118, in send_inner
+    raise ResponseHandlingException(e)
+qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+2025-05-06T13:38:22.706Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 116, in send_inner
+    response = self._client.send(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 58, in call_api
+    start_with_coordinates = get_point_std(client_qdrant, start, None)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 83, in get_point_byquery
+    return _perform_regular_search(point_textemb, client, coll_name, limit)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 149, in _perform_regular_search
+    results = client.search(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_client.py", line 373, in search
+    return self._client.search(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_remote.py", line 520, in search
+    search_result = self.http.search_api.search_points(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 936, in search_points
+    return self._build_for_search_points(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 487, in _build_for_search_points
+    return self.api_client.request(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 89, in request
+    return self.send(request, type_)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 106, in send
+    response = self.middleware(request, self.send_inner)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 215, in __call__
+    return call_next(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 118, in send_inner
+    raise ResponseHandlingException(e)
+qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+2025-05-06T13:38:22.959Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 116, in send_inner
+    response = self._client.send(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 58, in call_api
+    start_with_coordinates = get_point_std(client_qdrant, start, None)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 83, in get_point_byquery
+    return _perform_regular_search(point_textemb, client, coll_name, limit)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 149, in _perform_regular_search
+    results = client.search(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_client.py", line 373, in search
+    return self._client.search(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_remote.py", line 520, in search
+    search_result = self.http.search_api.search_points(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 936, in search_points
+    return self._build_for_search_points(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 487, in _build_for_search_points
+    return self.api_client.request(
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 89, in request
+    return self.send(request, type_)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 106, in send
+    response = self.middleware(request, self.send_inner)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 215, in __call__
+    return call_next(request)
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 118, in send_inner
+    raise ResponseHandlingException(e)
+qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+2025-05-06T13:38:23.055Z [ERROR]: Error running Python script: qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+Stack Trace: Error: qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+      yield
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+      resp = self._pool.handle_request(req)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+      raise exc from None
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+      response = connection.handle_request(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+      raise exc
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+      stream = self._connect(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+      stream = self._network_backend.connect_tcp(**kwargs)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+      with map_exceptions(exc_map):
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+      self.gen.throw(typ, value, traceback)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+      raise to_exc(exc) from exc
+  httpcore.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+  
+  The above exception was the direct cause of the following exception:
+  
+  Traceback (most recent call last):
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 116, in send_inner
+      response = self._client.send(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 914, in send
+      response = self._send_handling_auth(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+      response = self._send_handling_redirects(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+      response = self._send_single_request(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+      response = transport.handle_request(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+      with map_httpcore_exceptions():
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+      self.gen.throw(typ, value, traceback)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+      raise mapped_exc(message) from exc
+  httpx.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+  
+  During handling of the above exception, another exception occurred:
+  
+  Traceback (most recent call last):
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 58, in call_api
+      start_with_coordinates = get_point_std(client_qdrant, start, None)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 83, in get_point_byquery
+      return _perform_regular_search(point_textemb, client, coll_name, limit)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 149, in _perform_regular_search
+      results = client.search(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_client.py", line 373, in search
+      return self._client.search(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_remote.py", line 520, in search
+      search_result = self.http.search_api.search_points(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 936, in search_points
+      return self._build_for_search_points(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 487, in _build_for_search_points
+      return self.api_client.request(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 89, in request
+      return self.send(request, type_)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 106, in send
+      response = self.middleware(request, self.send_inner)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 215, in __call__
+      return call_next(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 118, in send_inner
+      raise ResponseHandlingException(e)
+2025-05-06T13:38:23.056Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538665280-1aed71987ac75.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538665280-1aed71987ac75.json'
+2025-05-06T13:38:23.261Z [ERROR]: Error running Python script: qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+Stack Trace: Error: qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+      yield
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+      resp = self._pool.handle_request(req)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+      raise exc from None
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+      response = connection.handle_request(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+      raise exc
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+      stream = self._connect(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+      stream = self._network_backend.connect_tcp(**kwargs)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+      with map_exceptions(exc_map):
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+      self.gen.throw(typ, value, traceback)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+      raise to_exc(exc) from exc
+  httpcore.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+  
+  The above exception was the direct cause of the following exception:
+  
+  Traceback (most recent call last):
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 116, in send_inner
+      response = self._client.send(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 914, in send
+      response = self._send_handling_auth(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+      response = self._send_handling_redirects(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+      response = self._send_single_request(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+      response = transport.handle_request(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+      with map_httpcore_exceptions():
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+      self.gen.throw(typ, value, traceback)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+      raise mapped_exc(message) from exc
+  httpx.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+  
+  During handling of the above exception, another exception occurred:
+  
+  Traceback (most recent call last):
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 58, in call_api
+      start_with_coordinates = get_point_std(client_qdrant, start, None)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 83, in get_point_byquery
+      return _perform_regular_search(point_textemb, client, coll_name, limit)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 149, in _perform_regular_search
+      results = client.search(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_client.py", line 373, in search
+      return self._client.search(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_remote.py", line 520, in search
+      search_result = self.http.search_api.search_points(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 936, in search_points
+      return self._build_for_search_points(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 487, in _build_for_search_points
+      return self.api_client.request(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 89, in request
+      return self.send(request, type_)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 106, in send
+      response = self.middleware(request, self.send_inner)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 215, in __call__
+      return call_next(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 118, in send_inner
+      raise ResponseHandlingException(e)
+2025-05-06T13:38:23.261Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538665270-ad22449068bc4.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538665270-ad22449068bc4.json'
+2025-05-06T13:38:23.489Z [ERROR]: Error running Python script: qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+Stack Trace: Error: qdrant_client.http.exceptions.ResponseHandlingException: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+      yield
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+      resp = self._pool.handle_request(req)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+      raise exc from None
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+      response = connection.handle_request(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+      raise exc
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+      stream = self._connect(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+      stream = self._network_backend.connect_tcp(**kwargs)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+      with map_exceptions(exc_map):
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+      self.gen.throw(typ, value, traceback)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+      raise to_exc(exc) from exc
+  httpcore.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+  
+  The above exception was the direct cause of the following exception:
+  
+  Traceback (most recent call last):
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 116, in send_inner
+      response = self._client.send(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 914, in send
+      response = self._send_handling_auth(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+      response = self._send_handling_redirects(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+      response = self._send_single_request(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+      response = transport.handle_request(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+      with map_httpcore_exceptions():
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\contextlib.py", line 153, in __exit__
+      self.gen.throw(typ, value, traceback)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+      raise mapped_exc(message) from exc
+  httpx.ConnectError: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+  
+  During handling of the above exception, another exception occurred:
+  
+  Traceback (most recent call last):
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 58, in call_api
+      start_with_coordinates = get_point_std(client_qdrant, start, None)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 83, in get_point_byquery
+      return _perform_regular_search(point_textemb, client, coll_name, limit)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 149, in _perform_regular_search
+      results = client.search(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_client.py", line 373, in search
+      return self._client.search(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\qdrant_remote.py", line 520, in search
+      search_result = self.http.search_api.search_points(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 936, in search_points
+      return self._build_for_search_points(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api\search_api.py", line 487, in _build_for_search_points
+      return self.api_client.request(
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 89, in request
+      return self.send(request, type_)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 106, in send
+      response = self.middleware(request, self.send_inner)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 215, in __call__
+      return call_next(request)
+    File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\http\api_client.py", line 118, in send_inner
+      raise ResponseHandlingException(e)
+2025-05-06T13:38:23.490Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538665275-d7ed0019b616e.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538665275-d7ed0019b616e.json'
+2025-05-06T13:39:05.746Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 62, in call_api
+    dest_aoi_location = find_point(dest_aoi)["location"]
+TypeError: 'NoneType' object is not subscriptable
+2025-05-06T13:39:06.260Z [ERROR]: Error running Python script: TypeError: 'NoneType' object is not subscriptable
+Stack Trace: Error: TypeError: 'NoneType' object is not subscriptable
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 62, in call_api
+      dest_aoi_location = find_point(dest_aoi)["location"]
+2025-05-06T13:39:06.260Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538732627-89ded92d5c2be.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538732627-89ded92d5c2be.json'
+2025-05-06T13:39:06.400Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 62, in call_api
+    dest_aoi_location = find_point(dest_aoi)["location"]
+TypeError: 'NoneType' object is not subscriptable
+2025-05-06T13:39:06.527Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 62, in call_api
+    dest_aoi_location = find_point(dest_aoi)["location"]
+TypeError: 'NoneType' object is not subscriptable
+2025-05-06T13:39:06.948Z [ERROR]: Error running Python script: TypeError: 'NoneType' object is not subscriptable
+Stack Trace: Error: TypeError: 'NoneType' object is not subscriptable
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 62, in call_api
+      dest_aoi_location = find_point(dest_aoi)["location"]
+2025-05-06T13:39:06.949Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538732631-cc8c78d8aa639.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538732631-cc8c78d8aa639.json'
+2025-05-06T13:39:07.080Z [ERROR]: Error running Python script: TypeError: 'NoneType' object is not subscriptable
+Stack Trace: Error: TypeError: 'NoneType' object is not subscriptable
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\retrieve1.py", line 62, in call_api
+      dest_aoi_location = find_point(dest_aoi)["location"]
+2025-05-06T13:39:07.081Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538732636-3668e3df060c2.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746538732636-3668e3df060c2.json'
+2025-05-06T13:56:07.458Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_3_e2e\assert1.py", line 18, in get_assert
+    answer = output.get('answer', '')
+AttributeError: 'str' object has no attribute 'get'
+2025-05-06T13:56:07.944Z [ERROR]: Error running Python script: AttributeError: 'str' object has no attribute 'get'
+Stack Trace: Error: AttributeError: 'str' object has no attribute 'get'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_3_e2e\assert1.py", line 18, in get_assert
+      answer = output.get('answer', '')
+2025-05-06T13:56:07.945Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746539761448-e43db355b222d.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1746539761448-e43db355b222d.json'

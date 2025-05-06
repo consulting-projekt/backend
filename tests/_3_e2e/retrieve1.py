@@ -5,7 +5,7 @@ from db.utils_data import find_point
 from db.utils_llm import call_gemma3_4b
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
-from db.utils_geofox import get_route_params, get_route
+from db.utils_geofox import get_route_params2, get_route, get_route_params1
 from db.utils_qdrant import get_startdest_std, get_point_std
 from db.utils_llm import raw_llm2json
 from tests._1_params_extract.retrieve_gemma3_4b import call_api as call_api_gemma3_4b
@@ -44,12 +44,22 @@ def call_api(prompt, options, context):
     if dest is None:
         problems.append("Es wurde kein Zielpunkt angegeben.")
 
+    time_param = get_route_params1(date, time)
+
     if len(problems) > 0:
         # Read the prompt template from file
         prompt = get_problems_prompt(anfrage, params_json, problems)
 
         return {
-            "output": call_gemma3_4b(prompt)
+            "output": {
+                "answer": call_gemma3_4b(prompt),
+                "vars": {
+                    "start": start,
+                    "dest": dest,
+                    "date": time_param['date'],
+                    "time": time_param['time'],
+                }
+            }
         }
 
     start_with_coordinates = find_point(start)
@@ -59,7 +69,8 @@ def call_api(prompt, options, context):
         if start_with_coordinates['score'] < MIN_SIMILARITY_SCORE_START:
             start_with_coordinates = None
     if dest_with_coordinates is None:
-        dest_aoi_location = find_point(dest_aoi)["location"]
+        dest_aoi_location = find_point(dest_aoi)
+        dest_aoi_location = dest_aoi_location['location'] if dest_aoi_location else None
         dest_with_coordinates = get_point_std(
             client_qdrant, dest, dest_aoi, point_condition_location=dest_aoi_location)
         if dest_with_coordinates['score'] < MIN_SIMILARITY_SCORE_DEST:
@@ -80,16 +91,16 @@ def call_api(prompt, options, context):
             "output": {
                 "answer": call_gemma3_4b(prompt),
                 "vars": {
-                    "start": route['start']['name'],
-                    "dest": route['dest']['name'],
-                    "date": formatted_dep_date,
-                    "time": formatted_dep_time,
+                    "start": start,
+                    "dest": dest,
+                    "date": time_param['date'],
+                    "time": time_param['time'],
                 }
             }
         }
 
-    start_param, dest_param, time_param, penalties_param, time_is_departure = get_route_params(
-        start_with_coordinates, dest_with_coordinates, date, time, time_is_departure, type_of_transport)
+    start_param, dest_param, penalties_param, time_is_departure = get_route_params2(
+        start_with_coordinates, dest_with_coordinates, time_is_departure, type_of_transport)
     route = get_route(client_geofox, start_param, dest_param,
                       time_param, penalties_param, time_is_departure)[0]
 

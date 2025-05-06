@@ -20,8 +20,8 @@ test_cases = [
     {
         "vars": {
             "anfrage": "Wann kommt der nächste Bus in die Innenstadt?",
-            "start": "Harverdstraße",
-            "answer": "Der nächste Bus fährt um <TIME> von der Station <START> zur Station <DEST>. Gute Fahrt!"
+            "start": None,
+            "answer": "Könnten Sie uns bitte mitteilen, von wo Sie starten möchten? Sobald wir die Startstation kennen, können wir Ihnen die nächste Verbindung nennen."
         }
     },
 ]
