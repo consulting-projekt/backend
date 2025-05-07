@@ -182,30 +182,30 @@ Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend a
 "start": mögliche Werte= null, <start adresse|station|poi>, <start aoi> wenn keine adresse|station|poi angegeben
 "dest":  mögliche Werte= null, <dest adresse|station|poi>, <dest aoi> wenn keine adresse|station|poi angegeben
 "dest_aoi":  mögliche Werte= null, <dest aoi> wenn für "dest" adresse|station|poi angegeben
-"date":  mögliche Werte= null, today, today + d|w (d:Tage, w:Wochen) Datum mit Zielformat: 22.04.2025
-"time": mögliche Werte= null, now, now + m|h (m:Minuten, h:Stunden) Zeit mit Zielformat: 18:30
+"date":  mögliche Werte= null, today, today + 4d7w3m (d:Tage, w:Wochen, m:monate) Datum mit Zielformat: 22.04.2025
+"time": mögliche Werte= null, now, now + 2m3h (m:Minuten, h:Stunden) Zeit mit Zielformat: 18:30
 "time_is_departure":  mögliche Werte= true, false; wenn true dann ist die Zeit eine Abfahrtszeit, wenn false dann ist es eine Ankunftszeit
 "type_of_transport":  mögliche Werte= null, bus, train
 
 
 ein Beispiele:
-Nutzeranfrage: "Wann kommt der nächste Bus in die Innenstadt?"
+Nutzeranfrage: "Ich muss in 2h 35 min von Puckholm zum Rieck Museum. Wie komme ich dort hin?"
 Deine Antwort in Json-Format:
 {
-    "start": null,
-    "dest": "Innenstadt",
+    "start": "Puckholm",
+    "dest": "Rieck Museum",
     "dest_aoi": null,
     "date": "today", 
-    "time": "now",
-    "time_is_departure": true,
-    "type_of_transport": "bus"
+    "time": "now + 2h35m",
+    "time_is_departure": True,
+    "type_of_transport": null  
 }
 
 Gib nun die beste Antwort passend zur Nutzeranfrage zurück.
 
-Nutzeranfrage: Ich benötge die nächste Bus-Linie vom Hochrad zu einem Einkaufszentrum in der Nähe des Windmühlenweg
+Nutzeranfrage: Ich benötge in 2h und 30 min ein bus vom Hochrad zu einem Einkaufszentrum in der Nähe des Windmühlenweg
             """
-    call_api(prompt, {}, {"vars": {"anfrage": "Ich benötge die nächste Bus-Linie vom Hochrad zu einem Einkaufszentrum in der Nähe des Windmühlenweg",
+    call_api(prompt, {}, {"vars": {"anfrage": "Ich benötge in 2h und 30 min ein bus vom Hochrad zu einem Einkaufszentrum in der Nähe des Windmühlenweg",
 
                                    "start": None,
                                    "date": None,

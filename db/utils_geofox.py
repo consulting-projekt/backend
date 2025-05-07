@@ -133,33 +133,18 @@ def get_date_param(date_str):
             target_date = current_date
             formatted_date = target_date.strftime("%d.%m.%Y")
         elif "today" in date_str:
+            target_date = current_date
             # Check if it's addition or subtraction
             if "+" in date_str:
                 parts = date_str.split("+")
-                increment = parts[1].strip()
-                if increment.endswith("d"):
-                    days = int(increment[:-1])
-                    target_date = current_date + timedelta(days=days)
-                elif increment.endswith("w"):
-                    weeks = int(increment[:-1])
-                    target_date = current_date + timedelta(weeks=weeks)
-                else:
-                    target_date = current_date
-                formatted_date = target_date.strftime("%d.%m.%Y")
+                increments = parts[1].strip()
+                target_date = apply_date_adjustments(target_date, increments)
             elif "-" in date_str:
                 parts = date_str.split("-")
-                decrement = parts[1].strip()
-                if decrement.endswith("d"):
-                    days = int(decrement[:-1])
-                    target_date = current_date - timedelta(days=days)
-                elif decrement.endswith("w"):
-                    weeks = int(decrement[:-1])
-                    target_date = current_date - timedelta(weeks=weeks)
-                else:
-                    target_date = current_date
-                formatted_date = target_date.strftime("%d.%m.%Y")
-            else:
-                formatted_date = date_str
+                decrements = parts[1].strip()
+                target_date = apply_date_adjustments(
+                    target_date, decrements, subtract=True)
+            formatted_date = target_date.strftime("%d.%m.%Y")
         else:
             # Use the provided date directly if it's already well-formatted
             formatted_date = date_str
@@ -167,6 +152,38 @@ def get_date_param(date_str):
         formatted_date = current_date.strftime("%d.%m.%Y")
 
     return formatted_date
+
+
+def apply_date_adjustments(base_date, adjustments, subtract=False):
+    """
+    Applies date adjustments (e.g., '3m3w5d') to the base_date.
+    :param base_date: The starting datetime object.
+    :param adjustments: A string containing adjustments like '3m3w5d'.
+    :param subtract: Whether to subtract the adjustments instead of adding them.
+    :return: Adjusted datetime object.
+    """
+    # Initialize adjustment values
+    months, weeks, days = 0, 0, 0
+
+    # Extract adjustments using simple parsing
+    if "m" in adjustments:
+        months = int(adjustments.split("m")[0])
+        adjustments = adjustments.split("m")[1]
+    if "w" in adjustments:
+        weeks = int(adjustments.split("w")[0])
+        adjustments = adjustments.split("w")[1]
+    if "d" in adjustments:
+        days = int(adjustments.split("d")[0])
+
+    # Apply adjustments
+    if subtract:
+        adjusted_date = base_date - relativedelta(months=months)
+        adjusted_date -= timedelta(weeks=weeks, days=days)
+    else:
+        adjusted_date = base_date + relativedelta(months=months)
+        adjusted_date += timedelta(weeks=weeks, days=days)
+
+    return adjusted_date
 
 
 def get_time_param(time_str):
@@ -177,33 +194,31 @@ def get_time_param(time_str):
         if time_str == "now":
             formatted_time = current_date.strftime("%H:%M")
         elif "now" in time_str:
+            target_time = current_date
             # Check if it's addition or subtraction
             if "+" in time_str:
                 parts = time_str.split("+")
-                increment = parts[1].strip()
-                if increment.endswith("m"):
-                    minutes = int(increment[:-1])
-                    target_time = current_date + timedelta(minutes=minutes)
-                elif increment.endswith("h"):
-                    hours = int(increment[:-1])
-                    target_time = current_date + timedelta(hours=hours)
-                else:
-                    target_time = current_date
-                formatted_time = target_time.strftime("%H:%M")
+                increments = parts[1].strip()
+                # Parse multiple increments like "2h35m"
+                hours, minutes = 0, 0
+                if "h" in increments:
+                    hours = int(increments.split("h")[0])
+                    increments = increments.split("h")[1]
+                if "m" in increments:
+                    minutes = int(increments.split("m")[0])
+                target_time += timedelta(hours=hours, minutes=minutes)
             elif "-" in time_str:
                 parts = time_str.split("-")
-                decrement = parts[1].strip()
-                if decrement.endswith("m"):
-                    minutes = int(decrement[:-1])
-                    target_time = current_date - timedelta(minutes=minutes)
-                elif decrement.endswith("h"):
-                    hours = int(decrement[:-1])
-                    target_time = current_date - timedelta(hours=hours)
-                else:
-                    target_time = current_date
-                formatted_time = target_time.strftime("%H:%M")
-            else:
-                formatted_time = time_str
+                decrements = parts[1].strip()
+                # Parse multiple decrements like "2h35m"
+                hours, minutes = 0, 0
+                if "h" in decrements:
+                    hours = int(decrements.split("h")[0])
+                    decrements = decrements.split("h")[1]
+                if "m" in decrements:
+                    minutes = int(decrements.split("m")[0])
+                target_time -= timedelta(hours=hours, minutes=minutes)
+            formatted_time = target_time.strftime("%H:%M")
         else:
             # Use the provided time directly
             formatted_time = time_str
