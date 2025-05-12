@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from tqdm import tqdm
 from parallel_pandas import ParallelPandas
-from dateutil import relativedelta
+from dateutil.relativedelta import relativedelta
 
 # Initialize parallel pandas
 ParallelPandas.initialize(n_cpu=12, disable_pr_bar=False)
