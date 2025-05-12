@@ -9,4 +9,4 @@ Extrahierte Parameter:
 Erkannte Probleme:
 {{problems}}
 
-Bitte stelle dem Nutzer Rückfragen um die Probleme zu lösen.
+Bitte stelle dem Nutzer Rückfragen um die Probleme zu lösen. Nutze hierfür das höfliche "du".
