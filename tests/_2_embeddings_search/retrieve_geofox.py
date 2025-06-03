@@ -6,7 +6,7 @@ from langchain_community.chat_models import ChatOllama
 from langchain.schema import HumanMessage
 from qdrant_client import QdrantClient
 from db.utils_embeddings import load_embedding_model_std
-from db.utils_geofox import get_startdest
+from db.utils_geofox import get_point_byquery
 from db.geofox_client import get_geofox_client
 import ast
 import json
@@ -18,15 +18,16 @@ client = get_geofox_client()
 
 def call_api(prompt, options, context):
     # Replace the ast.literal_eval line with:
-    anfrage = context.get('vars', {}).get('anfrage', {})
+    vars = context.get('vars', {})
 
-    print(f"Prompt: {anfrage}, Options: {options}, Context: {context}")
-    start, dest = get_startdest(client, anfrage)
+    print(f"vars: {vars}, Options: {options}, Context: {context}")
+    point = vars.get("point", None)
+    point_cond = vars.get("point_cond", None)
+    target = get_point_byquery(client, point, point_cond)
 
     return {
         "output": {
-            "start": start,
-            "dest": dest
+            "target": target
         },
     }
 
@@ -35,12 +36,11 @@ if __name__ == "__main__":
     # Example usage
     context = {
         "vars": {
-            "anfrage": {
-                "start": "Davidwache",
 
-                "dest": "Haus der Familie",
-                        "dest_aoi": "Elbstrand"
-            }
+            "point": "Bar Nachtschicht",
+            "point_cond": "St. Pauli",
+            "target_distance2centroid": f'("POINT(9.9608543 53.5478483)", {1000})',
+            "target_name_contains": '["Nachtschicht St. Pauli"]'
         }
     }
     call_api({}, {}, context)

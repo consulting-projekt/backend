@@ -1,129 +1,248 @@
-import pandas as pd
 
-# start und dest types = ["adress", "poi_or_aoi",  "station" , None]
+distance2centroid_small = 1000
+distance2centroid_medium = 3000
+distance2centroid_big = 5000
+
 test_cases = [
-    { 
-        "vars": {
-            "anfrage": {
-                "start": None, # point of interest oder area of interest
-                 # immer eine area of interest
-                "dest": "Kirche", # point of interest oder area of interest
-                "dest_aoi": "Kirchdorf-Süd" # immer eine area of interest
-            }, 
-            "assert": {
-                "ziel_nahe": ["POINT(10.000413 53.554069)", 1000]
-            }
-        }
-    }, 
-    
-    # "Wann kommt der nächste Bus in die Innenstadt?"
-    { 
-        "vars": {
-            "anfrage": {
-                "start": None,
-                
-                "dest": "Innenstadt",
-                "dest_aoi": None
-            }, 
-            "assert": {
-                "ziel_nahe": ["POINT(9.988080668856236 53.55184559306223)", 5000]
-            }
-        }
-    },
-    
-    # "Zeige mir eine Verbindung von Herthastraße zu einem Restarurant in Nähe vom Hafen?"
-    { 
-        "vars": {
-            "anfrage": {
-                "start": None,
-                
-                "dest": "Restarurant",
-                "dest_aoi": "Hafen"
-            }, 
-            "assert": {
-                "ziel_nahe": ["POINT(9.984983833154688 53.47308499617683)", 5000]
-            }
-        }
-    },
-    
-    
-    # "Ich möchte vom U Mümmelmannsberg zu einem Jugendzentrum in der Nähe der Speicherstadt fahren."
+    # {
+    #     # target = "Jugendzentrum Heimfeld"
+    #     "vars": {
+    #         # extrahiert aus der Anfrage (start oder dest) -> kann abwandlung von target sein
+    #         "point": "Jugendzentrum Heimfeld",
+    #         # extrahiert aus der Anfrage (dest_aoi), umgebung in der sich dest befinden soll
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.956510900962325 53.46846007447076)", {distance2centroid_small})',
+    #         "target_name_contains": '["Jugendclub Heimfeld"]'
+    #     }
+    # },
+    # {
+    #     # target = "Agentur für Arbeit"
+    #     "vars": {
+    #         "point": "Arbeitsagentur",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.9792704726871 53.46057846200804)", {distance2centroid_small})',
+    #         "target_name_contains": '["Agentur für Arbeit"]'
+    #     }
+    # },
+    # {
+    #     # target = "Schulungszentrum Deichverteidigung"
+    #     "vars": {
+    #         "point": "Deichverteidigungs-Schulungszentrum",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(10.026079492966264 53.540246749061104)", {distance2centroid_small})',
+    #         "target_name_contains": '["Schulungszentrum Deichverteidigung"]'
+    #     }
+    # },
+    # {
+    #     # target = "Rathaus"
+    #     "vars": {
+    #         "point": "Hamburger Rathaus",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.992400088323125 53.55041280989229)", {distance2centroid_small})',
+    #         "target_name_contains": '["Rathaus"]'
+    #     }
+    # },
+    # {
+    #     # target = "Bauspielplatz und Spielhaus Eppendorfer Park"
+    #     "vars": {
+    #         "point": "Spielhaus Eppendorferpark",  # zusammengezogen
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.981581819228403 53.59016276572776)", {distance2centroid_small})',
+    #         "target_name_contains": '["Bauspielplatz und Spielhaus Eppendorfer Park"]'
+    #     }
+    # },
+    # {
+    #     # target = "Gut vernetzt"
+    #     "vars": {
+    #         "point": "Gut Vernetzt Museum",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.996434428442694 53.54090433330553)", {distance2centroid_small})',
+    #         "target_name_contains": '["Gut vernetzt"]'
+    #     }
+    # },
+    # {
+    #     # target = "DLRG Bezirk Wandsbek"
+    #     "vars": {
+    #         "point": "DLRG Wandsbek",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(10.082359380443732 53.57452932441537)", {distance2centroid_small})',
+    #         "target_name_contains": '["DLRG Bezirk Wandsbek"]'
+    #     }
+    # },
+    # {
+    #     # target = "Cruise Center Altona"
+    #     "vars": {
+    #         "point": "Kreuzfahrtterminal Altona",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.937450892684728 53.5435580737001)", {distance2centroid_small})',
+    #         "target_name_contains": '["Cruise Center Altona", "Kreuzfahrtterminal Altona"]'
+    #     }
+    # },
+    # {
+    #     # target = "Trollhaus"
+    #     "vars": {
+    #         "point": "Troll Haus",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(10.15005405831095 53.58454534926207)", {distance2centroid_small})',
+    #         "target_name_contains": '["Trollhaus"]'
+    #     }
+    # },
+    # {
+    #     # target = "Amtsgericht Hamburg-Altona"
+    #     "vars": {
+    #         "point": "Amtsgericht Altona",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.94306296405268 53.55625350172331)", {distance2centroid_small})',
+    #         "target_name_contains": '["Amtsgericht Hamburg-Altona"]'
+    #     }
+    # },
+    # {
+    #     # target = "Hamburg Dammtor Bahnhof"
+    #     "vars": {
+    #         "point": "Dammtor Bahnhof",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.989592264735405 53.56083428484313)", {distance2centroid_small})',
+    #         "target_name_contains": '["Hamburg Dammtor Bahnhof", "Bf. Dammtor"]'
+    #     }
+    # },
+    # {
+    #     # target = "Uni Hamburg - Career Center"
+    #     "vars": {
+    #         "point": "Career Center Uni Hamburg",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.97665 53.569927)", {distance2centroid_small})',
+    #         "target_name_contains": '["Uni Hamburg - Career Center"]'
+    #     }
+    # },
+    # {
+    #     # target = "Alsterredder - Grundschule mit Vorschulklasse"
+    #     "vars": {
+    #         "point": "Grundschule Alsterredder",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(10.099568 53.658768)", {distance2centroid_small})',
+    #         "target_name_contains": '["Alsterredder - Grundschule mit Vorschulklasse"]'
+    #     }
+    # },
+    # {
+    #     # target = "Freizeitzentrum Feuervogel,offene Kinder- und Jugendarbeit"
+    #     "vars": {
+    #         "point": "Kinderzentrum Feuervogel",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.980852853928896 53.45366288508031)", {distance2centroid_small})',
+    #         "target_name_contains": '["Freizeitzentrum Feuervogel,offene Kinder- und Jugendarbeit"]'
+    #     }
+    # },
+    # {
+    #     # target = "Biozentrum Klein Flottbek - allgemeine Pflanzenberatung"
+    #     "vars": {
+    #         "point": "Zentrum für Pflanzen Klein Flottbek",
+    #         "point_cond": None,
+    #         "target_distance2centroid": f'("POINT(9.859803 53.559665)", {distance2centroid_small})',
+    #         "target_name_contains": '["Biozentrum Klein Flottbek"]'
+    #     }
+    # },
+
+
+
+    # 15 with point_cond
     {
+        # target = "Nachtschicht St. Pauli"
         "vars": {
-            "anfrage": {
-                "start": None,
-                
-                "dest": "Jugendzentrum",
-                "dest_aoi": "Speicherstadt"
-            },
-            "assert": {
-                "ziel_nahe": ["POINT(10.00467865 53.54357754999999)", 5000]
-            }
+            "point": "Bar Nachtschicht",
+            "point_cond": "St. Pauli",
+            # st. Pauli als centroid
+            "target_distance2centroid": f'("POINT(9.9608543 53.5478483)", {distance2centroid_medium})',
+            "target_name_contains": '["Nachtschicht St. Pauli"]'
         }
     },
-    
-     # "Wie komme ich vom U Steinfurther Allee zum nächsten Jugendzentrum im Stadtteil Billstedt?"
     {
+        # target = ein Fischrestaurant in der Nähe des Tierparks Hagenbeck
         "vars": {
-            "anfrage": {
-                "start": None,
-                
-                "dest": "Jugendzentrum",
-                "dest_aoi": "Billstedt"
-            },
-            "assert": {
-                "ziel_name_contains": ["Jugend"],
-                "ziel_nahe": ["POINT(10.104508884450647 53.54136343631377)", 5000]  # Ungefähre Koordinaten für Billstedt
-            }
+            "point": "Fischrestaurant",
+            "point_cond": "Tierpark in Hagenbeck",
+            # Hagenbecks Tierpark als centroid
+            "target_distance2centroid": f'("POINT(9.941535 53.594856)", {distance2centroid_medium})',
+            "target_name_contains": '["FischHütte", "Fischerstube", "Fischrestaurant"]'
         }
     },
-    
-    # "Zeige mir den Weg von der Kirchdorfer Straße zur Bücherhalle in der Nähe der Hafencity."
     {
+        # target = "Hamburgische Staatsoper" (in der Nähe von Innenstadt)
         "vars": {
-            "anfrage": {
-                "start": None,
-                
-                "dest": "Bücherhalle",
-                "dest_aoi": "Hafencity"
-            },
-            "assert": {
-                "ziel_name_contains": ["Bücherhalle", "Bibliothek"],
-                "ziel_nahe":  ["POINT(9.994725 53.541915)", 5000]  # Ungefähre Koordinaten für Hafencity
-            }
+            "point": "Staatsoper",
+            "point_cond": "Innenstadt",
+            # Hamburgische Staatsoper als centroid
+            "target_distance2centroid": f'("POINT(9.98892444516007 53.55666143940254)", {distance2centroid_medium})',
+            "target_name_contains": '["Hamburgische Staatsoper"]'
         }
     },
-    
-    # "Verbindung von der Davidwache zum Haus der Familie am Elbstrand."
     {
+        # target = "Bäderland Elbgaustraße"
         "vars": {
-            "anfrage": {
-                "start": "Davidwache",
-                
-                "dest": "Haus der Familie",
-                "dest_aoi": "Elbstrand"
-            },
-            "assert": {
-                "start_name_contains": ["Davidwache", "Polizei"],
-                "ziel_name_contains": ["Haus der Familie"],
-                "ziel_nahe": ["POINT(9.96242186569669 53.557507857835716)", 5000]  # Ungefähre Koordinaten für Elbstrand
-            }
+            "point": "Schwimmbad",
+            "point_cond": "Altona Volkspark",  # Altonaer Volkspark
+            # Altonaer Volkspark als centroid
+            "target_distance2centroid": f'("POINT(9.900253504833403 53.58051197902252)", {distance2centroid_medium})',
+            "target_name_contains": '["Bäderland Elbgaustraße"]'
         }
     },
-    
-    # "Fahre von S Billwerder-Moorfleet zur Grundschule in Allermöhe."
     {
+        # target = "Bauspielplatz und Spielhaus Eppendorfer Park"
         "vars": {
-            "anfrage": {
-                "start": None,
-                
-                "dest": "Grundschule",
-                "dest_aoi": "Allermöhe"
-            },
-            "assert": {
-                "ziel_name_contains": ["Grundschule", "Schule"],
-                "ziel_nahe":["POINT(10.160813 53.486764)", 5000] # Ungefähre Koordinaten für Allermöhe
-            }
+            "point": "Spielhaus",
+            "point_cond": "Eppendorfer Park",
+            # eppendorfer park als centroid
+            "target_distance2centroid": f'("POINT(9.979047274237926 53.589320108207936)", {distance2centroid_medium})',
+            "target_name_contains": '["Bauspielplatz und Spielhaus Eppendorfer Park"]'
+        }
+    },
+    {
+        # target = "Park in der Nähe der Innenstadt"
+        "vars": {
+            "point": "Waldpark",
+            "point_cond": "Innenstadt",
+            # Innenstadt als centroid
+            "target_distance2centroid": f'("POINT(9.988080668856236 53.55184559306223)", {distance2centroid_big})',
+            "target_name_contains": '["Park", "Wald"]'
+        }
+    },
+    {
+        # target = "Theater in der Nähe eines Parks mit See"
+        "vars": {
+            "point": "Theater",
+            "point_cond": "Stadtpark",
+            # Stadtpark als centroid
+            "target_distance2centroid": f'("POINT(10.029177 53.592139)", {distance2centroid_medium})',
+            "target_name_contains": '["Theater"]'
+        }
+    },
+    {
+        # target = "Theater in der Nähe eines Parks mit See"
+        "vars": {
+            "point": "Museum",
+            "point_cond": "Stadtpark",
+            # Stadtpark als centroid
+            "target_distance2centroid": f'("POINT(10.029177 53.592139)", {distance2centroid_medium})',
+            "target_name_contains": '["Museum"]'
+        }
+    },
+    {
+        # target = "Theater in der Nähe eines Parks mit See"
+        "vars": {
+            "point": "Kino",
+            "point_cond": "Innenstadt",
+            # Innenstadt als centroid
+            "target_distance2centroid": f'("POINT(9.988080668856236 53.55184559306223)", {distance2centroid_medium})',
+            "target_name_contains": '["Kino"]'
+        }
+    },
+    {
+        # target = "Bücherrei in der Nähe einer Liegewiese"
+        "vars": {
+            "point": "Bücherei",
+            "point_cond": "Liegewiese Boberger See",
+            # Liegewiese als centroid
+            "target_distance2centroid": f'("POINT(10.1377648 53.5153121)", {distance2centroid_medium})',
+            "target_name_contains": '["Bücherei", "Bibliothek", "Bücherhalle"]'
         }
     },
 ]
@@ -131,13 +250,3 @@ test_cases = [
 
 def generate_tests():
     return test_cases
-
-
-if __name__ == "__main__":
-    # Example usage
-    import ast
-    test_cases = generate_tests()
-    for case in test_cases:
-        anfrage =  case["vars"]["anfrage"]
-        anfrage_fromstr = ast.literal_eval(str(anfrage).strip())
-        print(f"From str: {anfrage_fromstr}")
