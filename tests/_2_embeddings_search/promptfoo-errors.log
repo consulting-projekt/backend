@@ -1,0 +1,155 @@
+2025-06-04T13:48:34.703Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+    target = get_point_std(client, point, poin_cond)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 91, in get_point_byquery
+    combined_text += f"Name: {point_text}\n"
+UnboundLocalError: local variable 'combined_text' referenced before assignment
+2025-06-04T13:48:34.878Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+    target = get_point_std(client, point, poin_cond)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 91, in get_point_byquery
+    combined_text += f"Name: {point_text}\n"
+UnboundLocalError: local variable 'combined_text' referenced before assignment
+2025-06-04T13:48:35.202Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'combined_text' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'combined_text' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+      target = get_point_std(client, point, poin_cond)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 91, in get_point_byquery
+      combined_text += f"Name: {point_text}\n"
+2025-06-04T13:48:35.203Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044908017-7a9114c52ede1.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044908017-7a9114c52ede1.json'
+2025-06-04T13:48:35.399Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'combined_text' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'combined_text' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+      target = get_point_std(client, point, poin_cond)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 91, in get_point_byquery
+      combined_text += f"Name: {point_text}\n"
+2025-06-04T13:48:35.399Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044908016-928974e63afdc.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044908016-928974e63afdc.json'
+2025-06-04T13:48:39.955Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+    target = get_point_std(client, point, poin_cond)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 91, in get_point_byquery
+    combined_text += f"Name: {point_text}\n"
+UnboundLocalError: local variable 'combined_text' referenced before assignment
+2025-06-04T13:48:40.457Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'combined_text' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'combined_text' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+      target = get_point_std(client, point, poin_cond)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 91, in get_point_byquery
+      combined_text += f"Name: {point_text}\n"
+2025-06-04T13:48:40.457Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044913422-a8707f8c9fd99.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044913422-a8707f8c9fd99.json'
+2025-06-04T13:49:19.824Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+    target = get_point_std(client, point, poin_cond)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 95, in get_point_byquery
+    f'{point_textemb}')
+UnboundLocalError: local variable 'point_textemb' referenced before assignment
+2025-06-04T13:49:19.825Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+    return method_to_call(*args)
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+    target = get_point_std(client, point, poin_cond)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 95, in get_point_byquery
+    f'{point_textemb}')
+UnboundLocalError: local variable 'point_textemb' referenced before assignment
+2025-06-04T13:49:20.349Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'point_textemb' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'point_textemb' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+      target = get_point_std(client, point, poin_cond)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 95, in get_point_byquery
+      f'{point_textemb}')
+2025-06-04T13:49:20.349Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044953291-911066485b067.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044953291-911066485b067.json'
+2025-06-04T13:49:20.359Z [ERROR]: Error running Python script: UnboundLocalError: local variable 'point_textemb' referenced before assignment
+Stack Trace: Error: UnboundLocalError: local variable 'point_textemb' referenced before assignment
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 28, in call_method
+      return method_to_call(*args)
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_std.py", line 17, in call_api
+      target = get_point_std(client, point, poin_cond)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 11, in get_point_std
+      return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 95, in get_point_byquery
+      f'{point_textemb}')
+2025-06-04T13:49:20.359Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044953292-a66bcc55d8b0c.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044953292-a66bcc55d8b0c.json'

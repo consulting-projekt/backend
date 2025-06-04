@@ -6,7 +6,7 @@ providers:
   - id: file://retrieve_std.py
   # - id: file://retrieve_distiluse.py
   # - id: file://retrieve_LaBSE.py
-  - id: file://retrieve_geofox.py
+  # - id: file://retrieve_geofox.py
 
 defaultTest:
   assert:

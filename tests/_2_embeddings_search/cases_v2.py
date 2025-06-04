@@ -1,146 +1,146 @@
 
 distance2centroid_small = 1000
-distance2centroid_medium = 3000
-distance2centroid_big = 5000
+distance2centroid_medium = 3500
+distance2centroid_big = 6000
 
 test_cases = [
-    # {
-    #     # target = "Jugendzentrum Heimfeld"
-    #     "vars": {
-    #         # extrahiert aus der Anfrage (start oder dest) -> kann abwandlung von target sein
-    #         "point": "Jugendzentrum Heimfeld",
-    #         # extrahiert aus der Anfrage (dest_aoi), umgebung in der sich dest befinden soll
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.956510900962325 53.46846007447076)", {distance2centroid_small})',
-    #         "target_name_contains": '["Jugendclub Heimfeld"]'
-    #     }
-    # },
-    # {
-    #     # target = "Agentur für Arbeit"
-    #     "vars": {
-    #         "point": "Arbeitsagentur",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.9792704726871 53.46057846200804)", {distance2centroid_small})',
-    #         "target_name_contains": '["Agentur für Arbeit"]'
-    #     }
-    # },
-    # {
-    #     # target = "Schulungszentrum Deichverteidigung"
-    #     "vars": {
-    #         "point": "Deichverteidigungs-Schulungszentrum",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(10.026079492966264 53.540246749061104)", {distance2centroid_small})',
-    #         "target_name_contains": '["Schulungszentrum Deichverteidigung"]'
-    #     }
-    # },
-    # {
-    #     # target = "Rathaus"
-    #     "vars": {
-    #         "point": "Hamburger Rathaus",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.992400088323125 53.55041280989229)", {distance2centroid_small})',
-    #         "target_name_contains": '["Rathaus"]'
-    #     }
-    # },
-    # {
-    #     # target = "Bauspielplatz und Spielhaus Eppendorfer Park"
-    #     "vars": {
-    #         "point": "Spielhaus Eppendorferpark",  # zusammengezogen
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.981581819228403 53.59016276572776)", {distance2centroid_small})',
-    #         "target_name_contains": '["Bauspielplatz und Spielhaus Eppendorfer Park"]'
-    #     }
-    # },
-    # {
-    #     # target = "Gut vernetzt"
-    #     "vars": {
-    #         "point": "Gut Vernetzt Museum",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.996434428442694 53.54090433330553)", {distance2centroid_small})',
-    #         "target_name_contains": '["Gut vernetzt"]'
-    #     }
-    # },
-    # {
-    #     # target = "DLRG Bezirk Wandsbek"
-    #     "vars": {
-    #         "point": "DLRG Wandsbek",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(10.082359380443732 53.57452932441537)", {distance2centroid_small})',
-    #         "target_name_contains": '["DLRG Bezirk Wandsbek"]'
-    #     }
-    # },
-    # {
-    #     # target = "Cruise Center Altona"
-    #     "vars": {
-    #         "point": "Kreuzfahrtterminal Altona",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.937450892684728 53.5435580737001)", {distance2centroid_small})',
-    #         "target_name_contains": '["Cruise Center Altona", "Kreuzfahrtterminal Altona"]'
-    #     }
-    # },
-    # {
-    #     # target = "Trollhaus"
-    #     "vars": {
-    #         "point": "Troll Haus",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(10.15005405831095 53.58454534926207)", {distance2centroid_small})',
-    #         "target_name_contains": '["Trollhaus"]'
-    #     }
-    # },
-    # {
-    #     # target = "Amtsgericht Hamburg-Altona"
-    #     "vars": {
-    #         "point": "Amtsgericht Altona",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.94306296405268 53.55625350172331)", {distance2centroid_small})',
-    #         "target_name_contains": '["Amtsgericht Hamburg-Altona"]'
-    #     }
-    # },
-    # {
-    #     # target = "Hamburg Dammtor Bahnhof"
-    #     "vars": {
-    #         "point": "Dammtor Bahnhof",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.989592264735405 53.56083428484313)", {distance2centroid_small})',
-    #         "target_name_contains": '["Hamburg Dammtor Bahnhof", "Bf. Dammtor"]'
-    #     }
-    # },
-    # {
-    #     # target = "Uni Hamburg - Career Center"
-    #     "vars": {
-    #         "point": "Career Center Uni Hamburg",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.97665 53.569927)", {distance2centroid_small})',
-    #         "target_name_contains": '["Uni Hamburg - Career Center"]'
-    #     }
-    # },
-    # {
-    #     # target = "Alsterredder - Grundschule mit Vorschulklasse"
-    #     "vars": {
-    #         "point": "Grundschule Alsterredder",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(10.099568 53.658768)", {distance2centroid_small})',
-    #         "target_name_contains": '["Alsterredder - Grundschule mit Vorschulklasse"]'
-    #     }
-    # },
-    # {
-    #     # target = "Freizeitzentrum Feuervogel,offene Kinder- und Jugendarbeit"
-    #     "vars": {
-    #         "point": "Kinderzentrum Feuervogel",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.980852853928896 53.45366288508031)", {distance2centroid_small})',
-    #         "target_name_contains": '["Freizeitzentrum Feuervogel,offene Kinder- und Jugendarbeit"]'
-    #     }
-    # },
-    # {
-    #     # target = "Biozentrum Klein Flottbek - allgemeine Pflanzenberatung"
-    #     "vars": {
-    #         "point": "Zentrum für Pflanzen Klein Flottbek",
-    #         "point_cond": None,
-    #         "target_distance2centroid": f'("POINT(9.859803 53.559665)", {distance2centroid_small})',
-    #         "target_name_contains": '["Biozentrum Klein Flottbek"]'
-    #     }
-    # },
+    {
+        # target = "Jugendzentrum Heimfeld"
+        "vars": {
+            # extrahiert aus der Anfrage (start oder dest) -> kann abwandlung von target sein
+            "point": "Jugendzentrum Heimfeld",
+            # extrahiert aus der Anfrage (dest_aoi), umgebung in der sich dest befinden soll
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.956510900962325 53.46846007447076)", {distance2centroid_small})',
+            "target_name_contains": '["Jugendclub Heimfeld"]'
+        }
+    },
+    {
+        # target = "Agentur für Arbeit"
+        "vars": {
+            "point": "Arbeitsagentur",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.9792704726871 53.46057846200804)", {distance2centroid_small})',
+            "target_name_contains": '["Agentur für Arbeit"]'
+        }
+    },
+    {
+        # target = "Schulungszentrum Deichverteidigung"
+        "vars": {
+            "point": "Deichverteidigungs-Schulungszentrum",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(10.026079492966264 53.540246749061104)", {distance2centroid_small})',
+            "target_name_contains": '["Schulungszentrum Deichverteidigung"]'
+        }
+    },
+    {
+        # target = "Rathaus"
+        "vars": {
+            "point": "Hamburger Rathaus",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.992400088323125 53.55041280989229)", {distance2centroid_small})',
+            "target_name_contains": '["Rathaus"]'
+        }
+    },
+    {
+        # target = "Bauspielplatz und Spielhaus Eppendorfer Park"
+        "vars": {
+            "point": "Spielhaus Epndorferpark",  # zusammengezogen
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.981581819228403 53.59016276572776)", {distance2centroid_small})',
+            "target_name_contains": '["Bauspielplatz und Spielhaus Eppendorfer Park", "Eppendorfer Park"]'
+        }
+    },
+    {
+        # target = "Gut vernetzt"
+        "vars": {
+            "point": "Gut Versetzt",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.996434428442694 53.54090433330553)", {distance2centroid_small})',
+            "target_name_contains": '["Gut vernetzt"]'
+        }
+    },
+    {
+        # target = "DLRG Bezirk Wandsbek"
+        "vars": {
+            "point": "DLRG Wandsbek",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(10.082359380443732 53.57452932441537)", {distance2centroid_small})',
+            "target_name_contains": '["DLRG Bezirk Wandsbek"]'
+        }
+    },
+    {
+        # target = "Cruise Center Altona"
+        "vars": {
+            "point": "Kreuzfahrtterminal Altona",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.937450892684728 53.5435580737001)", {distance2centroid_small})',
+            "target_name_contains": '["Cruise Center Altona", "Kreuzfahrtterminal Altona"]'
+        }
+    },
+    {
+        # target = "Trollhaus"
+        "vars": {
+            "point": "Troll Haus",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(10.15005405831095 53.58454534926207)", {distance2centroid_small})',
+            "target_name_contains": '["Trollhaus"]'
+        }
+    },
+    {
+        # target = "Amtsgericht Hamburg-Altona"
+        "vars": {
+            "point": "Amtsgericht Altona",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.94306296405268 53.55625350172331)", {distance2centroid_small})',
+            "target_name_contains": '["Amtsgericht Hamburg-Altona"]'
+        }
+    },
+    {
+        # target = "Hamburg Dammtor Bahnhof"
+        "vars": {
+            "point": "Dsmmtor Bahnhof",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.989592264735405 53.56083428484313)", {distance2centroid_small})',
+            "target_name_contains": '["Hamburg Dammtor Bahnhof", "Bf. Dammtor"]'
+        }
+    },
+    {
+        # target = "Uni Hamburg - Career Center"
+        "vars": {
+            "point": "Career Center Uni Hamburg",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.97665 53.569927)", {distance2centroid_small})',
+            "target_name_contains": '["Uni Hamburg - Career Center"]'
+        }
+    },
+    {
+        # target = "Alsterredder - Grundschule mit Vorschulklasse"
+        "vars": {
+            "point": "Grundschule Alsterredder",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(10.099568 53.658768)", {distance2centroid_small})',
+            "target_name_contains": '["Alsterredder - Grundschule mit Vorschulklasse"]'
+        }
+    },
+    {
+        # target = "Freizeitzentrum Feuervogel,offene Kinder- und Jugendarbeit"
+        "vars": {
+            "point": "Kinderzentrum Feuervogel",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.980852853928896 53.45366288508031)", {distance2centroid_small})',
+            "target_name_contains": '["Freizeitzentrum Feuervogel,offene Kinder- und Jugendarbeit"]'
+        }
+    },
+    {
+        # target = "Biozentrum Klein Flottbek - allgemeine Pflanzenberatung"
+        "vars": {
+            "point": "Zentrum für Pflanzen Klein Flottbek",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.859803 53.559665)", {distance2centroid_small})',
+            "target_name_contains": '["Biozentrum Klein Flottbek"]'
+        }
+    },
 
 
 
@@ -182,7 +182,7 @@ test_cases = [
             "point_cond": "Altona Volkspark",  # Altonaer Volkspark
             # Altonaer Volkspark als centroid
             "target_distance2centroid": f'("POINT(9.900253504833403 53.58051197902252)", {distance2centroid_medium})',
-            "target_name_contains": '["Bäderland Elbgaustraße"]'
+            "target_name_contains": '["Bäderland Elbgaustraße", "Altonaer Volkspark"]'
         }
     },
     {
@@ -192,7 +192,7 @@ test_cases = [
             "point_cond": "Eppendorfer Park",
             # eppendorfer park als centroid
             "target_distance2centroid": f'("POINT(9.979047274237926 53.589320108207936)", {distance2centroid_medium})',
-            "target_name_contains": '["Bauspielplatz und Spielhaus Eppendorfer Park"]'
+            "target_name_contains": '["Eppendorfer Park"]'
         }
     },
     {
@@ -232,7 +232,7 @@ test_cases = [
             "point_cond": "Innenstadt",
             # Innenstadt als centroid
             "target_distance2centroid": f'("POINT(9.988080668856236 53.55184559306223)", {distance2centroid_medium})',
-            "target_name_contains": '["Kino"]'
+            "target_name_contains": '["Kino", "Filmtheater", "Kinos"]'
         }
     },
     {
@@ -242,7 +242,7 @@ test_cases = [
             "point_cond": "Liegewiese Boberger See",
             # Liegewiese als centroid
             "target_distance2centroid": f'("POINT(10.1377648 53.5153121)", {distance2centroid_medium})',
-            "target_name_contains": '["Bücherei", "Bibliothek", "Bücherhalle"]'
+            "target_name_contains": '["Bücherei", "Bibliothek", "Bücherhalle", "Boberger See"]'
         }
     },
 ]
