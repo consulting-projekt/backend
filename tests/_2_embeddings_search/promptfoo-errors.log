@@ -153,3 +153,385 @@ Stack Trace: Error: UnboundLocalError: local variable 'point_textemb' referenced
     File "C:\studium\consulting\backend\db\utils_qdrant.py", line 95, in get_point_byquery
       f'{point_textemb}')
 2025-06-04T13:49:20.359Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044953292-a66bcc55d8b0c.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749044953292-a66bcc55d8b0c.json'
+2025-06-04T15:18:24.906Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+2025-06-04T15:18:24.907Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:24.908Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:24.908Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:24.910Z [ERROR]: from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:24.970Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:24.970Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304240-26ced99f5e63c.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304240-26ced99f5e63c.json'
+2025-06-04T15:18:24.980Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:24.981Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304238-0faa4a8a3b9bc.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304238-0faa4a8a3b9bc.json'
+2025-06-04T15:18:24.990Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:24.990Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304239-3ad89f3f9cbb5.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304239-3ad89f3f9cbb5.json'
+2025-06-04T15:18:24.999Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:24.999Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304240-bff6c4f482f7e.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304240-bff6c4f482f7e.json'
+2025-06-04T15:18:25.602Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+2025-06-04T15:18:25.602Z [ERROR]: ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:25.609Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+2025-06-04T15:18:25.609Z [ERROR]: from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:25.615Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:25.624Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+2025-06-04T15:18:25.625Z [ERROR]: File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:25.662Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:25.663Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304975-2771604a04609.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304975-2771604a04609.json'
+2025-06-04T15:18:25.673Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:25.674Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304984-72f52bc3730ad.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304984-72f52bc3730ad.json'
+2025-06-04T15:18:25.683Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:25.684Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304994-dedfe0657792.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050304994-dedfe0657792.json'
+2025-06-04T15:18:25.693Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:25.693Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305003-a0bbb19872d8e.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305003-a0bbb19872d8e.json'
+2025-06-04T15:18:26.299Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:26.299Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:26.319Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+2025-06-04T15:18:26.320Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+    from db.utils_qdrant import get_point_openai
+  File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+    import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:26.320Z [ERROR]: import __init__  # noqa: F401
+ModuleNotFoundError: No module named '__init__'
+2025-06-04T15:18:26.369Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:26.370Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305667-732ba00ba26aa.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305667-732ba00ba26aa.json'
+2025-06-04T15:18:26.381Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:26.381Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305678-7cab8f578b1d8.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305678-7cab8f578b1d8.json'
+2025-06-04T15:18:26.391Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:26.391Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305688-82ae64096f2c5.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305688-82ae64096f2c5.json'
+2025-06-04T15:18:26.399Z [ERROR]: Error running Python script: ModuleNotFoundError: No module named '__init__'
+Stack Trace: Error: ModuleNotFoundError: No module named '__init__'
+    at PythonShell.parseError (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:303:21)
+    at terminateIfNeeded (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:193:32)
+    at ChildProcess.<anonymous> (C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\node_modules\python-shell\index.js:185:13)
+    at ChildProcess.emit (node:events:518:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    --Python Traceback: --
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+      result = call_method(script_path, method_name, *data)
+    File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+      spec.loader.exec_module(script_module)
+    File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+    File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+    File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 5, in <module>
+      from db.utils_qdrant import get_point_openai
+    File "C:\studium\consulting\backend\db\utils_qdrant.py", line 1, in <module>
+      import __init__  # noqa: F401
+2025-06-04T15:18:26.400Z [ERROR]: Error removing C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305697-352892ffe7419.json: Error: ENOENT: no such file or directory, unlink 'C:\Users\paul-\AppData\Local\Temp\promptfoo-python-output-json-1749050305697-352892ffe7419.json'
+2025-06-04T15:18:26.681Z [ERROR]: Traceback (most recent call last):
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 39, in <module>
+    result = call_method(script_path, method_name, *data)
+  File "C:\Users\paul-\AppData\Roaming\npm\node_modules\promptfoo\dist\src\python\wrapper.py", line 18, in call_method
+    spec.loader.exec_module(script_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\studium\consulting\backend\tests\_2_embeddings_search\retrieve_openai.py", line 4, in <module>
+    from qdrant_client import QdrantClient
+  File "C:\Users\paul-\anaconda3\envs\py310\lib\site-packages\qdrant_client\__init__.py", line 1, in <module>

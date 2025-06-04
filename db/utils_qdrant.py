@@ -1,21 +1,28 @@
-
+from .__init__ import *  # noqa: F401
 from qdrant_client import QdrantClient, models
 from db.utils import parse_point_string
-from db.utils_embeddings import load_embedding_model_std, load_embedding_model_LaBSE, load_embedding_model_distiluse
+from db.utils_embeddings import load_embedding_model_std, load_embedding_model_LaBSE, load_embedding_model_distiluse, load_embedding_model_openai
+
+COLLECTION_NAME_STD = "aoipoi_embeddings_std"
+COLLECTION_NAME_OPENAI = "aoipoi_embeddings_openai"
 
 
 def get_point_std(qdrant_client, point, point_cond, point_condition_location=None):
-    COLLECTION_NAME = "aoipoi_embeddings_std"
     emb_model = load_embedding_model_std()
 
-    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME, point_condition_location=point_condition_location)
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME_STD, point_condition_location=point_condition_location)
+
+
+def get_point_openai(qdrant_client, point, point_cond, point_condition_location=None):
+    emb_model = load_embedding_model_openai()
+
+    return get_point_byquery(point, point_cond, qdrant_client, emb_model, COLLECTION_NAME_OPENAI, point_condition_location=point_condition_location)
 
 
 def get_startdest_std(qdrant_client, anfrage):
-    COLLECTION_NAME = "aoipoi_embeddings_std"
     emb_modell = load_embedding_model_std()
 
-    return get_startdest(qdrant_client, emb_modell, anfrage, COLLECTION_NAME)
+    return get_startdest(qdrant_client, emb_modell, anfrage, COLLECTION_NAME_STD)
 
 
 def get_point_LaBSE(qdrant_client, point, point_cond, point_condition_location=None):

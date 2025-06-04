@@ -1,3 +1,4 @@
+from .__init__ import *  # noqa: F401
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 from typing import List, Dict, Any
@@ -7,6 +8,8 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 import uuid
 import numpy as np
+from openai import OpenAI
+client = OpenAI()
 
 
 def load_embedding_model(model_name: str = "all-MiniLM-L6-v2"):
@@ -161,7 +164,7 @@ def process_node_embeddings(driver, model, client, label: str, collection_name: 
 
             if combined_text:
                 # Generate embedding
-                vector = model.encode(combined_text).tolist()
+                vector = list(model.encode(combined_text))
                 # Generate a new UUID for Qdrant
                 qdrant_id = str(uuid.uuid4())
                 # Prepare payload with common attributes
@@ -199,7 +202,86 @@ def process_node_embeddings(driver, model, client, label: str, collection_name: 
         f"Qdrant Collection '{collection_name}' contains {collection_info.vectors_count} vectors")
 
 
+def process_node_embeddings2(driver, model, client, label: str, collection_name: str, batch_size: int = 100):
+    """
+    Process nodes to generate embeddings and store them in Qdrant.
 
+    Args:
+        driver: Neo4j driver instance
+        model: SentenceTransformer model
+        client: Qdrant client instance
+        node_type: Type of nodes to process
+        collection_name: Name of the Qdrant collection to store embeddings
+        batch_size: Number of nodes to process in each batch
+    """
+    print(f"Processing {label} nodes for embeddings")
+
+    # Get total count of nodes
+    total_count = get_node_count(driver, label)
+    print(f"Found {total_count} {label} nodes")
+
+    if total_count == 0:
+        print(f"No {label} nodes found to process")
+        return
+
+    # Process in batches
+    for offset in range(0, total_count, batch_size):
+        print(f"Processing batch at offset {offset}")
+
+        # Get batch of nodes
+        nodes = get_nodes(driver, label, batch_size, offset)
+        # Process each node
+        combined_texts = []
+        for node in nodes:
+            node_properties = node["properties"]
+            # Create combined text for embedding
+            combined_text = create_text_for_embedding(node_properties, label)
+            combined_texts.append(combined_text)
+        combined_texts_embs = model.encode(combined_texts)
+
+        # Process each node
+        for node, emb in zip(nodes, combined_texts_embs):
+            node_id = node["id"]
+            node_properties = node["properties"]
+
+            if emb:
+                # Generate embedding
+                vector = list(emb)
+                # Generate a new UUID for Qdrant
+                qdrant_id = str(uuid.uuid4())
+                # Prepare payload with common attributes
+                payload = {
+                    "neo4j_elementId": str(node_id),
+                    "name": node_properties.get("name", ""),
+                    "description": node_properties.get("description", ""),
+                    "tags": node_properties.get("tags", []),
+                    "label": label  # Add label as a property
+                }
+
+                # Add location based on node type
+                if label == "POI" and "location" in node_properties:
+                    longitude, latitude = node_properties.get("location")
+                    payload["location"] = {"lon": longitude, "lat": latitude}
+                elif label == "AOI" and "centroid" in node_properties:
+                    longitude, latitude = node_properties.get("centroid")
+                    payload["location"] = {"lon": longitude, "lat": latitude}
+
+                # Store in Qdrant
+                client.upsert(
+                    collection_name=collection_name,
+                    points=[{
+                        "id": qdrant_id,
+                        "vector": vector,
+                        "payload": payload
+                    }]
+                )
+
+        print(f"Completed batch processing (offset: {offset})")
+
+    # Verify storage
+    collection_info = client.get_collection(collection_name=collection_name)
+    print(
+        f"Qdrant Collection '{collection_name}' contains {collection_info.vectors_count} vectors")
 
 
 def load_embedding_model_std():
@@ -217,6 +299,7 @@ def load_embedding_model_std():
     print(f"Loading embedding model: {model_std}")
     return SentenceTransformer(model_std)
 
+
 def load_embedding_model_LaBSE():
     """
     Load a sentence transformer model for generating embeddings.
@@ -231,6 +314,7 @@ def load_embedding_model_LaBSE():
     model = 'sentence-transformers/LaBSE'
     print(f"Loading embedding model: {model}")
     return SentenceTransformer(model)
+
 
 def load_embedding_model_distiluse():
     """
@@ -261,3 +345,44 @@ def compute_cosine_similarity(embedding1, embedding2):
     # Compute cosine similarity
     cosine_similarity = dot_product / (norm_emb1 * norm_emb2)
     return cosine_similarity
+
+
+class OpenAIEmbeddingModel:
+    def __init__(self, model_name='text-embedding-3-small'):
+        self.model_name = model_name
+        # You can set this statically or fetch it from OpenAI documentation
+        self.embedding_dimensions = {
+            'text-embedding-3-small': 1536,
+            'text-embedding-3-large': 3072,
+        }
+
+    def get_sentence_embedding_dimension(self):
+        return self.embedding_dimensions.get(self.model_name, None)
+
+    def encode(self, texts):
+        input_was_string = False
+        if isinstance(texts, str):
+            texts = [texts]
+            input_was_string = True
+        texts = [text.replace("\n", " ").strip() for text in texts]
+        res_data = client.embeddings.create(
+            input=texts,
+            model=self.model_name
+        ).data
+        all_embeddings = [res.embedding for res in res_data]
+        if input_was_string:
+            all_embeddings = all_embeddings[0]
+
+        return all_embeddings
+
+
+def load_embedding_model_openai():
+    """
+    Load an OpenAI embedding model wrapped in a SentenceTransformer-like interface.
+
+    Returns:
+        An object with get_sentence_embedding_dimension() and encode() methods.
+    """
+    model_name = 'text-embedding-3-small'
+    print(f"Loading OpenAI embedding model: {model_name}")
+    return OpenAIEmbeddingModel(model_name)

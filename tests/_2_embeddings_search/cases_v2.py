@@ -16,11 +16,11 @@ test_cases = [
         }
     },
     {
-        # target = "Agentur für Arbeit"
+        # target = "Agentur für Arbeit Eimsbüttel"
         "vars": {
-            "point": "Arbeitsagentur",
+            "point": "Jobhaus Eimsbüttel",
             "point_cond": None,
-            "target_distance2centroid": f'("POINT(9.9792704726871 53.46057846200804)", {distance2centroid_small})',
+            "target_distance2centroid": f'("POINT(9.957572 53.5693)", {distance2centroid_small})',
             "target_name_contains": '["Agentur für Arbeit"]'
         }
     },

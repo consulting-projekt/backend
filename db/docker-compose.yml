@@ -1,34 +1,6 @@
 version: '3.8'
 
 services:
-  neo4j-bus-chatbot:
-    image: neo4j:2025.03-community
-    container_name: neo4j-bus-chatbot
-    ports:
-      - "7475:7474"
-      - "7688:7687"
-      - "7476:7473"
-    environment:
-      - NEO4J_AUTH=neo4j/busticket123
-      - NEO4J_dbms_memory_pagecache_size=1G
-      - NEO4J_dbms_memory_heap_initial__size=1G
-      - NEO4J_dbms_memory_heap_max__size=2G
-      - NEO4J_dbms_security_procedures_unrestricted=apoc.*,vector.*
-      - NEO4J_dbms_security_procedures_allowlist=apoc.*,vector.*
-      - NEO4J_PLUGINS=["apoc"]  # Updated from NEO4JLABS_PLUGINS as per warning
-      - NEO4J_dbms_default__database=neo4j
-    volumes:
-      - neo4j-bus-data2:/data
-      - neo4j-bus-logs2:/logs
-      - neo4j-bus-import2:/var/lib/neo4j/import
-      - neo4j-bus-plugins2:/plugins
-    healthcheck:
-      test: ["CMD", "wget", "-O", "/dev/null", "-q", "http://localhost:7474"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-
   neo4j-bus-chatbot-osm:
     image: neo4j:2025.03-community
     container_name: neo4j-bus-chatbot-osm
