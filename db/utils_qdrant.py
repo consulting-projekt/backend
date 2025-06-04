@@ -1,10 +1,14 @@
-from .__init__ import *  # noqa: F401
+from pathlib import Path
+import sys
+# add parent directory to path
+sys.path.append(str(Path(__file__).resolve(strict=True).parent.parent))  # noqa: E402
 from qdrant_client import QdrantClient, models
 from db.utils import parse_point_string
 from db.utils_embeddings import load_embedding_model_std, load_embedding_model_LaBSE, load_embedding_model_distiluse, load_embedding_model_openai
 
 COLLECTION_NAME_STD = "aoipoi_embeddings_std"
 COLLECTION_NAME_OPENAI = "aoipoi_embeddings_openai"
+COLLECTION_NAME_NOMIC = "aoipoi_embeddings_nomic"
 
 
 def get_point_std(qdrant_client, point, point_cond, point_condition_location=None):

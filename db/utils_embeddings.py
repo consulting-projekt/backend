@@ -1,14 +1,16 @@
-from .__init__ import *  # noqa: F401
+from pathlib import Path
+import sys
+# add parent directory to path
+sys.path.append(str(Path(__file__).resolve(strict=True).parent.parent))  # noqa: E402
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 from typing import List, Dict, Any
 from neo4j import GraphDatabase
-import json
-from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 import uuid
 import numpy as np
 from openai import OpenAI
+import ollama
 client = OpenAI()
 
 
@@ -386,3 +388,44 @@ def load_embedding_model_openai():
     model_name = 'text-embedding-3-small'
     print(f"Loading OpenAI embedding model: {model_name}")
     return OpenAIEmbeddingModel(model_name)
+
+
+class NomicEmbeddingModel:
+    def __init__(self, model_name='nomic-embed-text'):
+        self.model_name = model_name
+        # You can adjust this based on the actual model spec
+        self.embedding_dimensions = {
+            'nomic-embed-text': 768,  # You can verify this value based on the model docs
+        }
+
+    def get_sentence_embedding_dimension(self):
+        return self.embedding_dimensions.get(self.model_name, None)
+
+    def encode(self, texts):
+        input_was_string = False
+        if isinstance(texts, str):
+            texts = [texts]
+            input_was_string = True
+
+        texts = [text.replace("\n", " ").strip() for text in texts]
+        all_embeddings = []
+        for text in texts:
+            response = ollama.embeddings(model=self.model_name, prompt=text)
+            all_embeddings.append(response['embedding'])
+
+        if input_was_string:
+            return all_embeddings[0]
+
+        return all_embeddings
+
+
+def load_embedding_model_nomic():
+    """
+    Load a Nomic embedding model via Ollama, wrapped in a SentenceTransformer-like interface.
+
+    Returns:
+        An object with get_sentence_embedding_dimension() and encode() methods.
+    """
+    model_name = 'nomic-embed-text'
+    print(f"Loading Nomic embedding model via Ollama: {model_name}")
+    return NomicEmbeddingModel(model_name)
