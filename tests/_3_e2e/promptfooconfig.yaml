@@ -4,15 +4,17 @@ providers:
 #  - openai:gpt-3.5-turbo-1106
 #  - openai:gpt-4o-mini
 #  - deepseek:deepseek-chat
- - id: file://retrieve1.py
+ - id: file://retrieve1_gemma3_4b_prompt1.py
+ - id: file://retrieve1_gemma3_4b_prompt2.py
 
 defaultTest:
+  transform:
+    - path: output.answer
   assert:
     - type: python
       value: file://assert1.py
 
 tests: 
   - file://cases.py:generate_tests
-  # - options:
-  #     runSerially: true
+
 

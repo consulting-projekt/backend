@@ -9,4 +9,4 @@ Extrahierte Parameter:
 API Ergebnis:
 {{api_result}}
 
-Bitte antworte dem Reisenden in einem kurzen Satz. Nutze hierfür das höfliche "du".
+Bitte antworte dem Reisenden in einem kurzen Satz. Nutze hierfür das höfliche "du". Formuliere deine Rückfragen so knapp, wie möglich und so lang, wie nötig. 

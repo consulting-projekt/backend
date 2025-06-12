@@ -6,7 +6,7 @@ from db.utils_llm import call_gemma3_4b
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
 from db.utils_geofox import get_route_params2, get_route, get_route_params1
-from db.utils_qdrant import get_startdest_std, get_point_std
+from db.utils_qdrant_3_e2e import get_startdest_std, get_point_std
 from db.utils_llm import raw_llm2json
 from tests._1_params_extract.retrieve_gemma3_4b import call_api as call_api_gemma3_4b
 from langchain.schema import HumanMessage
@@ -140,7 +140,7 @@ def call_api(prompt, options, context):
 def get_route_prompt(anfrage, params_json, route_infos):
     # Read the prompt template from file
     try:
-        with open(Path(__file__).parent / "prompt_step2.txt", "r", encoding="utf-8") as file:
+        with open(Path(__file__).parent / "prompt_step2_v2.txt", "r", encoding="utf-8") as file:
             prompt_template = file.read()
     except Exception as e:
         print(f"Error reading prompt.txt: {e}")
@@ -159,7 +159,7 @@ def get_route_prompt(anfrage, params_json, route_infos):
 def get_problems_prompt(anfrage, params_json, problems):
     # Read the prompt template from file
     try:
-        with open(Path(__file__).parent / "prompt_step2_with_problems.txt", "r", encoding="utf-8") as file:
+        with open(Path(__file__).parent / "prompt_step2_with_problems_v2.txt", "r", encoding="utf-8") as file:
             prompt_template = file.read()
     except Exception as e:
         print(f"Error reading prompt.txt: {e}")

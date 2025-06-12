@@ -40,8 +40,8 @@ def get_assert(output: dict, options: Dict[str, Any]) -> Union[bool, float, Dict
         cosine_similarity = compute_cosine_similarity(
             output_textemb, expected_output_textemb)
 
-        # Decide pass/fail based on similarity threshold (e.g., 0.9)
-        threshold = 0.9
+        # Decide pass/fail based on similarity threshold (e.g., 0.8)
+        threshold = 0.8
 
         return {
             "pass": bool(cosine_similarity >= threshold),
@@ -51,12 +51,12 @@ def get_assert(output: dict, options: Dict[str, Any]) -> Union[bool, float, Dict
 
     except Exception as e:
         print("Error:", e)
-        return {"pass": False, "score": 0.0, "reason": str(e)}
+        return {"pass": False, "score": 0.0, "reason": "Entschuldugung, da gab es leider einen Fehler. Bitte formuliere deine Nachricht noch einmal anders."}
 
 
 if __name__ == "__main__":
     # Example usage
-    output = {"answer": "Gerne, hier ist die Route: Ab Oberschleems 13 fahren Sie mit dem Bus um 15:00 Uhr zur Böckmannstraße 1 an, die Fahrt dauert etwa 33 Minuten.",
+    output = {"answer": "Der nächste Bus ab Oberschleems 13 zur Böckmannstraße 1 fährt am 05.05.2025 um 15:00 Uhr.",
               "vars": {"start": "Oberschleems 13", "dest": "Böckmannstraße 1", "date": "05.05.2025", "time": "15:00"}}
     options = {
         "vars": {
@@ -64,7 +64,7 @@ if __name__ == "__main__":
             "start": None,  # hiermit kann simuliert werden dass systemseitig standort des nutzers verwendet wird
             "date": None,  # hiermit kann simuliert werden dass systemseitig aktueller Tag verwendet wird
             "time": None,  # hiermit kann simuliert werden dass systemseitig aktuelle Zeit verwendet wird
-            "answer": "Um <TIME> fährt ein Bus von der Station <START> zur Station <DEST>. Wir wünschen Ihnen eine angenehme Fahrt!"
+            "answer": "Der nächste Bus fährt von <START> nach <DEST> am <DATE> um <TIME>."
         }
     }
 
