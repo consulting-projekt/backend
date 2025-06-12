@@ -2,8 +2,8 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from typing import Dict, Any, Union
-from db.utils_embeddings import compute_cosine_similarity
-from db.utils_embeddings import load_embedding_model_std
+from db.utils_embeddings_3_e2e import compute_cosine_similarity
+from db.utils_embeddings_3_e2e import load_embedding_model_std
 import json
 
 emb_model = load_embedding_model_std()
