@@ -6,11 +6,8 @@ from db.utils_llm import call_gemma3_4b
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
 from db.utils_geofox import get_route_params2, get_route, get_route_params1
-from db.utils_qdrant_3_e2e import get_startdest_std, get_point_std
+from db.utils_qdrant_3_e2e import get_point_std
 from db.utils_llm import raw_llm2json
-from tests._1_params_extract.retrieve_gemma3_4b import call_api as call_api_gemma3_4b
-from langchain.schema import HumanMessage
-from langchain_community.chat_models import ChatOllama
 from datetime import datetime
 
 

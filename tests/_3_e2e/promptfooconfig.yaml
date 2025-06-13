@@ -6,6 +6,9 @@ providers:
 #  - deepseek:deepseek-chat
  - id: file://retrieve1_gemma3_4b_prompt1.py
  - id: file://retrieve1_gemma3_4b_prompt2.py
+ - id: file://retrieve1_mistral-small_3-1_24b_4b_prompt1.py
+ - id: file://retrieve1_mistral-small_3-1_24b_4b_prompt2.py
+ 
 
 defaultTest:
   transform:

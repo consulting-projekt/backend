@@ -7,3 +7,4 @@ cache
 logs
 !db/exports/*.csv
 !tests/**/*.json
+tests/_3_e2e/*.json
