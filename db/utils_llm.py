@@ -79,6 +79,19 @@ def call_mistral_7b(prompt):
     
     return  response.content
 
+def call_mistral_small_3_1_24b(prompt):
+    model = "mistral-small3.1:latest"
+    model_url = "http://localhost:11434"
+    # Initialize Llama model via Ollama
+    ollama = ChatOllama(
+        model=model,
+        base_url=model_url,
+        temperature=0
+    )
+    response = ollama.invoke(prompt)
+    
+    return  response.content
+
 def call_qwen3_4b(prompt):
     model = "qwen3:4b"
     model_url = "http://localhost:11434"
