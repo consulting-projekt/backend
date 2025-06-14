@@ -83,7 +83,7 @@ test_cases = [
                 "dest": "Innenstatt",
                 "dest_aoi": None,
                 "date": "today",
-                "time": "now + 120m",
+                "time": "now + 2h00m",
                 "time_is_departure": True,
                 "type_of_transport": "train"
             }
@@ -114,8 +114,8 @@ test_cases = [
             "assert": {
                 "start": "Hochrad",
 
-                "dest": "Wintmüllenweg",
-                "dest_aoi": "Einkaufszentrum",
+                "dest": "Einkaufszentrum",
+                "dest_aoi": "Wintmüllenweg",
                 "date": "today",
                 "time": "now",
                 "time_is_departure": True,
@@ -153,7 +153,7 @@ test_cases = [
                 "dest": "Bar",
                 "dest_aoi": "Stadtpark",
                 "date": "today",
-                "time": "now + 3h",
+                "time": "now + 3h00m",
                 "time_is_departure": False,
                 "type_of_transport": "bus"
             }
@@ -165,7 +165,7 @@ test_cases = [
         "vars": {
             "anfrage": "LuftHansa Flughafen -> Roenklobel in ca. 40 min",
             "assert": {
-                "start": "Flughafen",
+                "start": "LuftHansa Flughafen",
 
                 "dest": "Roenklobel",
                 "dest_aoi": None,
@@ -186,7 +186,7 @@ test_cases = [
 
                 "dest": "Prinsenw",
                 "dest_aoi": None,
-                "date": "today + 26d",
+                "date": "today + 3w5d",
                 "time": "23:00",
                 "time_is_departure": True,
                 "type_of_transport": "bus"
@@ -406,7 +406,7 @@ test_cases = [
                 "dest": "Restaurant",
                 "dest_aoi": "SC Nienstedten",
                 "date": "today",
-                "time": "now + 3h",
+                "time": "now + 3h00m",
                 "time_is_departure": True,
                 "type_of_transport": "bus"
             }
@@ -720,7 +720,7 @@ test_cases = [
                 "dest": "Vahrenwinkelweg",
                 "dest_aoi": None,
                 "date": "today",
-                "time": "now + 3h",
+                "time": "now + 3h00m",
                 "time_is_departure": True,
                 "type_of_transport": "bus"
             }
