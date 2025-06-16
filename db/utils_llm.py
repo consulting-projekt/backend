@@ -8,11 +8,24 @@ import codecs
 
 token = os.getenv("x-api-key")
 
+import logging
+
+# Set up basic logging
+logging.basicConfig(
+    filename='output.log',           # Log file path
+    level=logging.INFO,              # Minimum logging level
+    format='%(asctime)s - %(message)s',  # Log format
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
 
 def raw_llm2json(raw_llm_output):
     try:
         if "answer" in raw_llm_output and "<think>" not in raw_llm_output:
             m = re.findall(r"json.*(\{.*?\})", raw_llm_output, re.DOTALL)
+            logging.info(m)
+            if m == []:
+                m = re.findall(r".*(\{.*?\})", raw_llm_output, re.DOTALL)
             decoded = codecs.decode(m[0], 'unicode_escape')
             json_output = json.loads(decoded)
         else:
@@ -130,8 +143,31 @@ def call_llama3_3(prompt):
     }
     response = requests.post(model_url, headers=headers, json=data)
     
+    return response.text
+    
 def call_phi_4(prompt):
     model = "phi4:latest"
+    model_url = "https://bc4ai.api.datis.de/api/chat"
+    headers = {
+    "Content-Type": "application/json",
+    "x-api-key": token,
+    "User-Agent": "PostmanRuntime/7.44.0",
+    "Accept": "*/*",
+    "Cache-Control": "no-cache",
+    "Host": "bc4ai.api.datis.de",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    }
+    data = {
+    "query": prompt,     
+    "model": model
+    }
+    response = requests.post(model_url, headers=headers, json=data)
+    
+    return response.text
+
+def call_mixtral(prompt):
+    model = "mixtral:latest"
     model_url = "https://bc4ai.api.datis.de/api/chat"
     headers = {
     "Content-Type": "application/json",
