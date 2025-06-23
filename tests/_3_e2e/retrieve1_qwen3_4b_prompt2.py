@@ -2,13 +2,14 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from db.utils_data import find_point
-from db.utils_llm import call_mistral_small_3_1_24b, call_gemma3_4b
+from db.utils_llm import call_gemma3_4b, call_qwen3_4b
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
 from db.utils_geofox import get_route_params2, get_route, get_route_params1
 from db.utils_qdrant_3_e2e import get_point_std
 from db.utils_llm import raw_llm2json
 from datetime import datetime
+import re
 
 
 client_qdrant = QdrantClient("localhost", port=6333)
@@ -49,7 +50,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": re.sub(r"<think>.*?</think>.{2}", "", call_qwen3_4b(prompt), flags=re.DOTALL),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -86,7 +87,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": re.sub(r"<think>.*?</think>.{2}", "", call_qwen3_4b(prompt), flags=re.DOTALL),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -123,7 +124,7 @@ def call_api(prompt, options, context):
 
     return {
         "output": {
-            "answer": call_mistral_small_3_1_24b(prompt),
+            "answer": re.sub(r"<think>.*?</think>.{2}", "", call_qwen3_4b(prompt), flags=re.DOTALL),
             "vars": {
                 "start": route['start']['name'],
                 "dest": route['dest']['name'],

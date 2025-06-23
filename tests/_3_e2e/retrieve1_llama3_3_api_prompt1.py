@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from db.utils_data import find_point
-from db.utils_llm import call_mistral_small_3_1_24b, call_gemma3_4b
+from db.utils_llm import call_llama3_3, call_gemma3_4b, get_answer_json
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
 from db.utils_geofox import get_route_params2, get_route, get_route_params1
@@ -26,15 +26,36 @@ def call_api(prompt, options, context):
 
     # resultierende dict werte mit defaults belegen
     # falls für start und dest in cases.py keine defaults hinterlegt sind (unter "vars") dann ist das ein simuliertes Problem
-    start = params_json.get("start")
+    try:
+        start = params_json.get("start")
+    except:
+        start = None
     start = context.get('vars', {}).get(
         'start', start) if start is None else start
-    date = params_json.get("date")
-    time = params_json.get("time")
-    dest = params_json.get("dest")
-    dest_aoi = params_json.get("dest_aoi")
-    time_is_departure = params_json.get("time_is_departure", True)
-    type_of_transport = params_json.get("type_of_transport", None)
+    try:
+        date = params_json.get("date")
+    except:
+        date = None
+    try:
+        time = params_json.get("time")
+    except:
+        time = None
+    try:
+        dest = params_json.get("dest")
+    except:
+        dest = None
+    try:
+        dest_aoi = params_json.get("dest_aoi")
+    except:
+        dest_aoi = None
+    try:
+        time_is_departure = params_json.get("time_is_departure", True)
+    except:
+        time_is_departure  = None
+    try:
+        type_of_transport = params_json.get("type_of_transport", None)
+    except:
+        type_of_transport  = None
 
     if start is None:
         problems.append("Es wurde kein Startpunkt angegeben.")
@@ -49,7 +70,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": get_answer_json(call_llama3_3(prompt)),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -86,7 +107,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": get_answer_json(call_llama3_3(prompt)),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -123,7 +144,7 @@ def call_api(prompt, options, context):
 
     return {
         "output": {
-            "answer": call_mistral_small_3_1_24b(prompt),
+            "answer": get_answer_json(call_llama3_3(prompt)),
             "vars": {
                 "start": route['start']['name'],
                 "dest": route['dest']['name'],
@@ -137,7 +158,7 @@ def call_api(prompt, options, context):
 def get_route_prompt(anfrage, params_json, route_infos):
     # Read the prompt template from file
     try:
-        with open(Path(__file__).parent / "prompt_step2_v2.txt", "r", encoding="utf-8") as file:
+        with open(Path(__file__).parent / "prompt_step2_v1.txt", "r", encoding="utf-8") as file:
             prompt_template = file.read()
     except Exception as e:
         print(f"Error reading prompt.txt: {e}")
@@ -156,7 +177,7 @@ def get_route_prompt(anfrage, params_json, route_infos):
 def get_problems_prompt(anfrage, params_json, problems):
     # Read the prompt template from file
     try:
-        with open(Path(__file__).parent / "prompt_step2_with_problems_v2.txt", "r", encoding="utf-8") as file:
+        with open(Path(__file__).parent / "prompt_step2_with_problems_v1.txt", "r", encoding="utf-8") as file:
             prompt_template = file.read()
     except Exception as e:
         print(f"Error reading prompt.txt: {e}")

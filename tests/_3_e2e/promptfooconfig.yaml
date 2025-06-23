@@ -1,14 +1,26 @@
 prompts:
   - file://../_1_params_extract/prompt_short.txt
 providers:
-#  - openai:gpt-3.5-turbo-1106
-#  - openai:gpt-4o-mini
-#  - deepseek:deepseek-chat
- - id: file://retrieve1_gemma3_4b_prompt1.py
- - id: file://retrieve1_gemma3_4b_prompt2.py
- - id: file://retrieve1_mistral-small_3-1_24b_4b_prompt1.py
- - id: file://retrieve1_mistral-small_3-1_24b_4b_prompt2.py
- 
+ - id: file://retrieve1_gemma3_4b_prompt1.py # schon einzeln durchgeführt 22./23.06.2025
+ - id: file://retrieve1_gemma3_4b_prompt2.py # schon einzeln durchgeführt 22./23.06.2025
+ - id: file://retrieve1_mistral-small_3-1_24b_4b_prompt1.py # schon einzeln durchgeführt 22./23.06.2025
+ - id: file://retrieve1_mistral-small_3-1_24b_4b_prompt2.py # schon einzeln durchgeführt 22./23.06.2025
+ - id: file://retrieve1_mixtral_8x7b_prompt1.py
+ - id: file://retrieve1_mixtral_8x7b_prompt2.py
+ - id: file://retrieve1_granite3mob_3b_prompt1.py
+ - id: file://retrieve1_granite3mob_3b_prompt2.py
+ - id: file://retrieve1_llama3_3_api_prompt1.py
+ - id: file://retrieve1_llama3_3_api_prompt2.py
+ - id: file://retrieve1_phi_4_api_prompt1.py
+ - id: file://retrieve1_phi_4_api_prompt2.py
+ - id: file://retrieve1_mixtral_api_prompt1.py
+ - id: file://retrieve1_mixtral_api_prompt2.py
+ - id: file://retrieve1_mistral-7b_prompt1.py
+ - id: file://retrieve1_mistral-7b_prompt2.py
+ - id: file://retrieve1_qwen3_4b_prompt1.py
+ - id: file://retrieve1_qwen3_4b_prompt2.py
+
+
 
 defaultTest:
   transform:
@@ -19,5 +31,6 @@ defaultTest:
 
 tests: 
   - file://cases.py:generate_tests
+  
 
 

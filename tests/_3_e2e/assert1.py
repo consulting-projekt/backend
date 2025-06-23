@@ -51,7 +51,7 @@ def get_assert(output: dict, options: Dict[str, Any]) -> Union[bool, float, Dict
 
     except Exception as e:
         print("Error:", e)
-        return {"pass": False, "score": 0.0, "reason": "Entschuldugung, da gab es leider einen Fehler. Bitte formuliere deine Nachricht noch einmal anders."}
+        return {"pass": False, "score": 0.0, "reason": "Entschuldigung, da gab es leider einen Fehler. Bitte formuliere deine Nachricht noch einmal anders."}
 
 
 if __name__ == "__main__":

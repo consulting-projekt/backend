@@ -8,15 +8,6 @@ import codecs
 
 token = os.getenv("x-api-key")
 
-import logging
-
-# Set up basic logging
-logging.basicConfig(
-    filename='output.log',           # Log file path
-    level=logging.INFO,              # Minimum logging level
-    format='%(asctime)s - %(message)s',  # Log format
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
 
 def raw_llm2json(raw_llm_output):
     try:
@@ -120,32 +111,6 @@ def call_mistral_small_3_1_24b(prompt):
     
     return  response.content
 
-def call_mixtral_8x7b(prompt):
-    model = "mixtral:8x7b"
-    model_url = "http://localhost:11434"
-    # Initialize Llama model via Ollama
-    ollama = ChatOllama(
-        model=model,
-        base_url=model_url,
-        temperature=0.1
-    )
-    response = ollama.invoke(prompt)
-    
-    return  response.content
-
-def call_granite3mob_3b(prompt):
-    model = "granite3-moe:3b"
-    model_url = "http://localhost:11434"
-    # Initialize Llama model via Ollama
-    ollama = ChatOllama(
-        model=model,
-        base_url=model_url,
-        temperature=0
-    )
-    response = ollama.invoke(prompt)
-    
-    return  response.content
-
 def call_qwen3_4b(prompt):
     model = "qwen3:4b"
     model_url = "http://localhost:11434"
@@ -177,8 +142,6 @@ def call_llama3_3(prompt):
     "model": model
     }
     response = requests.post(model_url, headers=headers, json=data)
-    print(response.text)
-    return response.text
     
 def call_phi_4(prompt):
     model = "phi4:latest"
@@ -200,33 +163,6 @@ def call_phi_4(prompt):
     response = requests.post(model_url, headers=headers, json=data)
     
     return response.text
-
-def call_mixtral(prompt):
-    model = "mixtral:latest"
-    model_url = "https://bc4ai.api.datis.de/api/chat"
-    headers = {
-    "Content-Type": "application/json",
-    "x-api-key": token,
-    "User-Agent": "PostmanRuntime/7.44.0",
-    "Accept": "*/*",
-    "Cache-Control": "no-cache",
-    "Host": "bc4ai.api.datis.de",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Connection": "keep-alive",
-    }
-    data = {
-    "query": prompt,     
-    "model": model
-    }
-    response = requests.post(model_url, headers=headers, json=data)
-    
-    return response.text
-
-def get_answer_json(output):
-    j = json.loads(output) # Convert output in JSON
-    answer = j['answer'] # Exctract answer from output
-    clean_answer = answer.encode('utf-8', errors='ignore').decode() # delete obsolete special characters
-    return clean_answer
 
 if __name__ == "__main__":
     #retur = '{"answer":"```json\n{\n  \"start\": null,\n  \"dest\": \"Innenstadt\",\n  \"dest_aoi\": null,\n  \"date\": \"null\",\n  \"time\": \"08:00\",\n  \"time_is_departure\": true,\n  \"type_of_transport\": \"Bus\"\n}\n```\n\nBegründung:\nDie Frage nach dem nächsten Bus in die Innenstadt ist sehr vage. Um eine Antwort zu geben, muss ich davon ausgehen, dass der nächste Bus in der Nähe des aktuellen Standorts abfährt und der Zielort genau identifiziert werden kann. Da keine spezifischen Informationen über den aktuellen Standort oder die genaue Route angegeben wurden, kann ich nur eine allgemeine Antwort geben.\n\nUm die beste Antwort zu geben, müsste ich wissen, wo sich der aktuelle Standort befindet und welche Buslinie in der Nähe verkehrt. Ohne diese Informationen kann ich keine genauere Antwort geben.","context":null,"references":[]}'

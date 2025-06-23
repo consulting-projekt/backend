@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from db.utils_data import find_point
-from db.utils_llm import call_mistral_small_3_1_24b, call_gemma3_4b
+from db.utils_llm import call_mistral_small_3_1_24b
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
 from db.utils_geofox import get_route_params2, get_route, get_route_params1
@@ -19,22 +19,26 @@ MIN_SIMILARITY_SCORE_START = 0.5
 
 def call_api(prompt, options, context):
     anfrage = context.get('vars', {}).get('anfrage', '')
-    params_extract_res = call_gemma3_4b(prompt)
+    params_extract_res = call_mistral_small_3_1_24b(prompt)
     params_json = raw_llm2json(params_extract_res)
 
     problems = []
 
     # resultierende dict werte mit defaults belegen
     # falls für start und dest in cases.py keine defaults hinterlegt sind (unter "vars") dann ist das ein simuliertes Problem
-    start = params_json.get("start")
-    start = context.get('vars', {}).get(
-        'start', start) if start is None else start
-    date = params_json.get("date")
-    time = params_json.get("time")
-    dest = params_json.get("dest")
-    dest_aoi = params_json.get("dest_aoi")
-    time_is_departure = params_json.get("time_is_departure", True)
-    type_of_transport = params_json.get("type_of_transport", None)
+    try:
+        start = params_json.get("start")
+        start = context.get('vars', {}).get(
+            'start', start) if start is None else start
+        date = params_json.get("date")
+        time = params_json.get("time")
+        dest = params_json.get("dest")
+        dest_aoi = params_json.get("dest_aoi")
+        time_is_departure = params_json.get("time_is_departure", True)
+        type_of_transport = params_json.get("type_of_transport", None)
+    except NameError as e:
+        print(e)
+        print(params_json)
 
     if start is None:
         problems.append("Es wurde kein Startpunkt angegeben.")

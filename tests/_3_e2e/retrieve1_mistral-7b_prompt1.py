@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from db.utils_data import find_point
-from db.utils_llm import call_mistral_small_3_1_24b, call_gemma3_4b
+from db.utils_llm import call_mistral_7b, call_gemma3_4b
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
 from db.utils_geofox import get_route_params2, get_route, get_route_params1
@@ -49,7 +49,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": call_mistral_7b(prompt),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -86,7 +86,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": call_mistral_7b(prompt),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -123,7 +123,7 @@ def call_api(prompt, options, context):
 
     return {
         "output": {
-            "answer": call_mistral_small_3_1_24b(prompt),
+            "answer": call_mistral_7b(prompt),
             "vars": {
                 "start": route['start']['name'],
                 "dest": route['dest']['name'],
@@ -137,7 +137,7 @@ def call_api(prompt, options, context):
 def get_route_prompt(anfrage, params_json, route_infos):
     # Read the prompt template from file
     try:
-        with open(Path(__file__).parent / "prompt_step2_v2.txt", "r", encoding="utf-8") as file:
+        with open(Path(__file__).parent / "prompt_step2_v1.txt", "r", encoding="utf-8") as file:
             prompt_template = file.read()
     except Exception as e:
         print(f"Error reading prompt.txt: {e}")
@@ -156,7 +156,7 @@ def get_route_prompt(anfrage, params_json, route_infos):
 def get_problems_prompt(anfrage, params_json, problems):
     # Read the prompt template from file
     try:
-        with open(Path(__file__).parent / "prompt_step2_with_problems_v2.txt", "r", encoding="utf-8") as file:
+        with open(Path(__file__).parent / "prompt_step2_with_problems_v1.txt", "r", encoding="utf-8") as file:
             prompt_template = file.read()
     except Exception as e:
         print(f"Error reading prompt.txt: {e}")

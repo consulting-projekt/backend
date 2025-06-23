@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from db.utils_data import find_point
-from db.utils_llm import call_mistral_small_3_1_24b, call_gemma3_4b
+from db.utils_llm import call_mistral_7b, call_gemma3_4b
 from db.geofox_client import get_geofox_client
 from qdrant_client import QdrantClient
 from db.utils_geofox import get_route_params2, get_route, get_route_params1
@@ -49,7 +49,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": call_mistral_7b(prompt),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -86,7 +86,7 @@ def call_api(prompt, options, context):
 
         return {
             "output": {
-                "answer": call_mistral_small_3_1_24b(prompt),
+                "answer": call_mistral_7b(prompt),
                 "vars": {
                     "start": start,
                     "dest": dest,
@@ -123,7 +123,7 @@ def call_api(prompt, options, context):
 
     return {
         "output": {
-            "answer": call_mistral_small_3_1_24b(prompt),
+            "answer": call_mistral_7b(prompt),
             "vars": {
                 "start": route['start']['name'],
                 "dest": route['dest']['name'],
