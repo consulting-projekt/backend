@@ -302,38 +302,6 @@ def load_embedding_model_std():
     return SentenceTransformer(model_std)
 
 
-def load_embedding_model_LaBSE():
-    """
-    Load a sentence transformer model for generating embeddings.
-
-    Args:
-        model_name: Name of the sentence-transformers model to use
-
-    Returns:
-        A SentenceTransformer model
-    """
-    # Initialize the sentence transformer model
-    model = 'sentence-transformers/LaBSE'
-    print(f"Loading embedding model: {model}")
-    return SentenceTransformer(model)
-
-
-def load_embedding_model_distiluse():
-    """
-    Load a sentence transformer model for generating embeddings.
-
-    Args:
-        model_name: Name of the sentence-transformers model to use
-
-    Returns:
-        A SentenceTransformer model
-    """
-    # Initialize the sentence transformer model
-    model = 'distiluse-base-multilingual-cased-v2'
-    print(f"Loading embedding model: {model}")
-    return SentenceTransformer(model)
-
-
 def compute_cosine_similarity(embedding1, embedding2):
     # Convert embeddings to numpy arrays
     emb1 = np.array(embedding1)
