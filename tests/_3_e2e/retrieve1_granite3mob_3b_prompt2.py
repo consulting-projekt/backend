@@ -19,7 +19,8 @@ MIN_SIMILARITY_SCORE_START = 0.5
 
 def call_api(prompt, options, context):
     anfrage = context.get('vars', {}).get('anfrage', '')
-    params_extract_res = call_gemma3_4b(prompt)
+    #params_extract_res = call_gemma3_4b(prompt) # Prameterextraktion mit Gemma3 deaktiviert
+    params_extract_res = call_granite3mob_3b(prompt)
     params_json = raw_llm2json(params_extract_res)
 
     problems = []

@@ -20,7 +20,8 @@ MIN_SIMILARITY_SCORE_START = 0.5
 
 def call_api(prompt, options, context):
     anfrage = context.get('vars', {}).get('anfrage', '')
-    params_extract_res = call_gemma3_4b(prompt)
+    #params_extract_res = call_gemma3_4b(prompt) # Prameterextraktion mit Gemma3 deaktiviert
+    params_extract_res = re.sub(r"<think>.*?</think>.{2}", "", call_qwen3_4b(prompt), flags=re.DOTALL)
     params_json = raw_llm2json(params_extract_res)
 
     problems = []
