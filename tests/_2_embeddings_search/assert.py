@@ -251,14 +251,12 @@ def calculate_score(llm_json, expected_json):
 
 if __name__ == "__main__":
     # Example usage
-    output = {
-        "target": None
-    },
+    output = {"target":{"name":"Polizeipräsidium","description":None,"tags":[],"label":"AOI","score":0.8083789}},
     options = {
         "vars": {
             "point": "Zentrum für Pflanzen Klein Flottbek",
             "point_cond": None,
-            "target_distance2centroid": f'("POINT(9.859803 53.559665)", {100})',
+            "target_distance2centroid": None,
             "target_name_contains": '["Biozentrum Klein Flottbek - allgemeine Pflanzenberatung"]'
         }
     }

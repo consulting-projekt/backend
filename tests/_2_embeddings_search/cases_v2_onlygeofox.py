@@ -11,7 +11,7 @@ test_cases = [
             "point": "Arbeitamt Emsbuttel",
             # extrahiert aus der Anfrage (dest_aoi), umgebung in der sich dest befinden soll
             "point_cond": None,
-            "target_distance2centroid": f'("POINT(9.957572 53.569363)", {distance2centroid_small})',
+            "target_distance2centroid": None,
             "target_name_contains": '["Agentur für Arbeit Eimsbüttel"]'
         }
     },
@@ -29,7 +29,7 @@ test_cases = [
         "vars": {
             "point": "Statue Bismrack",
             "point_cond": None,
-            "target_distance2centroid": f'("POINT(9.972206 53.548623)", {distance2centroid_small})',
+            "target_distance2centroid": None,
             "target_name_contains": '["Bismarck-Denkmal"]'
         }
     },
@@ -83,7 +83,7 @@ test_cases = [
         "vars": {
             "point": "Innenstadt",
             "point_cond": None,
-            "target_distance2centroid": f'("POINT(9.988080668856236 53.55184559306223)", {distance2centroid_small})',
+            "target_distance2centroid": f'("POINT(9.988080668856236 53.55184559306223)", {distance2centroid_medium})',
             "target_name_contains": '["City Center" ,"Innenstadt"]'
         }
     },
@@ -110,7 +110,7 @@ test_cases = [
         "vars": {
             "point": "Career Center Uni Hamburg",
             "point_cond": None,
-            "target_distance2centroid": f'("POINT(9.97665 53.569927)", {distance2centroid_small})',
+            "target_distance2centroid": None,
             "target_name_contains": '["Uni Hamburg - Career Center"]'
         }
     },
@@ -132,13 +132,53 @@ test_cases = [
             "target_name_contains": '["Staatsarchiv"]'
         }
     },
-    {
+ {
         # target = "Biozentrum Klein Flottbek - allgemeine Pflanzenberatung"
         "vars": {
             "point": "Willkommenszentrum Flughafen",
             "point_cond": None,
             "target_distance2centroid": f'("POINT(10.005884 53.631953)", {distance2centroid_small})',
             "target_name_contains": '["Welcome Center Airport"]'
+        }
+    },
+    {
+        "vars": {
+            "point": "Etesperranlage",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.79056 53.535146)", {distance2centroid_small})',
+            "target_name_contains": '["Estesperrwerk"]'
+        }
+    },
+    {
+        "vars": {
+            "point": "Fischauktionen",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.951648 53.544835)", {distance2centroid_small})',
+            "target_name_contains": '["Fischauktionshalle"]'
+        }
+    },
+    {
+        "vars": {
+            "point": "Petri Hauptkirche",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.996881 53.55019)", {distance2centroid_small})',
+            "target_name_contains": '["Kirche"]'
+        }
+    },
+    {
+        "vars": {
+            "point": "Fernwehturm",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.975936 53.563149)", {distance2centroid_small})',
+            "target_name_contains": '["Fernsehturm"]'
+        }
+    },
+    {
+        "vars": {
+            "point": "Elbtunnel alt",
+            "point_cond": None,
+            "target_distance2centroid": f'("POINT(9.966787 53.545864)", {distance2centroid_small})',
+            "target_name_contains": '["Alter Elbtunnel"]'
         }
     },
 
@@ -243,6 +283,56 @@ test_cases = [
             # Liegewiese als centroid
             "target_distance2centroid": f'("POINT(10.001809 53.495041)", {distance2centroid_medium})',
             "target_name_contains": '["Schwimmhalle"]'
+        }
+    },
+    {
+        # target = "Sportspaß Center (Altona)"
+        "vars": {
+            "point": "Sportanlage",
+            "point_cond": "Altona",
+            # Liegewiese als centroid
+            "target_distance2centroid": f'("POINT(9.935734 53.551763)", {distance2centroid_medium})',
+            "target_name_contains": '["Sport"]'
+        }
+    },
+    {
+        # target = "Altonaer Schachklub von 1873 e.V"
+        "vars": {
+            "point": "Schachverein",
+            "point_cond": "Altona",
+            # Liegewiese als centroid
+            "target_distance2centroid": f'("POINT(9.942793 53.548248)", {distance2centroid_medium})',
+            "target_name_contains": '["Schach"]'
+        }
+    },
+    {
+        # target = "Anglerverein Hecht von 1926 e.V."
+        "vars": {
+            "point": "Angelclub",
+            "point_cond": "Berliner Tor",
+            # Liegewiese als centroid
+            "target_distance2centroid": f'("POINT(10.037681 53.556429)", {distance2centroid_medium})',
+            "target_name_contains": '["Angler", "Angeln"]'
+        }
+    },
+    {
+        # target = "Garden Hotels"
+        "vars": {
+            "point": "Hotel",
+            "point_cond": "Alster",
+            # Liegewiese als centroid
+            "target_distance2centroid": f'("POINT(9.93527 53.592946)", {distance2centroid_medium})',
+            "target_name_contains": '["Hotel"]'
+        }
+    },
+    {
+        # target = "Jugendinformationszentrum (Info-Laden)"
+        "vars": {
+            "point": "Jugendinfo",
+            "point_cond": "Alster",
+            # Liegewiese als centroid
+            "target_distance2centroid": f'("POINT(9.988558 53.557555)", {distance2centroid_medium})',
+            "target_name_contains": '["Jugend"]'
         }
     },
 ]

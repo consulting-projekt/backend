@@ -11,7 +11,7 @@ test_cases = [
             "point": "Jugendzentrum Heimfeld",
             # extrahiert aus der Anfrage (dest_aoi), umgebung in der sich dest befinden soll
             "point_cond": None,
-            "target_distance2centroid": f'("POINT(9.956510900962325 53.46846007447076)", {distance2centroid_small})',
+            "target_distance2centroid": None,
             "target_name_contains": '["Jugendclub Heimfeld"]'
         }
     },

@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from qdrant_client import QdrantClient
-from db.utils_qdrant import get_point_nomic
+from db.utils_qdrant import get_point_distiluse
 
 client = QdrantClient("localhost", port=6333)
 
@@ -14,7 +14,7 @@ def call_api(_, options, context):
     print(f"vars: {vars}, Options: {options}, Context: {context}")
     point = vars.get("point", None)
     poin_cond = vars.get("point_cond", None)
-    target = get_point_nomic(client, point, poin_cond)
+    target = get_point_distiluse(client, point, poin_cond)
 
     return {
         "output": {

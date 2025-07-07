@@ -2,10 +2,6 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 import os
-from langchain_community.chat_models import ChatOllama
-from langchain.schema import HumanMessage
-from qdrant_client import QdrantClient
-from db.utils_embeddings import load_embedding_model_std
 from db.utils_geofox import get_point_byquery
 from db.geofox_client import get_geofox_client
 import ast

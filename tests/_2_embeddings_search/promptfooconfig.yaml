@@ -1,8 +1,10 @@
 providers:
-  # - id: file://retrieve_std.py
+  - id: file://retrieve_std.py
   - id: file://retrieve_nomic.py
-  # - id: file://retrieve_openai.py
-  # - id: file://retrieve_geofox.py
+  - id: file://retrieve_labse.py
+  # - id: file://retrieve_distiluse.py  # fertig 44%
+  # - id: file://retrieve_openai.py # fertig 80 %
+  # - id: file://retrieve_geofox.py # fertig 40%
 
 defaultTest:
   assert:

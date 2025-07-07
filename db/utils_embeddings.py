@@ -5,7 +5,6 @@ sys.path.append(str(Path(__file__).resolve(strict=True).parent.parent))  # noqa:
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 from typing import List, Dict, Any
-from neo4j import GraphDatabase
 from qdrant_client.models import Distance, VectorParams
 import uuid
 import numpy as np
@@ -284,6 +283,127 @@ def process_node_embeddings2(driver, model, client, label: str, collection_name:
     collection_info = client.get_collection(collection_name=collection_name)
     print(
         f"Qdrant Collection '{collection_name}' contains {collection_info.vectors_count} vectors")
+    
+def process_node_embeddings3(data, model, client, label: str, collection_name: str, batch_size: int = 100):
+    """
+    Process DataFrame data to generate embeddings and store them in Qdrant.
+
+    Args:
+        data: DataFrame with node data from CSV
+        model: SentenceTransformer model
+        client: Qdrant client instance
+        label: Type of nodes to process (e.g., "POI", "AOI")
+        collection_name: Name of the Qdrant collection to store embeddings
+        batch_size: Number of nodes to process in each batch
+    """
+    import ast
+    import uuid
+    import re
+    import pandas as pd
+    
+    print(f"Processing {label} nodes for embeddings")
+
+    # Get total count of rows
+    total_count = len(data)
+    print(f"Found {total_count} {label} nodes")
+
+    if total_count == 0:
+        print(f"No {label} nodes found to process")
+        return
+
+    # Process in batches
+    for offset in range(0, total_count, batch_size):
+        print(f"Processing batch at offset {offset}")
+
+        # Get batch of rows
+        end_idx = min(offset + batch_size, total_count)
+        batch_data = data.iloc[offset:end_idx]
+        
+        # Process each node
+        combined_texts = []
+        node_properties_list = []
+        
+        for _, row in batch_data.iterrows():
+            # Create dictionary of properties from row
+            node_properties = {
+                "name": row.get("name", ""),
+                "description": row.get("description", "")
+            }
+            
+            # Process tags from string representation
+            if isinstance(row.get("tags"), str) and row.get("tags"):
+                try:
+                    node_properties["tags"] = ast.literal_eval(row["tags"])
+                except (ValueError, SyntaxError):
+                    # If evaluation fails, use as-is or empty list
+                    node_properties["tags"] = [row["tags"]] if row["tags"] else []
+            elif isinstance(row.get("tags"), list):
+                node_properties["tags"] = row.get("tags")
+            else:
+                node_properties["tags"] = []
+                
+            # Process location data
+            node_type = str(row.get("node_type", "")).strip("[]'\"")
+            
+            if node_type == "POI" and pd.notna(row.get("location")):
+                match = re.search(r'POINT\(([0-9.]+)\s+([0-9.]+)\)', str(row["location"]))
+                if match:
+                    longitude, latitude = float(match.group(1)), float(match.group(2))
+                    node_properties["location"] = [longitude, latitude]
+                    
+            elif node_type == "AOI" and pd.notna(row.get("centroid")):
+                match = re.search(r'POINT\(([0-9.]+)\s+([0-9.]+)\)', str(row["centroid"]))
+                if match:
+                    longitude, latitude = float(match.group(1)), float(match.group(2))
+                    node_properties["centroid"] = [longitude, latitude]
+            
+            # Use the existing function to create text for embedding
+            combined_text = create_text_for_embedding(node_properties, label)
+            combined_texts.append(combined_text)
+            node_properties_list.append(node_properties)
+            
+        # Generate embeddings for all texts in batch
+        combined_texts_embs = model.encode(combined_texts)
+
+        # Process each row with its embedding
+        for i, (node_properties, emb) in enumerate(zip(node_properties_list, combined_texts_embs)):
+            if emb is not None:
+                # Generate a new UUID for Qdrant
+                qdrant_id = str(uuid.uuid4())
+                
+                # Prepare payload with node properties
+                payload = {
+                    "name": node_properties.get("name", ""),
+                    "description": node_properties.get("description", ""),
+                    "tags": node_properties.get("tags", []),
+                    "label": label  # Add label as a property
+                }
+
+                # Add location based on node type
+                if label == "POI" and "location" in node_properties:
+                    longitude, latitude = node_properties.get("location")
+                    payload["location"] = {"lon": longitude, "lat": latitude}
+                elif label == "AOI" and "centroid" in node_properties:
+                    longitude, latitude = node_properties.get("centroid")
+                    payload["location"] = {"lon": longitude, "lat": latitude}
+
+                # Store in Qdrant
+                client.upsert(
+                    collection_name=collection_name,
+                    points=[{
+                        "id": qdrant_id,
+                        "vector": list(emb),
+                        "payload": payload
+                    }]
+                )
+
+        print(f"Completed batch processing (offset: {offset})")
+
+    # Verify storage
+    collection_info = client.get_collection(collection_name=collection_name)
+    print(
+        f"Qdrant Collection '{collection_name}' contains {collection_info.vectors_count} vectors")
+
 
 
 def load_embedding_model_std():
@@ -397,3 +517,19 @@ def load_embedding_model_nomic():
     model_name = 'nomic-embed-text'
     print(f"Loading Nomic embedding model via Ollama: {model_name}")
     return NomicEmbeddingModel(model_name)
+
+def load_embedding_model_LaBSE():
+    # Initialize the sentence transformer model
+    model = 'sentence-transformers/LaBSE'
+    print(f"Loading embedding model: {model}")
+    return SentenceTransformer(model)
+
+
+
+
+
+def load_embedding_model_distiluse():
+    # Initialize the sentence transformer model
+    model = 'distiluse-base-multilingual-cased-v2'
+    print(f"Loading embedding model: {model}")
+    return SentenceTransformer(model)

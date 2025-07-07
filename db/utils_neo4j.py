@@ -12,7 +12,7 @@ geofox_constraint_query2 = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:Station) REQU
 
 ## etc
 point_index_query = "CREATE POINT INDEX IF NOT EXISTS FOR (i:POI) ON i.location"
-poi_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI) REQUIRE i.name IS UNIQUE"
+poi_aoi_constraint_query = "CREATE CONSTRAINT IF NOT EXISTS FOR (i:POI|AOI) REQUIRE i.name IS UNIQUE"
 
 
 # Cypher query to import our road network nodes GeoDataFrame

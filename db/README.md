@@ -73,6 +73,14 @@ import pois
     - URL: /gti/public/checkName 
     - darin können auch stations enthalten sein mit zusatz info ob innerCity
 
+    Executing the sample application
+
+### To execute the sample application, you will need to set environment variables containing the GTI-credentials.
+
+GTI_USER=<user> 
+GTI_HMAC_SECRET=<hmac secret>
+
+
 
 ## graph rag
 ### vector index
