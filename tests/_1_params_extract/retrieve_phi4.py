@@ -5,14 +5,14 @@ import json
 import pprint
 import re
 
-from db.utils_llm import call_phi_4
+from db.utils_llm import call_phi_4, get_answer_json
 
 
 
 
 def call_api(prompt, options, context):
     return {
-        "output": call_phi_4(prompt),
+        "output": get_answer_json(call_phi_4(prompt)),
     }
 
 

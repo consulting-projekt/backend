@@ -2,14 +2,14 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from db.utils_llm import call_mixtral
+from db.utils_llm import call_mixtral, get_answer_json
 
 
 
 
 def call_api(prompt, options, context):
     return {
-        "output": call_mixtral(prompt),
+        "output": get_answer_json(call_mixtral(prompt)),
     }
 
 

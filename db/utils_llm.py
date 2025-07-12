@@ -187,6 +187,13 @@ def call_mixtral(prompt):
     
     return response.text
 
+def get_answer_json(output):
+    j = json.loads(output) # Convert output in JSON
+    answer = j['answer'] # Exctract answer from output
+    clean_answer = answer.encode('utf-8', errors='ignore').decode() # delete obsolete special characters
+    return clean_answer
+
+
 if __name__ == "__main__":
     #retur = '{"answer":"```json\n{\n  \"start\": null,\n  \"dest\": \"Innenstadt\",\n  \"dest_aoi\": null,\n  \"date\": \"null\",\n  \"time\": \"08:00\",\n  \"time_is_departure\": true,\n  \"type_of_transport\": \"Bus\"\n}\n```\n\nBegründung:\nDie Frage nach dem nächsten Bus in die Innenstadt ist sehr vage. Um eine Antwort zu geben, muss ich davon ausgehen, dass der nächste Bus in der Nähe des aktuellen Standorts abfährt und der Zielort genau identifiziert werden kann. Da keine spezifischen Informationen über den aktuellen Standort oder die genaue Route angegeben wurden, kann ich nur eine allgemeine Antwort geben.\n\nUm die beste Antwort zu geben, müsste ich wissen, wo sich der aktuelle Standort befindet und welche Buslinie in der Nähe verkehrt. Ohne diese Informationen kann ich keine genauere Antwort geben.","context":null,"references":[]}'
     #r = json.loads(retur)
