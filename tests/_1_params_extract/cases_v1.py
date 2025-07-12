@@ -11,7 +11,7 @@ test_cases = [
                 # mögliche Werte: None, <dest adresse|station|poi>, <dest aoi> wenn keine adresse|station|poi angegeben
                 "dest": "Innenstadt",
                 # mögliche Werte: None, <dest aoi> wenn für "dest" adresse|station|poi angegeben
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 # mögliche Werte= None, today, today + 3m3w5d (d:Tage, w:Wochen, m:monate), Datum mit Zielformat: 22.04.2025
                 "date": "today",
                 # mögliche Werte= None, now, now + 3h2m (m:Minuten, h:Stunden), Zeit mit Zielformat: 18:30
@@ -47,7 +47,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Innenstatt",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today",
                 "time": "now",
                 "time_is_departure": True,
@@ -81,9 +81,9 @@ test_cases = [
                 "start": None,
 
                 "dest": "Innenstatt",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today",
-                "time": "now + 2h00m",
+                "time": "now + 120m",
                 "time_is_departure": True,
                 "type_of_transport": "train"
             }
@@ -114,8 +114,8 @@ test_cases = [
             "assert": {
                 "start": "Hochrad",
 
-                "dest": "Einkaufszentrum",
-                "dest_aoi": "Wintmüllenweg",
+                "dest": "Wintmüllenweg",
+                "dest_aoi": "Einkaufszentrum",
                 "date": "today",
                 "time": "now",
                 "time_is_departure": True,
@@ -153,7 +153,7 @@ test_cases = [
                 "dest": "Bar",
                 "dest_aoi": "Stadtpark",
                 "date": "today",
-                "time": "now + 3h00m",
+                "time": "now + 3h",
                 "time_is_departure": False,
                 "type_of_transport": "bus"
             }
@@ -165,7 +165,7 @@ test_cases = [
         "vars": {
             "anfrage": "LuftHansa Flughafen -> Roenklobel in ca. 40 min",
             "assert": {
-                "start": "LuftHansa Flughafen",
+                "start": "Flughafen",
 
                 "dest": "Roenklobel",
                 "dest_aoi": None,
@@ -186,7 +186,7 @@ test_cases = [
 
                 "dest": "Prinsenw",
                 "dest_aoi": None,
-                "date": "today + 3w5d",
+                "date": "today + 26d",
                 "time": "23:00",
                 "time_is_departure": True,
                 "type_of_transport": "bus"
@@ -304,7 +304,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Hafen",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today + 2d",
                 "time": "now",
                 "time_is_departure": True,
@@ -320,7 +320,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Wasser",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today",
                 "time": "now",
                 "time_is_departure": True,
@@ -337,7 +337,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Allianz Arena",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today + 4d",
                 "time": "now",
                 "time_is_departure": True,
@@ -406,7 +406,7 @@ test_cases = [
                 "dest": "Restaurant",
                 "dest_aoi": "SC Nienstedten",
                 "date": "today",
-                "time": "now + 3h00m",
+                "time": "now + 3h",
                 "time_is_departure": True,
                 "type_of_transport": "bus"
             }
@@ -720,7 +720,7 @@ test_cases = [
                 "dest": "Vahrenwinkelweg",
                 "dest_aoi": None,
                 "date": "today",
-                "time": "now + 3h00m",
+                "time": "now + 3h",
                 "time_is_departure": True,
                 "type_of_transport": "bus"
             }
