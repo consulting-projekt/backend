@@ -6,7 +6,6 @@ providers:
   #  - deepseek:deepseek-chat
   # - ollama:chat:gemma3:4b
    - id: file://retrieve_gemma3_4b.py
-   - id: file://retrieve_qwen3_4b.py
    - id: file://retrieve_llama3_3.py
    - id: file://retrieve_phi4.py
    - id: file://retrieve_mistral_7b.py
@@ -22,6 +21,6 @@ metrics:
     threshold: 1.0
 
 tests:
-  - file://cases_pilot.py:generate_tests
+  - file://cases_v1.py:generate_tests
   # - options:
   #     runSerially: true
