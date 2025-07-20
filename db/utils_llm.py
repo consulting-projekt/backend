@@ -8,22 +8,11 @@ import codecs
 
 token = os.getenv("x-api-key")
 
-import logging
-
-# Set up basic logging
-logging.basicConfig(
-    filename='output.log',           # Log file path
-    level=logging.INFO,              # Minimum logging level
-    format='%(asctime)s - %(message)s',  # Log format
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-
 
 def raw_llm2json(raw_llm_output):
     try:
         if "answer" in raw_llm_output and "<think>" not in raw_llm_output:
             m = re.findall(r"json.*(\{.*?\})", raw_llm_output, re.DOTALL)
-            logging.info(m)
             if m == []:
                 m = re.findall(r".*(\{.*?\})", raw_llm_output, re.DOTALL)
             decoded = codecs.decode(m[0], 'unicode_escape')
