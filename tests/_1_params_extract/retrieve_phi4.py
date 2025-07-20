@@ -1,8 +1,31 @@
+from pathlib import Path
+import sys
+sys.path.append(str(Path(__file__).parent.parent.parent))
+import json
+import pprint
+import re
+
+from db.utils_llm import call_phi_4
+
+
+
+
+def call_api(prompt, options, context):
+    return {
+        "output": call_phi_4(prompt),
+    }
+
+
+
+
+if __name__ == "__main__":
+    # Example usage
+    prompt = """
 Du bist ein experte im öffentlichen Nahverkehr und hast die Aufgabe basierend auf einer Nutzeranfrage folgende entities zu extrahieren:
 
 "start": mögliche Werte= null, <start adresse|station|poi>, <start aoi> wenn keine adresse|station|poi angegeben
 "dest":  mögliche Werte= null, <dest adresse|station|poi>, <dest aoi> wenn keine adresse|station|poi angegeben
-"dest_aoi":  mögliche Werte= null, <dest aoi> wenn für "dest" adresse|station|poi angegeben oder "location" wenn kein start angegeben ist und für dest keine adresse|station|aoi|poi angegeben wurde
+"dest_aoi":  mögliche Werte= null, <dest aoi> wenn für "dest" adresse|station|poi angegeben
 "date":  mögliche Werte= null, today, today + 3m3w5d (d:Tage, w:Wochen, m:monate), Datum mit Zielformat: 22.04.2025
 "time": mögliche Werte= null, now, now + 3h2m (m:Minuten, h:Stunden), Zeit mit Zielformat: 18:30
 "time_is_departure":  mögliche Werte= true, false; wenn true dann ist die Zeit eine Abfahrtszeit, wenn false dann ist es eine Ankunftszeit
@@ -31,20 +54,7 @@ Für die Ortsangaben "start", "dest" und "dest_aoi" gälten folgende Regeln:
 Wenn ein POI (z. B. „ein Café“) zusammen mit einem Ort oder Platz genannt wird (z. B. „am Hapischtsplatz“ oder "in St. Pauli" oder "in der Nähe von"), dann:
    - Setze `"dest"` auf den POI (z. B. "Café")
    - Setze `"dest_aoi"` auf das Gebiet oder den Platz (z. B. "Hapischtsplatz" oder "St. Pauli")
-   
-Wenn "start" auf null gesetzt ist und für "dest" keine adresse|station|aoi|poi angegeben ist, wird das "dest_aoi" auf "user_location" gesetzt.
-
-Nutzeranfrage: "Wann geht die nächste Linue zum Wasser?"
-{
-    "start": None,
-    "dest": "Wasser",
-    "dest_aoi": "user_location",
-    "date": "today",
-    "time": "now",
-    "time_is_departure": True,
-    "type_of_transport": None
-}
-
+ 
 Beispiel:
 Nutzeranfrage: Zeig mir bitte den nächsten Bus von der Station Messberg zu einem Restaurant in der Nähe vom Hauptbanhof
 
@@ -136,4 +146,18 @@ Die Rückgabe als Json-Objekt in dem folgenden Format ist dabei sehr wichtig:
     "type_of_transport": [Wert] 
 }
 
-Nutzeranfrage: {{anfrage}}
+Nutzeranfrage: Ich brauche nächste woche von der Harvertstraße einen Bus in die Innenstadt. Gib mir die Route dazu.
+ """
+    output = call_api(prompt, {}, {})
+    pprint.pp(output)
+    output_json = json.loads(output['output'])
+    answer_text = output_json['answer']
+    json_match = re.search(r"```json\n(.*?)\n```", answer_text, re.DOTALL)
+    inner_json_str = json_match.group(1)
+    parsed_data = json.loads(inner_json_str)
+    print(parsed_data)
+    """
+    json_match = re.search(r"```json\n(.*?)\n```", answer_text, re.DOTALL)
+    inner_json_str = json_match.group(1)
+    data = json.loads(inner_json_str)
+    print(data)"""

@@ -13,6 +13,7 @@ log_dir = Path(__file__).parent / "logs"
 def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[str, Any]]:
     # test case variables
     anfrage = options.get('vars', {}).get('anfrage', "")
+   #print(output)
     expected_output = options.get('vars', {}).get('assert', {})
 
     # llm output
@@ -21,6 +22,7 @@ def get_assert(output: str, options: Dict[str, Any]) -> Union[bool, float, Dict[
     # test start
     try:
         llm_json = raw_llm2json(raw_llm_output)
+        #print(llm_json)
         if not llm_json:
             return {
                 "pass": False,
@@ -125,18 +127,53 @@ def calculate_score(llm_json, expected_json):
 
 if __name__ == "__main__":
     # Example usage with the new format
-    output = """
-```json
+   # output = """
+#json
+#{
+#    "start": null,
+#    "dest": "Innenstadt",
+#    "dest_aoi": null,
+#    "date": "today",
+#    "time": "now + 1h",
+#    "time_is_departure": true,
+#    "type_of_transport": "bus"
+#}
+#```"""
+    output = """ 
+```
+<think>
+Okay, let's tackle this user query. The user is asking for the next bus from Harvertstraße to the Innenstadt next week. First, I need to extract the entities as per the rules provided.
+
+Starting with "start": The user mentions "von der Harvertstraße", which translates to "from Harvertstraße". So "start" should be "Harvertstraße". 
+
+Next, "dest": The user says "in die Innenstadt", which is "to the Innenstadt". So "dest" is "Innenstadt". 
+
+Now, "dest_aoi": Since the destination is a POI (Innenstadt) without a specific place or street mentioned, according to the rules, "dest_aoi" should be null. 
+
+For "date": The user says "next week", which is "today + 1w" as per the rules. 
+
+Time: The user didn't mention a specific time, so it's "now". But wait, the user didn't specify a time, so "time" is "now". However, the user might be implying that they want the next bus, so maybe the time is "now" as the default. 
+
+Time_is_departure: Since the user is starting from Harvertstraße and taking the bus, the time is for departure, so "time_is_departure" is true. 
+
+Type_of_transport: The user mentioned "Bus", so "type_of_transport" is "bus".
+
+Let me check the rules again. The date is "next week" which is "today + 1w". The time is "now" because there's no specific time given. The start is Harvertstraße, dest is Innenstadt, and dest_aoi is null. 
+
+I think that's all. Let me structure the JSON accordingly.
+</think>
+
 {
-    "start": null,
+    "start": "Harvertstraße",
     "dest": "Innenstadt",
     "dest_aoi": null,
-    "date": "today",
-    "time": "now + 1h",
+    "date": "today + 1w",
+    "time": "now",
     "time_is_departure": true,
     "type_of_transport": "bus"
 }
 ```"""
+
     options = {
         'vars': {
             'anfrage': 'Wann kommt der nächste Bus von Herthastraße in die Innenstadt?',
