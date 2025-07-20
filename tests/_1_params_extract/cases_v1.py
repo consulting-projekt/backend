@@ -11,7 +11,7 @@ test_cases = [
                 # mögliche Werte: None, <dest adresse|station|poi>, <dest aoi> wenn keine adresse|station|poi angegeben
                 "dest": "Innenstadt",
                 # mögliche Werte: None, <dest aoi> wenn für "dest" adresse|station|poi angegeben
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 # mögliche Werte= None, today, today + 3m3w5d (d:Tage, w:Wochen, m:monate), Datum mit Zielformat: 22.04.2025
                 "date": "today",
                 # mögliche Werte= None, now, now + 3h2m (m:Minuten, h:Stunden), Zeit mit Zielformat: 18:30
@@ -47,7 +47,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Innenstatt",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today",
                 "time": "now",
                 "time_is_departure": True,
@@ -81,7 +81,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Innenstatt",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today",
                 "time": "now + 120m",
                 "time_is_departure": True,
@@ -304,7 +304,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Hafen",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today + 2d",
                 "time": "now",
                 "time_is_departure": True,
@@ -320,7 +320,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Wasser",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today",
                 "time": "now",
                 "time_is_departure": True,
@@ -337,7 +337,7 @@ test_cases = [
                 "start": None,
 
                 "dest": "Allianz Arena",
-                "dest_aoi": None,
+                "dest_aoi": "user_location",
                 "date": "today + 4d",
                 "time": "now",
                 "time_is_departure": True,
