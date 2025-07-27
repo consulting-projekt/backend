@@ -7,44 +7,31 @@
   - Jupyter Notebooks für die Erstellung von Embeddings mit verschiedenen Modellen
   - Docker-Konfiguration
   
+  - **`imports/`**
+      - Datenimport-Scripts
+      - Notebooks für Import von OSM-Daten, Geofox-APIs und benutzerdefinierten Daten
+  
+  - **`exports/`**
+      - Datenexport-Funktionalitäten
+      - CSV-Export von verarbeiteten Daten
+  
+  - **`experiments/`**
+      - Prototyping und Experimente mit verschiedenen Ansätzen
+      - POI-Suche, Routing, Vector-Suche Experimente
+
 - **`tests/`** - Testframework und Evaluierung
-  - **`_1_params_extract/`** - Tests für Parameter-Extraktion mit verschiedenen LLMs
-  - **`_2_embeddings_search/`** - Tests für Embedding-basierte Suche
-  - **`_3_e2e/`** - End-to-End Tests des Gesamtsystems
-  
-- **`imports/`** - Datenimport-Scripts
-  - Notebooks für Import von OSM-Daten, Geofox-APIs und benutzerdefinierten Daten
-  
-- **`exports/`** - Datenexport-Funktionalitäten
-  - CSV-Export von verarbeiteten Daten
-
-## Kernkomponenten
-
-### Utility-Module (`src/`)
-- `utils_embeddings.py` - Embedding-Generierung und -Verarbeitung
-- `utils_qdrant.py` - Vector-Database Integration
-- `utils_geofox.py` - Geofox API Client
-- `utils_osm.py` - OpenStreetMap Datenverarbeitung
-- `utils_llm.py` - Large Language Model Integration
-- `geofox_client.py` - Geofox API Wrapper
-
-### Embedding-Notebooks
-- `create_embeddings_aoipoi_*.ipynb` - Verschiedene Embedding-Modelle:
-  - DistilUSE
-  - LaBSE
-  - Nomic v2
-  - OpenAI
-  - Standard v2
-
-### Experimentelle Entwicklung (`src/eperiments/`)
-- Prototyping und Experimente mit verschiedenen Ansätzen
-- POI-Suche, Routing, Vector-Suche Experimente
+  - **`_1_params_extract/`**
+    - Tests für Parameter-Extraktion mit verschiedenen LLMs
+  - **`_2_embeddings_search/`**
+    - Tests für Embedding-basierte Suche
+  - **`_3_e2e/`**
+    - End-to-End Tests des Gesamtsystems
 
 ## Testsystem
 
 Das Repository implementiert ein umfassendes Testsystem mit drei Evaluierungsebenen:
 
-1. **Parameter-Extraktion** - Evaluation verschiedener LLMs bei der Extraktion von Suchparametern
+1. **Parameter-Extraktion** - Evaluation verschiedener LLMs bei der Extraktion von Parametern
 2. **Embedding-Suche** - Vergleich verschiedener Embedding-Modelle für semantische Suche
 3. **End-to-End** - Gesamtsystem-Tests mit realen Szenarien
 
