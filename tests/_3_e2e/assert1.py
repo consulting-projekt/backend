@@ -20,10 +20,14 @@ def get_assert(output: dict, options: Dict[str, Any]) -> Union[bool, float, Dict
 
     # Define the placeholders and their corresponding keys in answer_vars
     placeholders = {
+        "<STARTPOS>": "start_pos",
         "<START>": "start",
         "<DEST>": "dest",
         "<DATE>": "date",
-        "<TIME>": "time"
+        "<TIME>": "time",
+        "<TRANSPORT>": "type_of_transport",
+        "<DIRECTION>": "direction",
+        "<LINE>": "line",
     }
 
     # Replace actual values in the answer with placeholders (masks)

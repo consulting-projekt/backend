@@ -19,8 +19,7 @@ MIN_SIMILARITY_SCORE_START = 0.5
 
 def call_api(prompt, options, context):
     anfrage = context.get('vars', {}).get('anfrage', '')
-    #params_extract_res = call_gemma3_4b(prompt) # Prameterextraktion mit Gemma3 deaktiviert
-    params_extract_res = get_answer_json(call_llama3_3(prompt))
+    params_extract_res = call_gemma3_4b(prompt) # Prameterextraktion mit Gemma3
     params_json = raw_llm2json(params_extract_res)
 
     problems = []
@@ -130,6 +129,10 @@ def call_api(prompt, options, context):
     formatted_dep_time = dt_dep.strftime('%H:%M')
     formatted_dep_date = dt_dep.strftime('%d.%m.%Y')
 
+    # Set date to "Heute" if date is today
+    if formatted_dep_date == datetime.strftime(datetime.today(),"%d.%m.%Y"):
+        formatted_dep_date = "Heute"
+
     # Parse the date string into a datetime object (ignoring the timezone offset)
     dt_arrival = datetime.strptime(route['realArrivalTime']
                                    [:-5], '%Y-%m-%dT%H:%M:%S.%f')
@@ -137,7 +140,30 @@ def call_api(prompt, options, context):
     formatted_arrival_time = dt_arrival.strftime('%H:%M')
     formatted_arrival_date = dt_arrival.strftime('%d.%m.%Y')
 
-    route2 = {"start": route['start']['name'], "dest": route['dest']['name'],
+    #route2 = {"start": route['start']['name'], "dest": route['dest']['name'],
+    #          "departure_date": formatted_dep_date, "departure_time": formatted_dep_time, "arrival_time": formatted_arrival_time, "arrival_date": formatted_arrival_date}
+
+    # Get parts of the route
+    route_stations = route.get("scheduleElements")
+
+    line = ""
+    start_station = ""
+    direction = ""
+    #dest_station = ""
+
+    for part in route_stations:
+        line_temp = part.get('line').get('name')
+        print(f'Linie: {line}')
+        if line_temp != "Fußweg":
+            line = line_temp
+            start_station = part.get('from').get('name')
+            direction = part.get('line').get('direction')
+            #dest_station = part.get('to').get('name')
+            formatted_arrival_date = part.get('from').get('depTime').get('time')
+            type_of_transport = part.get('line').get('type').get('shortInfo')
+            break
+
+    route2 = {"start": start_station, "type_of_transport": type_of_transport, "direction": direction, "line": line,
               "departure_date": formatted_dep_date, "departure_time": formatted_dep_time, "arrival_time": formatted_arrival_time, "arrival_date": formatted_arrival_date}
 
     # Read the prompt template from file
@@ -147,10 +173,15 @@ def call_api(prompt, options, context):
         "output": {
             "answer": get_answer_json(call_llama3_3(prompt)),
             "vars": {
-                "start": route['start']['name'],
-                "dest": route['dest']['name'],
+                #"start_pos": route['start']['name'],
+                "start": start_station,
+                #"dest": dest_station,
+                #"dest": route['dest']['name'],
                 "date": formatted_dep_date,
                 "time": formatted_dep_time,
+                "type_of_transport": type_of_transport,
+                "direction": direction,
+                "line": line,
             }
         }
     }
