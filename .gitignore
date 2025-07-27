@@ -2,9 +2,9 @@ __pycache__
 .vscode
 cache
 *.json
-*.csv
 *.dump
+*.csv
 logs
-!db/exports/*.csv
+!src/exports/*.csv
 !tests/**/*.json
 tests/_3_e2e/*.json
