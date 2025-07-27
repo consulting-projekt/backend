@@ -45,7 +45,7 @@ test_cases = [
     {
         # target = "Bauspielplatz und Spielhaus Eppendorfer Park"
         "vars": {
-            "point": "Spieothek",  # zusammengezogen
+            "point": "Spieothek", 
             "point_cond": None,
             "target_distance2centroid": f'("POINT(9.990283 53.558386)", {distance2centroid_small})',
             "target_name_contains": '["Spielbank Hamburg"]'
@@ -270,7 +270,6 @@ test_cases = [
         "vars": {
             "point": "Sozialstation",
             "point_cond": "Norden",
-            # Innenstadt als centroid
             "target_distance2centroid": f'("POINT(9.984334 53.590072)", {distance2centroid_medium})',
             "target_name_contains": '["Soziales Dienstleistungszentrum"]'
         }
@@ -280,7 +279,6 @@ test_cases = [
         "vars": {
             "point": "Hallenbad",
             "point_cond": "Wilhelmsburg",
-            # Liegewiese als centroid
             "target_distance2centroid": f'("POINT(10.001809 53.495041)", {distance2centroid_medium})',
             "target_name_contains": '["Schwimmhalle"]'
         }
@@ -290,7 +288,6 @@ test_cases = [
         "vars": {
             "point": "Sportanlage",
             "point_cond": "Altona",
-            # Liegewiese als centroid
             "target_distance2centroid": f'("POINT(9.935734 53.551763)", {distance2centroid_medium})',
             "target_name_contains": '["Sport"]'
         }
@@ -300,7 +297,6 @@ test_cases = [
         "vars": {
             "point": "Schachverein",
             "point_cond": "Altona",
-            # Liegewiese als centroid
             "target_distance2centroid": f'("POINT(9.942793 53.548248)", {distance2centroid_medium})',
             "target_name_contains": '["Schach"]'
         }
@@ -310,7 +306,6 @@ test_cases = [
         "vars": {
             "point": "Angelclub",
             "point_cond": "Berliner Tor",
-            # Liegewiese als centroid
             "target_distance2centroid": f'("POINT(10.037681 53.556429)", {distance2centroid_medium})',
             "target_name_contains": '["Angler", "Angeln"]'
         }
@@ -320,7 +315,6 @@ test_cases = [
         "vars": {
             "point": "Hotel",
             "point_cond": "Alster",
-            # Liegewiese als centroid
             "target_distance2centroid": f'("POINT(9.93527 53.592946)", {distance2centroid_medium})',
             "target_name_contains": '["Hotel"]'
         }
@@ -330,7 +324,7 @@ test_cases = [
         "vars": {
             "point": "Jugendinfo",
             "point_cond": "Alster",
-            # Liegewiese als centroid
+            # Liegewiese als Alster
             "target_distance2centroid": f'("POINT(9.988558 53.557555)", {distance2centroid_medium})',
             "target_name_contains": '["Jugend"]'
         }
