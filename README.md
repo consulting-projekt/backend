@@ -1,10 +1,6 @@
-# Backend Repository - Wissenschaftliche Arbeit
+# Repository-Struktur
 
-Dieses Repository enthält das Backend-System der wissenschaftlichen Arbeit und ist als Anhang der Abschlussarbeit beigefügt.
-
-## Repository-Struktur
-
-### Hauptverzeichnisse
+## Hauptverzeichnisse
 
 - **`src/`** - Hauptquellcode des Backends
   - Utility-Module für verschiedene Funktionalitäten (Embeddings, Datenverarbeitung, APIs)
@@ -22,9 +18,9 @@ Dieses Repository enthält das Backend-System der wissenschaftlichen Arbeit und 
 - **`exports/`** - Datenexport-Funktionalitäten
   - CSV-Export von verarbeiteten Daten
 
-### Kernkomponenten
+## Kernkomponenten
 
-#### Utility-Module (`src/`)
+### Utility-Module (`src/`)
 - `utils_embeddings.py` - Embedding-Generierung und -Verarbeitung
 - `utils_qdrant.py` - Vector-Database Integration
 - `utils_geofox.py` - Geofox API Client
@@ -32,7 +28,7 @@ Dieses Repository enthält das Backend-System der wissenschaftlichen Arbeit und 
 - `utils_llm.py` - Large Language Model Integration
 - `geofox_client.py` - Geofox API Wrapper
 
-#### Embedding-Notebooks
+### Embedding-Notebooks
 - `create_embeddings_aoipoi_*.ipynb` - Verschiedene Embedding-Modelle:
   - DistilUSE
   - LaBSE
@@ -40,11 +36,11 @@ Dieses Repository enthält das Backend-System der wissenschaftlichen Arbeit und 
   - OpenAI
   - Standard v2
 
-#### Experimentelle Entwicklung (`src/eperiments/`)
+### Experimentelle Entwicklung (`src/eperiments/`)
 - Prototyping und Experimente mit verschiedenen Ansätzen
 - POI-Suche, Routing, Vector-Suche Experimente
 
-### Testsystem
+## Testsystem
 
 Das Repository implementiert ein umfassendes Testsystem mit drei Evaluierungsebenen:
 
@@ -52,24 +48,24 @@ Das Repository implementiert ein umfassendes Testsystem mit drei Evaluierungsebe
 2. **Embedding-Suche** - Vergleich verschiedener Embedding-Modelle für semantische Suche
 3. **End-to-End** - Gesamtsystem-Tests mit realen Szenarien
 
-## Setup
+# Setup
 
-### Voraussetzungen
+## Voraussetzungen
 - Python 3.10
 - Docker (für Qdrant Vector Database)
 
-### Installation
+## Installation
 ```bash
 pip install -r requirements.txt
 ```
 
-### Datenbank
+## Datenbank
 Das System verwendet Qdrant als Vector-Database, konfiguriert über Docker Compose.
 
-## Verwendung im Kontext der Arbeit
+# Verwendung im Kontext der Arbeit
 
 Dieses Repository demonstriert die praktische Implementierung der in der wissenschaftlichen Arbeit beschriebenen Konzepte für:
-- Multimodale Suche in Point-of-Interest Daten
+- Intention-Detection und Slot-Filling
 - Embedding-basierte semantische Suche
 - Integration verschiedener Datenquellen (OSM, Geofox)
 - Evaluierung und Vergleich verschiedener KI-Modelle
