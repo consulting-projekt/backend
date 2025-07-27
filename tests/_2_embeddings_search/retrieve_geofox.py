@@ -2,8 +2,8 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 import os
-from db.utils_geofox import get_point_byquery
-from db.geofox_client import get_geofox_client
+from src.utils_geofox import get_point_byquery
+from src.geofox_client import get_geofox_client
 import ast
 import json
 

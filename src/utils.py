@@ -1,5 +1,6 @@
 from typing import Dict, List, Any, Optional
 
+
 # Funktion, um zu entscheiden, ob ein Polygon durch seinen Centroid ersetzt werden soll
 def simplify_to_centroid_if_small(geometry, max_area_threshold=0.0000006791):  # Schwellenwert anpassen
     """

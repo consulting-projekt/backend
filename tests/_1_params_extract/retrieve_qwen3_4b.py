@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from db.utils_llm import call_qwen3_4b
+from src.utils_llm import call_qwen3_4b
 
 
 

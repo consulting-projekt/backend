@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  # Neuer Qdrant-Service für Vektorspeicherung und -suche
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant-vector-db
+    ports:
+      - "6333:6333"  # REST API
+      - "6334:6334"  # gRPC API
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    environment:
+      - QDRANT_ALLOW_ORIGIN=* # Nur für Entwicklung, in Produktion einschränken
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  qdrant-storage:         # Neues Volume für Qdrant-Daten
+
+

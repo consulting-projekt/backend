@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 
-from db.utils_llm import call_gemma3_4b
+from src.utils_llm import call_gemma3_4b
 
 
 def call_api(prompt, options, context):

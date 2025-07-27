@@ -2,7 +2,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 sys.path.append(str(Path(__file__).parent.parent.parent))  # noqa: E402
 from qdrant_client import QdrantClient
-from db.utils_qdrant import get_point_nomic
+from src.utils_qdrant import get_point_nomic
 
 client = QdrantClient("localhost", port=6333)
 
